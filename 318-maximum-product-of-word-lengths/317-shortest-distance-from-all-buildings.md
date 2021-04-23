@@ -106,7 +106,7 @@ public class Solution {
         }
         int result = Integer.MAX_VALUE, look = 0;
         int[][] sums = new int[grid.length][grid[0].length];
-        int[][] dirs = new int[][]{ {0,-1},{-1,0},{0,1},{1,0} };
+        int[][] dirs = new int[][]{{0,-1},{-1,0},{0,1},{1,0}};
         for (int i = 0; i < grid.length; i ++) {
             for (int j = 0; j < grid[0].length; j ++) {
                 if (grid[i][j] == 1) {

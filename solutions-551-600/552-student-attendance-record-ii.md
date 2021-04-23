@@ -26,9 +26,9 @@ Note: The value of n won't exceed 100,000.
 ```java
 public class Solution {
     public int checkRecord(int n) {
-        long dp[][] = { {1, 1, 0}, {1, 0, 0}};
+        long dp[][] = {{1, 1, 0}, {1, 0, 0}};
         for (int i = 2; i <= n; i++) {
-            long ndp[][] = { {0, 0, 0}, {0, 0, 0}};
+            long ndp[][] = {{0, 0, 0}, {0, 0, 0}};
             ndp[0][0] = (int)((dp[0][0] + dp[0][1] + dp[0][2]) % 1000000007) ;
             ndp[0][1] = dp[0][0];
             ndp[0][2] = dp[0][1];

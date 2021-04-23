@@ -44,7 +44,7 @@ public class Solution {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return matrix;
         }
-        int[][] dirs = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         Queue<Integer> qx = new LinkedList<Integer>();
         Queue<Integer> qy = new LinkedList<Integer>();
         for (int i = 0; i < matrix.length; i ++) {

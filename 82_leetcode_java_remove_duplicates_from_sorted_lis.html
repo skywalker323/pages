@@ -1,0 +1,6340 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>82 Remove Duplicates from Sorted List II – Medium · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="83_leetcode_java_remove_duplicates_from_sorted_lis.html" />
+    
+    
+    <link rel="prev" href="81_leetcode_java_search_in_rotated_sorted_array_ii.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="solutions_1_-_50.html">
+            
+                <a href="solutions_1_-_50.html">
+            
+                    
+                    Solutions 1 - 50
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="1_leetcode_java_two_sum__medium.html">
+            
+                <a href="1_leetcode_java_two_sum__medium.html">
+            
+                    
+                    1Two Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="2_leetcode_java_add_two_numbers__medium.html">
+            
+                <a href="2_leetcode_java_add_two_numbers__medium.html">
+            
+                    
+                    2 Add Two Numbers – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="3_leetcode_java_longest_substring_without_repeatin.html">
+            
+                <a href="3_leetcode_java_longest_substring_without_repeatin.html">
+            
+                    
+                    3  Longest Substring Without Repeating Characters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="4-median-of-two-sorted-arrays.html">
+            
+                <a href="4-median-of-two-sorted-arrays.html">
+            
+                    
+                    4 Median of Two Sorted Arrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="5_longest_palindromic_substring.html">
+            
+                <a href="5_longest_palindromic_substring.html">
+            
+                    
+                    5 Longest Palindromic Substring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="6_zigzag_conversion__easy.html">
+            
+                <a href="6_zigzag_conversion__easy.html">
+            
+                    
+                    6 ZigZag Conversion – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="7_reverse_integer__easy.html">
+            
+                <a href="7_reverse_integer__easy.html">
+            
+                    
+                    7 Reverse Integer – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="8_string_to_integer_atoi__easy.html">
+            
+                <a href="8_string_to_integer_atoi__easy.html">
+            
+                    
+                    8 String to Integer (atoi) – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="9_palindrome_number__easy.html">
+            
+                <a href="9_palindrome_number__easy.html">
+            
+                    
+                    9 Palindrome Number – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="10-regular-expression-matching.html">
+            
+                <a href="10-regular-expression-matching.html">
+            
+                    
+                    10 Regular Expression Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="11_leetcode_java_container_with_most_water__medium.html">
+            
+                <a href="11_leetcode_java_container_with_most_water__medium.html">
+            
+                    
+                    11  Container With Most Water – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="12_integer_to_roman__medium.html">
+            
+                <a href="12_integer_to_roman__medium.html">
+            
+                    
+                    12 Integer to Roman – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="13_roman_to_integer__easy.html">
+            
+                <a href="13_roman_to_integer__easy.html">
+            
+                    
+                    13 Roman to Integer – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="14_longest_common_prefix__easy.html">
+            
+                <a href="14_longest_common_prefix__easy.html">
+            
+                    
+                    14 Longest Common Prefix – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="15_3sum__medium.html">
+            
+                <a href="15_3sum__medium.html">
+            
+                    
+                    15 3Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="16_3sum_closest__medium.html">
+            
+                <a href="16_3sum_closest__medium.html">
+            
+                    
+                    16 3Sum Closest – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="17_letter_combinations_of_a_phone_number__medium.html">
+            
+                <a href="17_letter_combinations_of_a_phone_number__medium.html">
+            
+                    
+                    17 Letter Combinations of a Phone Number – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="18_4sum__medium.html">
+            
+                <a href="18_4sum__medium.html">
+            
+                    
+                    18 4Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.19" data-path="19_remove_nth_node_from_end_of_list__easy.html">
+            
+                <a href="19_remove_nth_node_from_end_of_list__easy.html">
+            
+                    
+                    19 Remove Nth Node From End of List – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="20_valid_parentheses__easy.html">
+            
+                <a href="20_valid_parentheses__easy.html">
+            
+                    
+                    20 Valid Parentheses – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.21" data-path="21_merge_two_sorted_lists__easy.html">
+            
+                <a href="21_merge_two_sorted_lists__easy.html">
+            
+                    
+                    21 Merge Two Sorted Lists – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="22_generate_parentheses__medium.html">
+            
+                <a href="22_generate_parentheses__medium.html">
+            
+                    
+                    22 Generate Parentheses – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.23" data-path="23-merge-k-sorted-lists.html">
+            
+                <a href="23-merge-k-sorted-lists.html">
+            
+                    
+                    23 Merge k Sorted Lists
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.24" data-path="24_swap_nodes_in_pairs__medium.html">
+            
+                <a href="24_swap_nodes_in_pairs__medium.html">
+            
+                    
+                    24 Swap Nodes in Pairs – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.25" data-path="25-reverse-nodes-in-k-group.html">
+            
+                <a href="25-reverse-nodes-in-k-group.html">
+            
+                    
+                    25 Reverse Nodes in k-Group
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.26" data-path="26_remove_duplicates_from_sorted_array__easy.html">
+            
+                <a href="26_remove_duplicates_from_sorted_array__easy.html">
+            
+                    
+                    26 Remove Duplicates from Sorted Array – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.27" data-path="27_remove_element__easy.html">
+            
+                <a href="27_remove_element__easy.html">
+            
+                    
+                    27 Remove Element – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.28" data-path="28_implement_strstr__easy.html">
+            
+                <a href="28_implement_strstr__easy.html">
+            
+                    
+                    28 Implement strStr() – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.29" data-path="29_divide_two_integers__medium.html">
+            
+                <a href="29_divide_two_integers__medium.html">
+            
+                    
+                    29 Divide Two Integers – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.30" data-path="31_next_permutation__medium.html">
+            
+                <a href="31_next_permutation__medium.html">
+            
+                    
+                    31 Next Permutation – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.31" data-path="33_leetcode_java_search_in_rotated_sorted_array__h.html">
+            
+                <a href="33_leetcode_java_search_in_rotated_sorted_array__h.html">
+            
+                    
+                    33 Search in Rotated Sorted Array – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.32" data-path="34_search_for_a_range__medium.html">
+            
+                <a href="34_search_for_a_range__medium.html">
+            
+                    
+                    34 Search for a Range – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.33" data-path="35_search_insert_position__medium.html">
+            
+                <a href="35_search_insert_position__medium.html">
+            
+                    
+                    35 Search Insert Position – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.34" data-path="36_valid_sudoku__easy.html">
+            
+                <a href="36_valid_sudoku__easy.html">
+            
+                    
+                    36 Valid Sudoku – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.35" data-path="37-sudoku-solver.html">
+            
+                <a href="37-sudoku-solver.html">
+            
+                    
+                    37 Sudoku Solver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.36" data-path="38_count_and_say__easy.html">
+            
+                <a href="38_count_and_say__easy.html">
+            
+                    
+                    38 Count and Say – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.37" data-path="39_combination_sum__medium.html">
+            
+                <a href="39_combination_sum__medium.html">
+            
+                    
+                    39  Combination Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.38" data-path="40_combination_sum_ii__medium.html">
+            
+                <a href="40_combination_sum_ii__medium.html">
+            
+                    
+                    40 Combination Sum II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.39" data-path="42-trapping-rain-water.html">
+            
+                <a href="42-trapping-rain-water.html">
+            
+                    
+                    42 Trapping Rain Water
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.40" data-path="43_multiply_strings__medium.html">
+            
+                <a href="43_multiply_strings__medium.html">
+            
+                    
+                    43  Multiply Strings – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.41" data-path="44-wildcard-matching.html">
+            
+                <a href="44-wildcard-matching.html">
+            
+                    
+                    44 Wildcard Matching
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.42" data-path="46_permutations__medium.html">
+            
+                <a href="46_permutations__medium.html">
+            
+                    
+                    46  Permutations – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.43" data-path="47_permutations_ii_medium.html">
+            
+                <a href="47_permutations_ii_medium.html">
+            
+                    
+                    47  Permutations II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.44" data-path="48_rotate_image__medium.html">
+            
+                <a href="48_rotate_image__medium.html">
+            
+                    
+                    48 Rotate Image – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.45" data-path="49_group_anagrams__medium.html">
+            
+                <a href="49_group_anagrams__medium.html">
+            
+                    
+                    49  Group Anagrams – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.46" data-path="50_powx,_n__medium.html">
+            
+                <a href="50_powx,_n__medium.html">
+            
+                    
+                    50 Pow(x, n) – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="solutions_51_-_100.html">
+            
+                <a href="solutions_51_-_100.html">
+            
+                    
+                    Solutions 51 - 100
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="53_maximum_subarray__medium.html">
+            
+                <a href="53_maximum_subarray__medium.html">
+            
+                    
+                    53 Maximum Subarray – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="54_spiral_matrix__medium.html">
+            
+                <a href="54_spiral_matrix__medium.html">
+            
+                    
+                    54 Spiral Matrix – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="55_jump_game__medium.html">
+            
+                <a href="55_jump_game__medium.html">
+            
+                    
+                    55 Jump Game – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="56-merge-intervals.html">
+            
+                <a href="56-merge-intervals.html">
+            
+                    
+                    56 Merge Intervals
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="56-merge-intervals/57-insert-interval.html">
+            
+                <a href="56-merge-intervals/57-insert-interval.html">
+            
+                    
+                    57 Insert Interval
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="58_length_of_last_word__easy.html">
+            
+                <a href="58_length_of_last_word__easy.html">
+            
+                    
+                    58 Length of Last Word – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="59_spiral_matrix_ii__medium.html">
+            
+                <a href="59_spiral_matrix_ii__medium.html">
+            
+                    
+                    59 Spiral Matrix II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="60_permutation_sequence__medium.html">
+            
+                <a href="60_permutation_sequence__medium.html">
+            
+                    
+                    60 Permutation Sequence – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="61_rotate_list__medium.html">
+            
+                <a href="61_rotate_list__medium.html">
+            
+                    
+                    61 Rotate List – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="62_unique_paths__medium.html">
+            
+                <a href="62_unique_paths__medium.html">
+            
+                    
+                    62 Unique Paths – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="62_unique_paths_ii__medium.html">
+            
+                <a href="62_unique_paths_ii__medium.html">
+            
+                    
+                    63 Unique Paths II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="64_minimum_path_sum__medium.html">
+            
+                <a href="64_minimum_path_sum__medium.html">
+            
+                    
+                    64 Minimum Path Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="65-valid-number.html">
+            
+                <a href="65-valid-number.html">
+            
+                    
+                    65 Valid Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="66_plus_one__easy.html">
+            
+                <a href="66_plus_one__easy.html">
+            
+                    
+                    66 Plus One – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="67_add_binary__easy.html">
+            
+                <a href="67_add_binary__easy.html">
+            
+                    
+                    67 Add Binary – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="68-text-justification.html">
+            
+                <a href="68-text-justification.html">
+            
+                    
+                    68 Text Justification
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="69_sqrtx__medium.html">
+            
+                <a href="69_sqrtx__medium.html">
+            
+                    
+                    69 Sqrt(x) – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="70_climbing_stairs__easy.html">
+            
+                <a href="70_climbing_stairs__easy.html">
+            
+                    
+                    70 Climbing Stairs – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="71_simplify_path__medium.html">
+            
+                <a href="71_simplify_path__medium.html">
+            
+                    
+                    71 Simplify Path – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.20" data-path="73_set_matrix_zeroes__medium.html">
+            
+                <a href="73_set_matrix_zeroes__medium.html">
+            
+                    
+                    73 Set Matrix Zeroes – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.21" data-path="74_search_a_2d_matrix__medium.html">
+            
+                <a href="74_search_a_2d_matrix__medium.html">
+            
+                    
+                    74 Search a 2D Matrix – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.22" data-path="75_sort_colors__medium.html">
+            
+                <a href="75_sort_colors__medium.html">
+            
+                    
+                    75 Sort Colors – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.23" data-path="76-minimum-window-substring.html">
+            
+                <a href="76-minimum-window-substring.html">
+            
+                    
+                    76 Minimum Window Substring
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.24" data-path="77_combinations__medium.html">
+            
+                <a href="77_combinations__medium.html">
+            
+                    
+                    77 Combinations – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.25" data-path="78_subsets__medium.html">
+            
+                <a href="78_subsets__medium.html">
+            
+                    
+                    78 Subsets – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.26" data-path="79_word_search__medium.html">
+            
+                <a href="79_word_search__medium.html">
+            
+                    
+                    79 Word Search – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.27" data-path="80_remove_duplicates_from_sorted_array_ii__medium.html">
+            
+                <a href="80_remove_duplicates_from_sorted_array_ii__medium.html">
+            
+                    
+                    80 Remove Duplicates from Sorted Array II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.28" data-path="81_leetcode_java_search_in_rotated_sorted_array_ii.html">
+            
+                <a href="81_leetcode_java_search_in_rotated_sorted_array_ii.html">
+            
+                    
+                    81 Search in Rotated Sorted Array II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.29" data-path="82_leetcode_java_remove_duplicates_from_sorted_lis.html">
+            
+                <a href="82_leetcode_java_remove_duplicates_from_sorted_lis.html">
+            
+                    
+                    82 Remove Duplicates from Sorted List II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.30" data-path="83_leetcode_java_remove_duplicates_from_sorted_lis.html">
+            
+                <a href="83_leetcode_java_remove_duplicates_from_sorted_lis.html">
+            
+                    
+                    83  Remove Duplicates from Sorted List – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.31" data-path="85-maximal-rectangle.html">
+            
+                <a href="85-maximal-rectangle.html">
+            
+                    
+                    85 Maximal Rectangle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.32" data-path="86_partition_list__medium.html">
+            
+                <a href="86_partition_list__medium.html">
+            
+                    
+                    86 Partition List – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.33" data-path="88_merge_sorted_array.html">
+            
+                <a href="88_merge_sorted_array.html">
+            
+                    
+                    88 Merge Sorted Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.34" data-path="89_gray_code__medium.html">
+            
+                <a href="89_gray_code__medium.html">
+            
+                    
+                    89 Gray Code – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.35" data-path="90_subsets_ii__medium.html">
+            
+                <a href="90_subsets_ii__medium.html">
+            
+                    
+                    90 Subsets II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.36" data-path="91_decode_ways__medium.html">
+            
+                <a href="91_decode_ways__medium.html">
+            
+                    
+                    91 Decode Ways – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.37" data-path="92_reverse_linked_list_ii__medium.html">
+            
+                <a href="92_reverse_linked_list_ii__medium.html">
+            
+                    
+                    92 Reverse Linked List II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.38" data-path="93_restore_ip_addresses__medium.html">
+            
+                <a href="93_restore_ip_addresses__medium.html">
+            
+                    
+                    93 Restore IP Addresses – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.39" data-path="94_binary_tree_inorder_traversal__medium.html">
+            
+                <a href="94_binary_tree_inorder_traversal__medium.html">
+            
+                    
+                    94 Binary Tree Inorder Traversal – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.40" data-path="95_unique_binary_search_trees_ii__medium.html">
+            
+                <a href="95_unique_binary_search_trees_ii__medium.html">
+            
+                    
+                    95 Unique Binary Search Trees II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.41" data-path="98-validate-binary-search-tree.html">
+            
+                <a href="98-validate-binary-search-tree.html">
+            
+                    
+                    98 Validate Binary Search Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="solutions_101_-_150.html">
+            
+                <a href="solutions_101_-_150.html">
+            
+                    
+                    Solutions 101 - 150
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="101_symmetric_tree__easy.html">
+            
+                <a href="101_symmetric_tree__easy.html">
+            
+                    
+                    101 Symmetric Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="102_binary_tree_level_order_traversal__easy.html">
+            
+                <a href="102_binary_tree_level_order_traversal__easy.html">
+            
+                    
+                    102 Binary Tree Level Order Traversal – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="103-binary-tree-zigzag-level-order-traversal.html">
+            
+                <a href="103-binary-tree-zigzag-level-order-traversal.html">
+            
+                    
+                    103 Binary Tree Zigzag Level Order Traversal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="104_maximum_depth_of_binary_tree__easy.html">
+            
+                <a href="104_maximum_depth_of_binary_tree__easy.html">
+            
+                    
+                    104 Maximum Depth of Binary Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="105_construct_binary_tree_from_preorder_and_inorde.html">
+            
+                <a href="105_construct_binary_tree_from_preorder_and_inorde.html">
+            
+                    
+                    105 Construct Binary Tree from Preorder and Inorder Traversal – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="106_construct_binary_tree_from_inorder_and_postord.html">
+            
+                <a href="106_construct_binary_tree_from_inorder_and_postord.html">
+            
+                    
+                    106 Construct Binary Tree from Inorder and Postorder Traversal – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="107_binary_tree_level_order_traversal_ii__easy.html">
+            
+                <a href="107_binary_tree_level_order_traversal_ii__easy.html">
+            
+                    
+                    107 Binary Tree Level Order Traversal II – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="108_convert_sorted_array_to_binary_search_tree__me.html">
+            
+                <a href="108_convert_sorted_array_to_binary_search_tree__me.html">
+            
+                    
+                    108 Convert Sorted Array to Binary Search Tree – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="109_convert_sorted_list_to_binary_search_tree__med.html">
+            
+                <a href="109_convert_sorted_list_to_binary_search_tree__med.html">
+            
+                    
+                    109 Convert Sorted List to Binary Search Tree – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="110_balanced_binary_tree__easy.html">
+            
+                <a href="110_balanced_binary_tree__easy.html">
+            
+                    
+                    110 Balanced Binary Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="111minimum_depth_of_binary_tree__easy.html">
+            
+                <a href="111minimum_depth_of_binary_tree__easy.html">
+            
+                    
+                    111Minimum Depth of Binary Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="112_path_sum__easy.html">
+            
+                <a href="112_path_sum__easy.html">
+            
+                    
+                    112 Path Sum – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="113_path_sum_ii__medium.html">
+            
+                <a href="113_path_sum_ii__medium.html">
+            
+                    
+                    113 Path Sum II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="114_flatten_binary_tree_to_linked_list__medium.html">
+            
+                <a href="114_flatten_binary_tree_to_linked_list__medium.html">
+            
+                    
+                    114 Flatten Binary Tree to Linked List – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="116_populating_next_right_pointers_in_each_node__m.html">
+            
+                <a href="116_populating_next_right_pointers_in_each_node__m.html">
+            
+                    
+                    116 Populating Next Right Pointers in Each Node – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="117-populating-next-right-pointers-in-each-node-ii.html">
+            
+                <a href="117-populating-next-right-pointers-in-each-node-ii.html">
+            
+                    
+                    117 Populating Next Right Pointers in Each Node II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="118_pascals_triangle__easy.html">
+            
+                <a href="118_pascals_triangle__easy.html">
+            
+                    
+                    118 Pascal’s Triangle – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="119_pascals_triangle_ii__medium.html">
+            
+                <a href="119_pascals_triangle_ii__medium.html">
+            
+                    
+                    119 Pascal’s Triangle II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="120_triangle__medium.html">
+            
+                <a href="120_triangle__medium.html">
+            
+                    
+                    120 Triangle – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.20" data-path="121_best_time_to_buy_and_sell_stock__medium.html">
+            
+                <a href="121_best_time_to_buy_and_sell_stock__medium.html">
+            
+                    
+                    121 Best Time to Buy and Sell Stock – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.21" data-path="122_best_time_to_buy_and_sell_stock_ii__medium.html">
+            
+                <a href="122_best_time_to_buy_and_sell_stock_ii__medium.html">
+            
+                    
+                    122 Best Time to Buy and Sell Stock II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.22" data-path="123_best_time_to_buy_and_sell_stock_iii__hard.html">
+            
+                <a href="123_best_time_to_buy_and_sell_stock_iii__hard.html">
+            
+                    
+                    123 Best Time to Buy and Sell Stock III – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.23" data-path="125_valid_palindrome__easy.html">
+            
+                <a href="125_valid_palindrome__easy.html">
+            
+                    
+                    125 Valid Palindrome – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.24" data-path="127_word_ladder__medium.html">
+            
+                <a href="127_word_ladder__medium.html">
+            
+                    
+                    127 Word Ladder – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.25" data-path="129_sum_root_to_leaf_numbers__medium/128-longest-consecutive-sequence.html">
+            
+                <a href="129_sum_root_to_leaf_numbers__medium/128-longest-consecutive-sequence.html">
+            
+                    
+                    128 Longest Consecutive Sequence
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.26" data-path="129_sum_root_to_leaf_numbers__medium.html">
+            
+                <a href="129_sum_root_to_leaf_numbers__medium.html">
+            
+                    
+                    129 Sum Root to Leaf Numbers – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.27" data-path="130_surrounded_regions__medium.html">
+            
+                <a href="130_surrounded_regions__medium.html">
+            
+                    
+                    130 Surrounded Regions – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.28" data-path="131_palindrome_partitioning__medium.html">
+            
+                <a href="131_palindrome_partitioning__medium.html">
+            
+                    
+                    131 Palindrome Partitioning – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.29" data-path="132_palindrome_partitioning_ii__hard.html">
+            
+                <a href="132_palindrome_partitioning_ii__hard.html">
+            
+                    
+                    132 Palindrome Partitioning II – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.30" data-path="133_clone_graph__medium.html">
+            
+                <a href="133_clone_graph__medium.html">
+            
+                    
+                    133 Clone Graph – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.31" data-path="134_gas_station__medium.html">
+            
+                <a href="134_gas_station__medium.html">
+            
+                    
+                    134 Gas Station – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.32" data-path="136_single_number__medium.html">
+            
+                <a href="136_single_number__medium.html">
+            
+                    
+                    136 Single Number – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.33" data-path="137_single_number_ii__medium.html">
+            
+                <a href="137_single_number_ii__medium.html">
+            
+                    
+                    137 Single Number II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.34" data-path="138-copy-list-with-random-pointer.html">
+            
+                <a href="138-copy-list-with-random-pointer.html">
+            
+                    
+                    138 Copy List with Random Pointer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.35" data-path="139_word_break__medium.html">
+            
+                <a href="139_word_break__medium.html">
+            
+                    
+                    139 Word Break – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.36" data-path="140_word_break_ii__hard.html">
+            
+                <a href="140_word_break_ii__hard.html">
+            
+                    
+                    140 Word Break II – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.37" data-path="141_linked_list_cycle__medium.html">
+            
+                <a href="141_linked_list_cycle__medium.html">
+            
+                    
+                    141 Linked List Cycle – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.38" data-path="142_linked_list_cycle_ii__medium.html">
+            
+                <a href="142_linked_list_cycle_ii__medium.html">
+            
+                    
+                    142 Linked List Cycle II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.39" data-path="143_reorder_list__medium.html">
+            
+                <a href="143_reorder_list__medium.html">
+            
+                    
+                    143 Reorder List – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.40" data-path="144_binary_tree_preorder_traversal__medium.html">
+            
+                <a href="144_binary_tree_preorder_traversal__medium.html">
+            
+                    
+                    144 Binary Tree Preorder Traversal – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.41" data-path="145_binary_tree_postorder_traversal__hard.html">
+            
+                <a href="145_binary_tree_postorder_traversal__hard.html">
+            
+                    
+                    145 Binary Tree Postorder Traversal – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.42" data-path="146_lru_cache__hard.html">
+            
+                <a href="146_lru_cache__hard.html">
+            
+                    
+                    146 LRU Cache – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.43" data-path="147_insertion_sort_list__medium.html">
+            
+                <a href="147_insertion_sort_list__medium.html">
+            
+                    
+                    147 Insertion Sort List – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.44" data-path="148-sort-list.html">
+            
+                <a href="148-sort-list.html">
+            
+                    
+                    148 Sort List
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.45" data-path="149-max-points-on-a-line.html">
+            
+                <a href="149-max-points-on-a-line.html">
+            
+                    
+                    149 Max Points on a Line
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.46" data-path="150_evaluate_reverse_polish_notation__medium.html">
+            
+                <a href="150_evaluate_reverse_polish_notation__medium.html">
+            
+                    
+                    150 Evaluate Reverse Polish Notation – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="solutions_151_-_200.html">
+            
+                <a href="solutions_151_-_200.html">
+            
+                    
+                    Solutions 151 - 200
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="151_reverse_words_in_a_string__medium.html">
+            
+                <a href="151_reverse_words_in_a_string__medium.html">
+            
+                    
+                    151 Reverse Words in a String – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="152_maximum_product_subarray__medium.html">
+            
+                <a href="152_maximum_product_subarray__medium.html">
+            
+                    
+                    152 Maximum Product Subarray – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="153_find_minimum_in_rotated_sorted_array__medium.html">
+            
+                <a href="153_find_minimum_in_rotated_sorted_array__medium.html">
+            
+                    
+                    153 Find Minimum in Rotated Sorted Array – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="155_min_stack__easy.html">
+            
+                <a href="155_min_stack__easy.html">
+            
+                    
+                    155  Min Stack – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="156-binary-tree-upside-down-–-medium.html">
+            
+                <a href="156-binary-tree-upside-down-–-medium.html">
+            
+                    
+                    156 Binary Tree Upside Down – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="157-read-n-characters-given-read4-–-easy.html">
+            
+                <a href="157-read-n-characters-given-read4-–-easy.html">
+            
+                    
+                    157 Read N Characters Given Read4 – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="158-read-n-characters-given-read4-ii-–-call-multiple-times-add-to-list-questioneditorial-solution-–-hard.html">
+            
+                <a href="158-read-n-characters-given-read4-ii-–-call-multiple-times-add-to-list-questioneditorial-solution-–-hard.html">
+            
+                    
+                    158 Read N Characters Given Read4 II – Call multiple times Add to List QuestionEditorial Solution – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.8" data-path="160-intersection-of-two-linked-lists-–-easy/159-longest-substring-with-at-most-two-distinct-characters.html">
+            
+                <a href="160-intersection-of-two-linked-lists-–-easy/159-longest-substring-with-at-most-two-distinct-characters.html">
+            
+                    
+                    159 Longest Substring with At Most Two Distinct Characters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.9" data-path="160-intersection-of-two-linked-lists-–-easy.html">
+            
+                <a href="160-intersection-of-two-linked-lists-–-easy.html">
+            
+                    
+                    160 Intersection of Two Linked Lists – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.10" data-path="161-one-edit-distance-–-medium.html">
+            
+                <a href="161-one-edit-distance-–-medium.html">
+            
+                    
+                    161 One Edit Distance – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.11" data-path="162-find-peak-element-–-medium.html">
+            
+                <a href="162-find-peak-element-–-medium.html">
+            
+                    
+                    162 Find Peak Element – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.12" data-path="163-missing-ranges.html">
+            
+                <a href="163-missing-ranges.html">
+            
+                    
+                    163 Missing Ranges 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.13" data-path="165-compare-version-numbers.html">
+            
+                <a href="165-compare-version-numbers.html">
+            
+                    
+                    165 Compare Version Numbers 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.14" data-path="166-fraction-to-recurring-decimal.html">
+            
+                <a href="166-fraction-to-recurring-decimal.html">
+            
+                    
+                    166  Fraction to Recurring Decimal 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.15" data-path="167-two-sum-ii-input-array-is-sorted-medium.html">
+            
+                <a href="167-two-sum-ii-input-array-is-sorted-medium.html">
+            
+                    
+                    167 Two Sum II – Input array is sorted – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.16" data-path="168-excel-sheet-column-title-easy.html">
+            
+                <a href="168-excel-sheet-column-title-easy.html">
+            
+                    
+                    168 Excel Sheet Column Title – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.17" data-path="169-majority-element-easy.html">
+            
+                <a href="169-majority-element-easy.html">
+            
+                    
+                    169 Majority Element – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.18" data-path="170-two-sum-iii-data-structure-design-easy.html">
+            
+                <a href="170-two-sum-iii-data-structure-design-easy.html">
+            
+                    
+                    170 Two Sum III – Data structure design – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.19" data-path="171-excel-sheet-column-number-easy.html">
+            
+                <a href="171-excel-sheet-column-number-easy.html">
+            
+                    
+                    171 Excel Sheet Column Number – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.20" data-path="172-factorial-trailing-zeroes-easy.html">
+            
+                <a href="172-factorial-trailing-zeroes-easy.html">
+            
+                    
+                    172 Factorial Trailing Zeroes – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.21" data-path="173-binary-search-tree-iterator-medium.html">
+            
+                <a href="173-binary-search-tree-iterator-medium.html">
+            
+                    
+                    173 Binary Search Tree Iterator – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.22" data-path="179-largest-number-medium.html">
+            
+                <a href="179-largest-number-medium.html">
+            
+                    
+                    179 Largest Number – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.23" data-path="186-reverse-words-in-a-string-ii-medium.html">
+            
+                <a href="186-reverse-words-in-a-string-ii-medium.html">
+            
+                    
+                    186 Reverse Words in a String II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.24" data-path="187-repeated-dna-sequences-medium.html">
+            
+                <a href="187-repeated-dna-sequences-medium.html">
+            
+                    
+                    187 Repeated DNA Sequences – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.25" data-path="189-rotate-array-easy.html">
+            
+                <a href="189-rotate-array-easy.html">
+            
+                    
+                    189 Rotate Array – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.26" data-path="190-java-reverse-bits-easy.html">
+            
+                <a href="190-java-reverse-bits-easy.html">
+            
+                    
+                    190 Java: Reverse Bits – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.27" data-path="191-number-of-1-bits-easy.html">
+            
+                <a href="191-number-of-1-bits-easy.html">
+            
+                    
+                    191 Number of 1 Bits – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.28" data-path="198-house-robber-easy.html">
+            
+                <a href="198-house-robber-easy.html">
+            
+                    
+                    198 House Robber – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.29" data-path="199-binary-tree-right-side-view-medium.html">
+            
+                <a href="199-binary-tree-right-side-view-medium.html">
+            
+                    
+                    199 Binary Tree Right Side View – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.30" data-path="200-number-of-islands-medium.html">
+            
+                <a href="200-number-of-islands-medium.html">
+            
+                    
+                    200 Number of Islands – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="solutions-201---250.html">
+            
+                <a href="solutions-201---250.html">
+            
+                    
+                    Solutions 201 - 250
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="201-leetcode-java--bitwise-and-of-numbers-range-–-medium.html">
+            
+                <a href="201-leetcode-java--bitwise-and-of-numbers-range-–-medium.html">
+            
+                    
+                    201 LeetCode Java : Bitwise AND of Numbers Range – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="202-leetcode-java-happy-number-–-easy.html">
+            
+                <a href="202-leetcode-java-happy-number-–-easy.html">
+            
+                    
+                    202 LeetCode Java: Happy Number – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="203-leetcode-java-remove-linked-list-elements-–-easy.html">
+            
+                <a href="203-leetcode-java-remove-linked-list-elements-–-easy.html">
+            
+                    
+                    203 LeetCode Java: Remove Linked List Elements – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="204-leetcode-java-count-primes-–-easy.html">
+            
+                <a href="204-leetcode-java-count-primes-–-easy.html">
+            
+                    
+                    204 LeetCode Java: Count Primes – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="205-leetcode-java-isomorphic-strings-–-easy.html">
+            
+                <a href="205-leetcode-java-isomorphic-strings-–-easy.html">
+            
+                    
+                    205 LeetCode Java: Isomorphic Strings – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="206-leetcode-java-reverse-linked-list--easy.html">
+            
+                <a href="206-leetcode-java-reverse-linked-list--easy.html">
+            
+                    
+                    206 LeetCode Java: Reverse Linked List -Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="207-leetcode-java-course-schedule-–-medium.html">
+            
+                <a href="207-leetcode-java-course-schedule-–-medium.html">
+            
+                    
+                    207 LeetCode Java: Course Schedule – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.8" data-path="208-leetcode-java-implement-trie-prefix-tree-–-medium.html">
+            
+                <a href="208-leetcode-java-implement-trie-prefix-tree-–-medium.html">
+            
+                    
+                    208 LeetCode Java: Implement Trie (Prefix Tree) – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.9" data-path="209-leetcode-java--minimum-size-subarray-sum-–-medium.html">
+            
+                <a href="209-leetcode-java--minimum-size-subarray-sum-–-medium.html">
+            
+                    
+                    209 LeetCode Java : Minimum Size Subarray Sum – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.10" data-path="210-leetcode-java-course-schedule-ii-–-medium.html">
+            
+                <a href="210-leetcode-java-course-schedule-ii-–-medium.html">
+            
+                    
+                    210 LeetCode Java: Course Schedule II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.11" data-path="211-leetcode-java-add-and-search-word-–-data-structure-design-–-medium.html">
+            
+                <a href="211-leetcode-java-add-and-search-word-–-data-structure-design-–-medium.html">
+            
+                    
+                    211 LeetCode Java: Add and Search Word – Data structure design – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.12" data-path="212-word-search-ii.html">
+            
+                <a href="212-word-search-ii.html">
+            
+                    
+                    212 Word Search II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.13" data-path="213-house-robber-ii-medium.html">
+            
+                <a href="213-house-robber-ii-medium.html">
+            
+                    
+                    213 House Robber II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.14" data-path="212-word-search-ii/214-shortest-palindrome.html">
+            
+                <a href="212-word-search-ii/214-shortest-palindrome.html">
+            
+                    
+                    214 Shortest Palindrome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.15" data-path="215-kth-largest-element-in-an-array-medium.html">
+            
+                <a href="215-kth-largest-element-in-an-array-medium.html">
+            
+                    
+                    215 Kth Largest Element in an Array – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.16" data-path="216-combination-sum-iii-medium.html">
+            
+                <a href="216-combination-sum-iii-medium.html">
+            
+                    
+                    216 Combination Sum III – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.17" data-path="217-contains-duplicate-easy.html">
+            
+                <a href="217-contains-duplicate-easy.html">
+            
+                    
+                    217 Contains Duplicate – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.18" data-path="218-the-skyline-problem.html">
+            
+                <a href="218-the-skyline-problem.html">
+            
+                    
+                    218 The Skyline Problem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.19" data-path="219-contains-duplicate-ii-medium.html">
+            
+                <a href="219-contains-duplicate-ii-medium.html">
+            
+                    
+                    219 Contains Duplicate II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.20" data-path="220-contains-duplicate-iii-medium.html">
+            
+                <a href="220-contains-duplicate-iii-medium.html">
+            
+                    
+                    220  Contains Duplicate III – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.21" data-path="221-maximal-square-medium.html">
+            
+                <a href="221-maximal-square-medium.html">
+            
+                    
+                    221 Maximal Square – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.22" data-path="222-count-complete-tree-nodes-medium.html">
+            
+                <a href="222-count-complete-tree-nodes-medium.html">
+            
+                    
+                    222 Count Complete Tree Nodes – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.23" data-path="223-rectangle-area-easy.html">
+            
+                <a href="223-rectangle-area-easy.html">
+            
+                    
+                    223 Rectangle Area – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.24" data-path="218-the-skyline-problem/224-basic-calculator.html">
+            
+                <a href="218-the-skyline-problem/224-basic-calculator.html">
+            
+                    
+                    224 Basic Calculator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.25" data-path="225-implement-stack-using-queues-easy.html">
+            
+                <a href="225-implement-stack-using-queues-easy.html">
+            
+                    
+                    225 Implement Stack using Queues – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.26" data-path="226-invert-binary-tree-easy.html">
+            
+                <a href="226-invert-binary-tree-easy.html">
+            
+                    
+                    226 Invert Binary Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.27" data-path="227-basic-calculator-ii-medium.html">
+            
+                <a href="227-basic-calculator-ii-medium.html">
+            
+                    
+                    227 Basic Calculator II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.28" data-path="228-summary-ranges-medium.html">
+            
+                <a href="228-summary-ranges-medium.html">
+            
+                    
+                    228 Summary Ranges – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.29" data-path="229-majority-element-ii-medium.html">
+            
+                <a href="229-majority-element-ii-medium.html">
+            
+                    
+                    229 Majority Element II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.30" data-path="230-kth-smallest-element-in-a-bst-medium.html">
+            
+                <a href="230-kth-smallest-element-in-a-bst-medium.html">
+            
+                    
+                    230 Kth Smallest Element in a BST – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.31" data-path="231-power-of-two-easy.html">
+            
+                <a href="231-power-of-two-easy.html">
+            
+                    
+                    231 Power of Two – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.32" data-path="232-implement-queue-using-stacks-easy.html">
+            
+                <a href="232-implement-queue-using-stacks-easy.html">
+            
+                    
+                    232 Implement Queue using Stacks – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.33" data-path="234-palindrome-linked-list-easy.html">
+            
+                <a href="234-palindrome-linked-list-easy.html">
+            
+                    
+                    234 Palindrome Linked List – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.34" data-path="235-lowest-common-ancestor-of-a-binary-search-tree-easy.html">
+            
+                <a href="235-lowest-common-ancestor-of-a-binary-search-tree-easy.html">
+            
+                    
+                    235 Lowest Common Ancestor of a Binary Search Tree – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.35" data-path="236-lowest-common-ancestor-of-a-binary-tree-medium.html">
+            
+                <a href="236-lowest-common-ancestor-of-a-binary-tree-medium.html">
+            
+                    
+                    236 Lowest Common Ancestor of a Binary Tree – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.36" data-path="237-delete-node-in-a-linked-list-easy.html">
+            
+                <a href="237-delete-node-in-a-linked-list-easy.html">
+            
+                    
+                    237 Delete Node in a Linked List – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.37" data-path="238-product-of-array-except-self-medium.html">
+            
+                <a href="238-product-of-array-except-self-medium.html">
+            
+                    
+                    238 Product of Array Except Self – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.38" data-path="218-the-skyline-problem/239-sliding-window-maximum.html">
+            
+                <a href="218-the-skyline-problem/239-sliding-window-maximum.html">
+            
+                    
+                    239 Sliding Window Maximum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.39" data-path="240-search-a-2d-matrix-ii-medium.html">
+            
+                <a href="240-search-a-2d-matrix-ii-medium.html">
+            
+                    
+                    240 Search a 2D Matrix II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.40" data-path="241-different-ways-to-add-parentheses-medium.html">
+            
+                <a href="241-different-ways-to-add-parentheses-medium.html">
+            
+                    
+                    241 Different Ways to Add Parentheses – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.41" data-path="242-valid-anagram-easy.html">
+            
+                <a href="242-valid-anagram-easy.html">
+            
+                    
+                    242 Valid Anagram – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.42" data-path="243-shortest-word-distance-easy.html">
+            
+                <a href="243-shortest-word-distance-easy.html">
+            
+                    
+                    243 Shortest Word Distance – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.43" data-path="244-shortest-word-distance-ii-medium.html">
+            
+                <a href="244-shortest-word-distance-ii-medium.html">
+            
+                    
+                    244 Shortest Word Distance II – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.44" data-path="245-shortest-word-distance-iii-medium.html">
+            
+                <a href="245-shortest-word-distance-iii-medium.html">
+            
+                    
+                    245 Shortest Word Distance III – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.45" data-path="246-strobogrammatic-number-easy.html">
+            
+                <a href="246-strobogrammatic-number-easy.html">
+            
+                    
+                    246 Strobogrammatic Number – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.46" data-path="247-strobogrammatic-number-ii.html">
+            
+                <a href="247-strobogrammatic-number-ii.html">
+            
+                    
+                    247 Strobogrammatic Number II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.47" data-path="248-leetcode-java-different-ways-to-add-parentheses-–-hard.html">
+            
+                <a href="248-leetcode-java-different-ways-to-add-parentheses-–-hard.html">
+            
+                    
+                    248 LeetCode Java: Different Ways to Add Parentheses – Hard
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.48" data-path="249-leetcode-java-group-shifted-strings-–-easy.html">
+            
+                <a href="249-leetcode-java-group-shifted-strings-–-easy.html">
+            
+                    
+                    249 LeetCode Java: Group Shifted Strings – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.49" data-path="250-leetcode-java-count-univalue-subtrees-–-medium.html">
+            
+                <a href="250-leetcode-java-count-univalue-subtrees-–-medium.html">
+            
+                    
+                    250 LeetCode Java: Count Univalue Subtrees – Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="solutions-251---300.html">
+            
+                <a href="solutions-251---300.html">
+            
+                    
+                    Solutions 251 - 300
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="251-flatten-2d-vector.html">
+            
+                <a href="251-flatten-2d-vector.html">
+            
+                    
+                    251 Flatten 2D Vector
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="252-leetcode-java-meeting-rooms-–-easy.html">
+            
+                <a href="252-leetcode-java-meeting-rooms-–-easy.html">
+            
+                    
+                    252 LeetCode Java: Meeting Rooms – Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="253-meeting-rooms-ii---medium.html">
+            
+                <a href="253-meeting-rooms-ii---medium.html">
+            
+                    
+                    253 Meeting Rooms II - Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="254-factor-combinations---medium.html">
+            
+                <a href="254-factor-combinations---medium.html">
+            
+                    
+                    254 Factor Combinations - Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.5" data-path="255-verify-preorder-sequence-in-binary-search-tree---medium.html">
+            
+                <a href="255-verify-preorder-sequence-in-binary-search-tree---medium.html">
+            
+                    
+                    255 Verify Preorder Sequence in Binary Search Tree - Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.6" data-path="256-paint-house---medium.html">
+            
+                <a href="256-paint-house---medium.html">
+            
+                    
+                    256 Paint House - Medium
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.7" data-path="257-binary-tree-paths---easy.html">
+            
+                <a href="257-binary-tree-paths---easy.html">
+            
+                    
+                    257 Binary Tree Paths - Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.8" data-path="258-add-digits---easy.html">
+            
+                <a href="258-add-digits---easy.html">
+            
+                    
+                    258 Add Digits - Easy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.9" data-path="259-3sum-smaller.html">
+            
+                <a href="259-3sum-smaller.html">
+            
+                    
+                    259 3Sum Smaller
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.10" data-path="260-single-number-iii.html">
+            
+                <a href="260-single-number-iii.html">
+            
+                    
+                    260 Single Number III
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.11" data-path="261-graph-valid-tree.html">
+            
+                <a href="261-graph-valid-tree.html">
+            
+                    
+                    261 Graph Valid Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.12" data-path="263-ugly-number.html">
+            
+                <a href="263-ugly-number.html">
+            
+                    
+                    263 Ugly Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.13" data-path="264-ugly-number-ii.html">
+            
+                <a href="264-ugly-number-ii.html">
+            
+                    
+                    264 Ugly Number II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.14" data-path="266-palindrome-permutation.html">
+            
+                <a href="266-palindrome-permutation.html">
+            
+                    
+                    266 Palindrome Permutation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.15" data-path="267-palindrome-permutation-ii.html">
+            
+                <a href="267-palindrome-permutation-ii.html">
+            
+                    
+                    267 Palindrome Permutation II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.16" data-path="268-missing-number.html">
+            
+                <a href="268-missing-number.html">
+            
+                    
+                    268 Missing Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.17" data-path="268-missing-number/269-alien-dictionary.html">
+            
+                <a href="268-missing-number/269-alien-dictionary.html">
+            
+                    
+                    269 Alien Dictionary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.18" data-path="270-closest-binary-search-tree-value.html">
+            
+                <a href="270-closest-binary-search-tree-value.html">
+            
+                    
+                    270 Closest Binary Search Tree Value
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.19" data-path="271-encode-and-decode-strings.html">
+            
+                <a href="271-encode-and-decode-strings.html">
+            
+                    
+                    271 Encode and Decode Strings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.20" data-path="271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.html">
+            
+                <a href="271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.html">
+            
+                    
+                    272 Closest Binary Search Tree Value II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.21" data-path="273-integer-to-english-words.html">
+            
+                <a href="273-integer-to-english-words.html">
+            
+                    
+                    273 Integer to English Words
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.22" data-path="274-h-index.html">
+            
+                <a href="274-h-index.html">
+            
+                    
+                    274 H-Index
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.23" data-path="275-h-index-ii.html">
+            
+                <a href="275-h-index-ii.html">
+            
+                    
+                    275 H-Index II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.24" data-path="276-paint-fence.html">
+            
+                <a href="276-paint-fence.html">
+            
+                    
+                    276 Paint Fence
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.25" data-path="277-find-the-celebrity.html">
+            
+                <a href="277-find-the-celebrity.html">
+            
+                    
+                    277 Find the Celebrity
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.26" data-path="278-first-bad-version.html">
+            
+                <a href="278-first-bad-version.html">
+            
+                    
+                    278 First Bad Version
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.27" data-path="279-perfect-squares.html">
+            
+                <a href="279-perfect-squares.html">
+            
+                    
+                    279 Perfect Squares
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.28" data-path="280-wiggle-sort.html">
+            
+                <a href="280-wiggle-sort.html">
+            
+                    
+                    280 Wiggle Sort
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.29" data-path="281-zigzag-iterator.html">
+            
+                <a href="281-zigzag-iterator.html">
+            
+                    
+                    281 Zigzag Iterator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.30" data-path="282-expression-add-operators.html">
+            
+                <a href="282-expression-add-operators.html">
+            
+                    
+                    282 Expression Add Operators
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.31" data-path="283-move-zeroes.html">
+            
+                <a href="283-move-zeroes.html">
+            
+                    
+                    283 Move Zeroes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.32" data-path="284-peeking-iterator.html">
+            
+                <a href="284-peeking-iterator.html">
+            
+                    
+                    284 Peeking Iterator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.33" data-path="285-inorder-successor-in-bst.html">
+            
+                <a href="285-inorder-successor-in-bst.html">
+            
+                    
+                    285 Inorder Successor in BST
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.34" data-path="286-walls-and-gates.html">
+            
+                <a href="286-walls-and-gates.html">
+            
+                    
+                    286 Walls and Gates
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.35" data-path="288-unique-word-abbreviation.html">
+            
+                <a href="288-unique-word-abbreviation.html">
+            
+                    
+                    288 Unique Word Abbreviation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.36" data-path="289-game-of-life.html">
+            
+                <a href="289-game-of-life.html">
+            
+                    
+                    289 Game of Life
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.37" data-path="290-word-pattern.html">
+            
+                <a href="290-word-pattern.html">
+            
+                    
+                    290 Word Pattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.38" data-path="291-word-pattern-ii.html">
+            
+                <a href="291-word-pattern-ii.html">
+            
+                    
+                    291 Word Pattern II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.39" data-path="292-nim-game.html">
+            
+                <a href="292-nim-game.html">
+            
+                    
+                    292 Nim Game
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.40" data-path="293-flip-game.html">
+            
+                <a href="293-flip-game.html">
+            
+                    
+                    293 Flip Game
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.41" data-path="294-flip-game-ii.html">
+            
+                <a href="294-flip-game-ii.html">
+            
+                    
+                    294 Flip Game II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.42" data-path="295-find-median-from-data-stream.html">
+            
+                <a href="295-find-median-from-data-stream.html">
+            
+                    
+                    295 Find Median from Data Stream
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.43" data-path="298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.html">
+            
+                <a href="298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.html">
+            
+                    
+                    297 Serialize and Deserialize Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.44" data-path="298-binary-tree-longest-consecutive-sequence.html">
+            
+                <a href="298-binary-tree-longest-consecutive-sequence.html">
+            
+                    
+                    298 Binary Tree Longest Consecutive Sequence
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.45" data-path="299-bulls-and-cows.html">
+            
+                <a href="299-bulls-and-cows.html">
+            
+                    
+                    299 Bulls and Cows
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" >
+            
+                <span>
+            
+                    
+                    Solutions 301 - 350
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.8.1" data-path="303-range-sum-query---immutable/301-remove-invalid-parentheses.html">
+            
+                <a href="303-range-sum-query---immutable/301-remove-invalid-parentheses.html">
+            
+                    
+                    301 Remove Invalid Parentheses
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.2" data-path="303-range-sum-query---immutable/302-smallest-rectangle-enclosing-black-pixels.html">
+            
+                <a href="303-range-sum-query---immutable/302-smallest-rectangle-enclosing-black-pixels.html">
+            
+                    
+                    302 Smallest Rectangle Enclosing Black Pixels
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.3" data-path="303-range-sum-query---immutable.html">
+            
+                <a href="303-range-sum-query---immutable.html">
+            
+                    
+                    303 Range Sum Query - Immutable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.4" data-path="304-range-sum-query-2d---immutable.html">
+            
+                <a href="304-range-sum-query-2d---immutable.html">
+            
+                    
+                    304 Range Sum Query 2D - Immutable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.5" data-path="303-range-sum-query---immutable/305-number-of-islands-ii.html">
+            
+                <a href="303-range-sum-query---immutable/305-number-of-islands-ii.html">
+            
+                    
+                    305 Number of Islands II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.6" data-path="306-additive-number.html">
+            
+                <a href="306-additive-number.html">
+            
+                    
+                    306 Additive Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.7" data-path="307-range-sum-query---mutable.html">
+            
+                <a href="307-range-sum-query---mutable.html">
+            
+                    
+                    307 Range Sum Query - Mutable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.8" data-path="307-range-sum-query---mutable/308-range-sum-query-2d-mutable.html">
+            
+                <a href="307-range-sum-query---mutable/308-range-sum-query-2d-mutable.html">
+            
+                    
+                    308 Range Sum Query 2D - Mutable
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.9" data-path="309-best-time-to-buy-and-sell-stock-with-cooldown.html">
+            
+                <a href="309-best-time-to-buy-and-sell-stock-with-cooldown.html">
+            
+                    
+                    309 Best Time to Buy and Sell Stock with Cooldown
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.10" data-path="310-minimum-height-trees.html">
+            
+                <a href="310-minimum-height-trees.html">
+            
+                    
+                    310 Minimum Height Trees
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.11" data-path="311-sparse-matrix-multiplication.html">
+            
+                <a href="311-sparse-matrix-multiplication.html">
+            
+                    
+                    311 Sparse Matrix Multiplication
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.12" data-path="311-sparse-matrix-multiplication/312-burst-balloons.html">
+            
+                <a href="311-sparse-matrix-multiplication/312-burst-balloons.html">
+            
+                    
+                    312 Burst Balloons
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.13" data-path="313-super-ugly-number.html">
+            
+                <a href="313-super-ugly-number.html">
+            
+                    
+                    313 Super Ugly Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.14" data-path="314-binary-tree-vertical-order-traversal.html">
+            
+                <a href="314-binary-tree-vertical-order-traversal.html">
+            
+                    
+                    314 Binary Tree Vertical Order Traversal
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.15" data-path="303-range-sum-query---immutable/315-count-of-smaller-numbers-after-self.html">
+            
+                <a href="303-range-sum-query---immutable/315-count-of-smaller-numbers-after-self.html">
+            
+                    
+                    315 Count of Smaller Numbers After Self
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.16" data-path="303-range-sum-query---immutable/316-remove-duplicate-letters.html">
+            
+                <a href="303-range-sum-query---immutable/316-remove-duplicate-letters.html">
+            
+                    
+                    316 Remove Duplicate Letters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.17" data-path="318-maximum-product-of-word-lengths/317-shortest-distance-from-all-buildings.html">
+            
+                <a href="318-maximum-product-of-word-lengths/317-shortest-distance-from-all-buildings.html">
+            
+                    
+                    317 Shortest Distance from All Buildings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.18" data-path="318-maximum-product-of-word-lengths.html">
+            
+                <a href="318-maximum-product-of-word-lengths.html">
+            
+                    
+                    318 Maximum Product of Word Lengths
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.19" data-path="319-bulb-switcher.html">
+            
+                <a href="319-bulb-switcher.html">
+            
+                    
+                    319 Bulb Switcher
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.20" data-path="320-generalized-abbreviation.html">
+            
+                <a href="320-generalized-abbreviation.html">
+            
+                    
+                    320 Generalized Abbreviation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.21" data-path="322-coin-change/321-create-maximum-number.html">
+            
+                <a href="322-coin-change/321-create-maximum-number.html">
+            
+                    
+                    321 Create Maximum Number
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.22" data-path="322-coin-change.html">
+            
+                <a href="322-coin-change.html">
+            
+                    
+                    322 Coin Change
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.23" data-path="323-number-of-connected-components-in-an-undirected-graph.html">
+            
+                <a href="323-number-of-connected-components-in-an-undirected-graph.html">
+            
+                    
+                    323 Number of Connected Components in an Undirected Graph
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.24" data-path="324-wiggle-sort-ii.html">
+            
+                <a href="324-wiggle-sort-ii.html">
+            
+                    
+                    324 Wiggle Sort II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.25" data-path="325-maximum-size-subarray-sum-equals-k.html">
+            
+                <a href="325-maximum-size-subarray-sum-equals-k.html">
+            
+                    
+                    325 Maximum Size Subarray Sum Equals k
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.26" data-path="326-power-of-three.html">
+            
+                <a href="326-power-of-three.html">
+            
+                    
+                    326 Power of Three
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.27" data-path="303-range-sum-query---immutable/327-count-of-range-sum.html">
+            
+                <a href="303-range-sum-query---immutable/327-count-of-range-sum.html">
+            
+                    
+                    327 Count of Range Sum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.28" data-path="328-odd-even-linked-list.html">
+            
+                <a href="328-odd-even-linked-list.html">
+            
+                    
+                    328 Odd Even Linked List
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.29" data-path="303-range-sum-query---immutable/329-longest-increasing-path-in-a-matrix.html">
+            
+                <a href="303-range-sum-query---immutable/329-longest-increasing-path-in-a-matrix.html">
+            
+                    
+                    329 Longest Increasing Path in a Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.30" data-path="303-range-sum-query---immutable/330-patching-array.html">
+            
+                <a href="303-range-sum-query---immutable/330-patching-array.html">
+            
+                    
+                    330 Patching Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.31" data-path="331-verify-preorder-serialization-of-a-binary-tree.html">
+            
+                <a href="331-verify-preorder-serialization-of-a-binary-tree.html">
+            
+                    
+                    331 Verify Preorder Serialization of a Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.32" data-path="332-reconstruct-itinerary.html">
+            
+                <a href="332-reconstruct-itinerary.html">
+            
+                    
+                    332 Reconstruct Itinerary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.33" data-path="333-largest-bst-subtree.html">
+            
+                <a href="333-largest-bst-subtree.html">
+            
+                    
+                    333 Largest BST Subtree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.34" data-path="334-increasing-triplet-subsequence.html">
+            
+                <a href="334-increasing-triplet-subsequence.html">
+            
+                    
+                    334 Increasing Triplet Subsequence
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.35" data-path="303-range-sum-query---immutable/336-palindrome-pairs.html">
+            
+                <a href="303-range-sum-query---immutable/336-palindrome-pairs.html">
+            
+                    
+                    336 Palindrome Pairs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.36" data-path="337-house-robber-iii.html">
+            
+                <a href="337-house-robber-iii.html">
+            
+                    
+                    337 House Robber III
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.37" data-path="338-counting-bits.html">
+            
+                <a href="338-counting-bits.html">
+            
+                    
+                    338 Counting Bits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.38" data-path="339-nested-list-weight-sum.html">
+            
+                <a href="339-nested-list-weight-sum.html">
+            
+                    
+                    339 Nested List Weight Sum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.39" data-path="303-range-sum-query---immutable/340-longest-substring-with-at-most-k-distinct-characters.html">
+            
+                <a href="303-range-sum-query---immutable/340-longest-substring-with-at-most-k-distinct-characters.html">
+            
+                    
+                    340 Longest Substring with At Most K Distinct Characters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.40" data-path="341-flatten-nested-list-iterator.html">
+            
+                <a href="341-flatten-nested-list-iterator.html">
+            
+                    
+                    341 Flatten Nested List Iterator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.41" data-path="342-power-of-four.html">
+            
+                <a href="342-power-of-four.html">
+            
+                    
+                    342 Power of Four
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.42" data-path="343-integer-break.html">
+            
+                <a href="343-integer-break.html">
+            
+                    
+                    343 Integer Break
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.43" data-path="344-reverse-string.html">
+            
+                <a href="344-reverse-string.html">
+            
+                    
+                    344 Reverse String
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.44" data-path="345-reverse-vowels-of-a-string.html">
+            
+                <a href="345-reverse-vowels-of-a-string.html">
+            
+                    
+                    345 Reverse Vowels of a String
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.45" data-path="346-moving-average-from-data-stream.html">
+            
+                <a href="346-moving-average-from-data-stream.html">
+            
+                    
+                    346 Moving Average from Data Stream
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.46" data-path="347-top-k-frequent-elements.html">
+            
+                <a href="347-top-k-frequent-elements.html">
+            
+                    
+                    347 Top K Frequent Elements
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.47" data-path="348-design-tic-tac-toe.html">
+            
+                <a href="348-design-tic-tac-toe.html">
+            
+                    
+                    348 Design Tic-Tac-Toe
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.48" data-path="349-intersection-of-two-arrays.html">
+            
+                <a href="349-intersection-of-two-arrays.html">
+            
+                    
+                    349 Intersection of Two Arrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8.49" data-path="350-intersection-of-two-arrays-ii.html">
+            
+                <a href="350-intersection-of-two-arrays-ii.html">
+            
+                    
+                    350 Intersection of Two Arrays II
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="solutions-351---400.html">
+            
+                <a href="solutions-351---400.html">
+            
+                    
+                    Solutions 351 - 400
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.9.1" data-path="351-android-unlock-patterns.html">
+            
+                <a href="351-android-unlock-patterns.html">
+            
+                    
+                    351 Android Unlock Patterns
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.2" data-path="353-design-snake-game.html">
+            
+                <a href="353-design-snake-game.html">
+            
+                    
+                    353 Design Snake Game
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.3" data-path="354-russian-doll-envelopes.html">
+            
+                <a href="354-russian-doll-envelopes.html">
+            
+                    
+                    354 Russian Doll Envelopes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.4" data-path="355-design-twitter.html">
+            
+                <a href="355-design-twitter.html">
+            
+                    
+                    355 Design Twitter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.5" data-path="356-line-reflection.html">
+            
+                <a href="356-line-reflection.html">
+            
+                    
+                    356 Line Reflection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.6" data-path="357-count-numbers-with-unique-digits.html">
+            
+                <a href="357-count-numbers-with-unique-digits.html">
+            
+                    
+                    357 Count Numbers with Unique Digits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.7" data-path="359-logger-rate-limiter/358-rearrange-string-k-distance-apart.html">
+            
+                <a href="359-logger-rate-limiter/358-rearrange-string-k-distance-apart.html">
+            
+                    
+                    358 Rearrange String k Distance Apart
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.8" data-path="359-logger-rate-limiter.html">
+            
+                <a href="359-logger-rate-limiter.html">
+            
+                    
+                    359 Logger Rate Limiter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.9" data-path="360-sort-transformed-array.html">
+            
+                <a href="360-sort-transformed-array.html">
+            
+                    
+                    360 Sort Transformed Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.10" data-path="361-bomb-enemy.html">
+            
+                <a href="361-bomb-enemy.html">
+            
+                    
+                    361 Bomb Enemy
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.11" data-path="362-design-hit-counter.html">
+            
+                <a href="362-design-hit-counter.html">
+            
+                    
+                    362 Design Hit Counter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.12" data-path="363-max-sum-of-rectangle-no-larger-than-k.html">
+            
+                <a href="363-max-sum-of-rectangle-no-larger-than-k.html">
+            
+                    
+                    363 Max Sum of Rectangle No Larger Than K
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.13" data-path="364-nested-list-weight-sum-ii.html">
+            
+                <a href="364-nested-list-weight-sum-ii.html">
+            
+                    
+                    364 Nested List Weight Sum II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.14" data-path="365-water-and-jug-problem.html">
+            
+                <a href="365-water-and-jug-problem.html">
+            
+                    
+                    365 Water and Jug Problem
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.15" data-path="366-find-leaves-of-binary-tree.html">
+            
+                <a href="366-find-leaves-of-binary-tree.html">
+            
+                    
+                    366 Find Leaves of Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.16" data-path="367-valid-perfect-square.html">
+            
+                <a href="367-valid-perfect-square.html">
+            
+                    
+                    367 Valid Perfect Square
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.17" data-path="368-largest-divisible-subset.html">
+            
+                <a href="368-largest-divisible-subset.html">
+            
+                    
+                    368 Largest Divisible Subset
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.18" data-path="369-plus-one-linked-list.html">
+            
+                <a href="369-plus-one-linked-list.html">
+            
+                    
+                    369 Plus One Linked List
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.19" data-path="370-range-addition.html">
+            
+                <a href="370-range-addition.html">
+            
+                    
+                    370 Range Addition
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.20" data-path="371-sum-of-two-integers.html">
+            
+                <a href="371-sum-of-two-integers.html">
+            
+                    
+                    371 Sum of Two Integers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.21" data-path="372-super-pow.html">
+            
+                <a href="372-super-pow.html">
+            
+                    
+                    372 Super Pow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.22" data-path="373-find-k-pairs-with-smallest-sums.html">
+            
+                <a href="373-find-k-pairs-with-smallest-sums.html">
+            
+                    
+                    373 Find K Pairs with Smallest Sums
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.23" data-path="374-guess-number-higher-or-lower.html">
+            
+                <a href="374-guess-number-higher-or-lower.html">
+            
+                    
+                    374 Guess Number Higher or Lower
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.24" data-path="375-guess-number-higher-or-lower-ii.html">
+            
+                <a href="375-guess-number-higher-or-lower-ii.html">
+            
+                    
+                    375 Guess Number Higher or Lower II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.25" data-path="377-combination-sum-iv.html">
+            
+                <a href="377-combination-sum-iv.html">
+            
+                    
+                    377 Combination Sum IV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.26" data-path="378-kth-smallest-element-in-a-sorted-matrix.html">
+            
+                <a href="378-kth-smallest-element-in-a-sorted-matrix.html">
+            
+                    
+                    378 Kth Smallest Element in a Sorted Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.27" data-path="379-design-phone-directory.html">
+            
+                <a href="379-design-phone-directory.html">
+            
+                    
+                    379 Design Phone Directory
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.28" data-path="380-insert-delete-getrandom-o1.html">
+            
+                <a href="380-insert-delete-getrandom-o1.html">
+            
+                    
+                    380 Insert Delete GetRandom O(1)
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.29" data-path="382-linked-list-random-node.html">
+            
+                <a href="382-linked-list-random-node.html">
+            
+                    
+                    382 Linked List Random Node
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.30" data-path="388-longest-absolute-file-path.html">
+            
+                <a href="388-longest-absolute-file-path.html">
+            
+                    
+                    388 Longest Absolute File Path
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.31" data-path="389-find-the-difference.html">
+            
+                <a href="389-find-the-difference.html">
+            
+                    
+                    389 Find the Difference
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.32" data-path="391-perfect-rectangle.html">
+            
+                <a href="391-perfect-rectangle.html">
+            
+                    
+                    391 Perfect Rectangle
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.33" data-path="393-utf-8-validation.html">
+            
+                <a href="393-utf-8-validation.html">
+            
+                    
+                    393 UTF-8 Validation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.34" data-path="394-decode-string.html">
+            
+                <a href="394-decode-string.html">
+            
+                    
+                    394 Decode String
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.35" data-path="397-integer-replacement.html">
+            
+                <a href="397-integer-replacement.html">
+            
+                    
+                    397 Integer Replacement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.36" data-path="398-random-pick-index.html">
+            
+                <a href="398-random-pick-index.html">
+            
+                    
+                    398 Random Pick Index
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.37" data-path="399-evaluate-division.html">
+            
+                <a href="399-evaluate-division.html">
+            
+                    
+                    399 Evaluate Division
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9.38" data-path="400-nth-digit.html">
+            
+                <a href="400-nth-digit.html">
+            
+                    
+                    400 Nth Digit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" >
+            
+                <span>
+            
+                    
+                    Solutions 401 - 450
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.10.1" data-path="401-binary-watch.html">
+            
+                <a href="401-binary-watch.html">
+            
+                    
+                    401 Binary Watch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.2" data-path="402-remove-k-digits.html">
+            
+                <a href="402-remove-k-digits.html">
+            
+                    
+                    402 Remove K Digits
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.3" data-path="404-sum-of-left-leaves.html">
+            
+                <a href="404-sum-of-left-leaves.html">
+            
+                    
+                    404 Sum of Left Leaves
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.4" data-path="406-queue-reconstruction-by-height.html">
+            
+                <a href="406-queue-reconstruction-by-height.html">
+            
+                    
+                    406 Queue Reconstruction by Height
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.5" data-path="408-valid-word-abbreviation/407-trapping-rain-water-ii.html">
+            
+                <a href="408-valid-word-abbreviation/407-trapping-rain-water-ii.html">
+            
+                    
+                    407 Trapping Rain Water II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.6" data-path="408-valid-word-abbreviation.html">
+            
+                <a href="408-valid-word-abbreviation.html">
+            
+                    
+                    408 Valid Word Abbreviation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.7" data-path="409-longest-palindrome.html">
+            
+                <a href="409-longest-palindrome.html">
+            
+                    
+                    409 Longest Palindrome
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.8" data-path="411-minimum-unique-word-abbreviation.html">
+            
+                <a href="411-minimum-unique-word-abbreviation.html">
+            
+                    
+                    411 Minimum Unique Word Abbreviation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.9" data-path="415-add-strings.html">
+            
+                <a href="415-add-strings.html">
+            
+                    
+                    415 Add Strings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.10" data-path="417-pacific-atlantic-water-flow.html">
+            
+                <a href="417-pacific-atlantic-water-flow.html">
+            
+                    
+                    417 Pacific Atlantic Water Flow
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.11" data-path="418-sentence-screen-fitting.html">
+            
+                <a href="418-sentence-screen-fitting.html">
+            
+                    
+                    418 Sentence Screen Fitting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.12" data-path="421-maximum-xor-of-two-numbers-in-an-array.html">
+            
+                <a href="421-maximum-xor-of-two-numbers-in-an-array.html">
+            
+                    
+                    421 Maximum XOR of Two Numbers in an Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.13" data-path="422-valid-word-square.html">
+            
+                <a href="422-valid-word-square.html">
+            
+                    
+                    422 Valid Word Square
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.14" data-path="425-word-squares.html">
+            
+                <a href="425-word-squares.html">
+            
+                    
+                    425 Word Squares
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.15" data-path="444-sequence-reconstruction.html">
+            
+                <a href="444-sequence-reconstruction.html">
+            
+                    
+                    444 Sequence Reconstruction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.16" data-path="447-number-of-boomerangs.html">
+            
+                <a href="447-number-of-boomerangs.html">
+            
+                    
+                    447 Number of Boomerangs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.17" data-path="448-find-all-numbers-disappeared-in-an-array.html">
+            
+                <a href="448-find-all-numbers-disappeared-in-an-array.html">
+            
+                    
+                    448 Find All Numbers Disappeared in an Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.18" data-path="404-sum-of-left-leaves.html">
+            
+                <a href="404-sum-of-left-leaves.html">
+            
+                    
+                    404 Sum of Left Leaves
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.19" data-path="410-split-array-largest-sum.html">
+            
+                <a href="410-split-array-largest-sum.html">
+            
+                    
+                    410 Split Array Largest Sum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.20" data-path="432-all-oone-data-structure.html">
+            
+                <a href="432-all-oone-data-structure.html">
+            
+                    
+                    432 All O`one Data Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.21" data-path="437-path-sum-iii.html">
+            
+                <a href="437-path-sum-iii.html">
+            
+                    
+                    437 Path Sum III
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10.22" data-path="450-delete-node-in-a-bst.html">
+            
+                <a href="450-delete-node-in-a-bst.html">
+            
+                    
+                    450 Delete Node in a BST
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="solutions-451-500.html">
+            
+                <a href="solutions-451-500.html">
+            
+                    
+                    Solutions 451 - 500
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.11.1" data-path="solutions-451-500/451-sort-characters-by-frequency.html">
+            
+                <a href="solutions-451-500/451-sort-characters-by-frequency.html">
+            
+                    
+                    451 Sort Characters By Frequency
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.2" data-path="solutions-451-500/459-repeated-substring-pattern.html">
+            
+                <a href="solutions-451-500/459-repeated-substring-pattern.html">
+            
+                    
+                    459 Repeated Substring Pattern
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.3" data-path="solutions-451-500/460-lfu-cache.html">
+            
+                <a href="solutions-451-500/460-lfu-cache.html">
+            
+                    
+                    460 LFU Cache
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.4" data-path="solutions-451-500/461-hamming-distance.html">
+            
+                <a href="solutions-451-500/461-hamming-distance.html">
+            
+                    
+                    461 Hamming Distance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.5" data-path="solutions-451-500/463-island-perimeter.html">
+            
+                <a href="solutions-451-500/463-island-perimeter.html">
+            
+                    
+                    463 Island Perimeter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.6" data-path="solutions-451-500/465-optimal-account-balancing.html">
+            
+                <a href="solutions-451-500/465-optimal-account-balancing.html">
+            
+                    
+                    465 Optimal Account Balancing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.7" data-path="solutions-451-500/469-convex-polygon.html">
+            
+                <a href="solutions-451-500/469-convex-polygon.html">
+            
+                    
+                    469 Convex Polygon
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.8" data-path="solutions-451-500/471-encode-string-with-shortest-length.html">
+            
+                <a href="solutions-451-500/471-encode-string-with-shortest-length.html">
+            
+                    
+                    471 Encode String with Shortest Length 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.9" data-path="solutions-451-500/474-ones-and-zeroes.html">
+            
+                <a href="solutions-451-500/474-ones-and-zeroes.html">
+            
+                    
+                    474 Ones and Zeroes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.10" data-path="solutions-451-500/475-heaters.html">
+            
+                <a href="solutions-451-500/475-heaters.html">
+            
+                    
+                    475 Heaters
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.11" data-path="solutions-451-500/480-sliding-window-median.html">
+            
+                <a href="solutions-451-500/480-sliding-window-median.html">
+            
+                    
+                    480 Sliding Window Median
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.12" data-path="solutions-451-500/481-magical-string.html">
+            
+                <a href="solutions-451-500/481-magical-string.html">
+            
+                    
+                    481 Magical String
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.13" data-path="solutions-451-500/482-license-key-formatting.html">
+            
+                <a href="solutions-451-500/482-license-key-formatting.html">
+            
+                    
+                    482 License Key Formatting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.14" data-path="solutions-451-500/483-smallest-good-base.html">
+            
+                <a href="solutions-451-500/483-smallest-good-base.html">
+            
+                    
+                    483 Smallest Good Base
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.15" data-path="solutions-451-500/484-find-permutation.html">
+            
+                <a href="solutions-451-500/484-find-permutation.html">
+            
+                    
+                    484 Find Permutation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.16" data-path="solutions-451-500/485-max-consecutive-ones.html">
+            
+                <a href="solutions-451-500/485-max-consecutive-ones.html">
+            
+                    
+                    485 Max Consecutive Ones
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.17" data-path="solutions-451-500/486-predict-the-winner.html">
+            
+                <a href="solutions-451-500/486-predict-the-winner.html">
+            
+                    
+                    486 Predict the Winner
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.18" data-path="solutions-451-500/487-max-consecutive-ones-ii.html">
+            
+                <a href="solutions-451-500/487-max-consecutive-ones-ii.html">
+            
+                    
+                    487 Max Consecutive Ones II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.19" data-path="solutions-451-500/490-the-maze.html">
+            
+                <a href="solutions-451-500/490-the-maze.html">
+            
+                    
+                    490 The Maze
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.20" data-path="solutions-451-500/493-reverse-pairs.html">
+            
+                <a href="solutions-451-500/493-reverse-pairs.html">
+            
+                    
+                    493 Reverse Pairs
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.21" data-path="solutions-451-500/494-target-sum.html">
+            
+                <a href="solutions-451-500/494-target-sum.html">
+            
+                    
+                    494 Target Sum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11.22" data-path="solutions-451-500/498-diagonal-traverse.html">
+            
+                <a href="solutions-451-500/498-diagonal-traverse.html">
+            
+                    
+                    498 Diagonal Traverse
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="solutions-501-550.html">
+            
+                <a href="solutions-501-550.html">
+            
+                    
+                    Solutions 501 - 550
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.12.1" data-path="solutions-501-550/501-find-mode-in-binary-search-tree.html">
+            
+                <a href="solutions-501-550/501-find-mode-in-binary-search-tree.html">
+            
+                    
+                    501 Find Mode in Binary Search Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.2" data-path="solutions-501-550/503-next-greater-element-ii.html">
+            
+                <a href="solutions-501-550/503-next-greater-element-ii.html">
+            
+                    
+                    503 Next Greater Element II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.3" data-path="solutions-501-550/505-the-maze-ii.html">
+            
+                <a href="solutions-501-550/505-the-maze-ii.html">
+            
+                    
+                    505 The Maze II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.4" data-path="solutions-501-550/506-relative-ranks.html">
+            
+                <a href="solutions-501-550/506-relative-ranks.html">
+            
+                    
+                    506 Relative Ranks
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.5" data-path="solutions-501-550/514-freedom-trail.html">
+            
+                <a href="solutions-501-550/514-freedom-trail.html">
+            
+                    
+                    514 Freedom Trail
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.6" data-path="solutions-501-550/515-find-largest-value-in-each-tree-row.html">
+            
+                <a href="solutions-501-550/515-find-largest-value-in-each-tree-row.html">
+            
+                    
+                    515 Find Largest Value in Each Tree Row
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.7" data-path="solutions-501-550/520-detect-capital.html">
+            
+                <a href="solutions-501-550/520-detect-capital.html">
+            
+                    
+                    520 Detect Capital
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.8" data-path="solutions-501-550/520-detect-capital/521-longest-uncommon-subsequence-i.html">
+            
+                <a href="solutions-501-550/520-detect-capital/521-longest-uncommon-subsequence-i.html">
+            
+                    
+                    521 Longest Uncommon Subsequence I
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.9" data-path="solutions-501-550/526-beautiful-arrangement/522-longest-uncommon-subsequence-ii.html">
+            
+                <a href="solutions-501-550/526-beautiful-arrangement/522-longest-uncommon-subsequence-ii.html">
+            
+                    
+                    522 Longest Uncommon Subsequence II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.10" data-path="solutions-501-550/523-continuous-subarray-sum.html">
+            
+                <a href="solutions-501-550/523-continuous-subarray-sum.html">
+            
+                    
+                    523 Continuous Subarray Sum
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.11" data-path="solutions-501-550/524-longest-word-in-dictionary-through-deleting.html">
+            
+                <a href="solutions-501-550/524-longest-word-in-dictionary-through-deleting.html">
+            
+                    
+                    524 Longest Word in Dictionary through Deleting
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.12" data-path="solutions-501-550/525-contiguous-array.html">
+            
+                <a href="solutions-501-550/525-contiguous-array.html">
+            
+                    
+                    525 Contiguous Array
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.13" data-path="solutions-501-550/526-beautiful-arrangement.html">
+            
+                <a href="solutions-501-550/526-beautiful-arrangement.html">
+            
+                    
+                    526 Beautiful Arrangement
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.14" data-path="solutions-501-550/527-word-abbreviation.html">
+            
+                <a href="solutions-501-550/527-word-abbreviation.html">
+            
+                    
+                    527 Word Abbreviation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.15" data-path="solutions-501-550/530-minimum-absolute-difference-in-bst.html">
+            
+                <a href="solutions-501-550/530-minimum-absolute-difference-in-bst.html">
+            
+                    
+                    530 Minimum Absolute Difference in BST
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.16" data-path="solutions-501-550/531-lonely-pixel-i.html">
+            
+                <a href="solutions-501-550/531-lonely-pixel-i.html">
+            
+                    
+                    531 Lonely Pixel I
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.17" data-path="solutions-501-550/533-lonely-pixel-ii.html">
+            
+                <a href="solutions-501-550/533-lonely-pixel-ii.html">
+            
+                    
+                    533 Lonely Pixel II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.18" data-path="solutions-501-550/534-design-tinyurl.html">
+            
+                <a href="solutions-501-550/534-design-tinyurl.html">
+            
+                    
+                    534 Design TinyURL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.19" data-path="solutions-501-550/535-encode-and-decode-tinyurl.html">
+            
+                <a href="solutions-501-550/535-encode-and-decode-tinyurl.html">
+            
+                    
+                    535 Encode and Decode TinyURL
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.20" data-path="solutions-501-550/541-reverse-string-ii.html">
+            
+                <a href="solutions-501-550/541-reverse-string-ii.html">
+            
+                    
+                    541 Reverse String II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.21" data-path="solutions-501-550/542-01-matrix.html">
+            
+                <a href="solutions-501-550/542-01-matrix.html">
+            
+                    
+                    542 01 Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.22" data-path="solutions-501-550/543-diameter-of-binary-tree.html">
+            
+                <a href="solutions-501-550/543-diameter-of-binary-tree.html">
+            
+                    
+                    543 Diameter of Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.23" data-path="solutions-501-550/544-output-contest-matches.html">
+            
+                <a href="solutions-501-550/544-output-contest-matches.html">
+            
+                    
+                    544 Output Contest Matches
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.24" data-path="solutions-501-550/545-boundary-of-binary-tree.html">
+            
+                <a href="solutions-501-550/545-boundary-of-binary-tree.html">
+            
+                    
+                    545 Boundary of Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.25" data-path="solutions-501-550/549-binary-tree-longest-consecutive-sequence-ii.html">
+            
+                <a href="solutions-501-550/549-binary-tree-longest-consecutive-sequence-ii.html">
+            
+                    
+                    549 Binary Tree Longest Consecutive Sequence II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12.26" data-path="solutions-501-550/516-longest-palindromic-subsequence.html">
+            
+                <a href="solutions-501-550/516-longest-palindromic-subsequence.html">
+            
+                    
+                    516 Longest Palindromic Subsequence
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="solutions-551-600.html">
+            
+                <a href="solutions-551-600.html">
+            
+                    
+                    Solutions 551 - 600
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.13.1" data-path="solutions-551-600/551-student-attendance-record-i.html">
+            
+                <a href="solutions-551-600/551-student-attendance-record-i.html">
+            
+                    
+                    551 Student Attendance Record I
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.2" data-path="solutions-551-600/552-student-attendance-record-ii.html">
+            
+                <a href="solutions-551-600/552-student-attendance-record-ii.html">
+            
+                    
+                    552 Student Attendance Record II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.3" data-path="solutions-551-600/560-subarray-sum-equals-k.html">
+            
+                <a href="solutions-551-600/560-subarray-sum-equals-k.html">
+            
+                    
+                    560 Subarray Sum Equals K
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.4" data-path="solutions-551-600/562-longest-line-of-consecutive-one-in-matrix.html">
+            
+                <a href="solutions-551-600/562-longest-line-of-consecutive-one-in-matrix.html">
+            
+                    
+                    562 Longest Line of Consecutive One in Matrix
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.5" data-path="solutions-551-600/568-maximum-vacation-days.html">
+            
+                <a href="solutions-551-600/568-maximum-vacation-days.html">
+            
+                    
+                    568 Maximum Vacation Days
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.6" data-path="solutions-551-600/569-median-employee-salary.html">
+            
+                <a href="solutions-551-600/569-median-employee-salary.html">
+            
+                    
+                    569 Median Employee Salary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13.7" data-path="solutions-551-600/554-brick-wall.html">
+            
+                <a href="solutions-551-600/554-brick-wall.html">
+            
+                    
+                    554 Brick Wall
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" >
+            
+                <span>
+            
+                    
+                    Solutions 601 - 650
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.14.1" data-path="621-task-scheduler.html">
+            
+                <a href="621-task-scheduler.html">
+            
+                    
+                    621 Task Scheduler
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.2" data-path="633-sum-of-square-numbers.html">
+            
+                <a href="633-sum-of-square-numbers.html">
+            
+                    
+                    633 Sum of Square Numbers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.3" data-path="636-exclusive-time-of-functions.html">
+            
+                <a href="636-exclusive-time-of-functions.html">
+            
+                    
+                    636 Exclusive Time of Functions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.4" data-path="637-average-of-levels-in-binary-tree.html">
+            
+                <a href="637-average-of-levels-in-binary-tree.html">
+            
+                    
+                    637 Average of Levels in Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.5" data-path="639-decode-ways-ii.html">
+            
+                <a href="639-decode-ways-ii.html">
+            
+                    
+                    639 Decode Ways II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.6" data-path="642-design-search-autocomplete-system.html">
+            
+                <a href="642-design-search-autocomplete-system.html">
+            
+                    
+                    642 Design Search Autocomplete System
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.7" data-path="647-palindromic-substrings.html">
+            
+                <a href="647-palindromic-substrings.html">
+            
+                    
+                    647 Palindromic Substrings
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14.8" data-path="648-replace-words.html">
+            
+                <a href="648-replace-words.html">
+            
+                    
+                    648 Replace Words
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15" >
+            
+                <span>
+            
+                    
+                    Solutions 651 - 700
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.15.1" data-path="653-two-sum-iv-input-is-a-bst.html">
+            
+                <a href="653-two-sum-iv-input-is-a-bst.html">
+            
+                    
+                    653 Two Sum IV - Input is a BST
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.2" data-path="689-maximum-sum-of-3-non-overlapping-subarrays.html">
+            
+                <a href="689-maximum-sum-of-3-non-overlapping-subarrays.html">
+            
+                    
+                    689 Maximum Sum of 3 Non-Overlapping Subarrays
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.3" data-path="670-maximum-swap.html">
+            
+                <a href="670-maximum-swap.html">
+            
+                    
+                    670 Maximum Swap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.4" data-path="671-second-minimum-node-in-a-binary-tree.html">
+            
+                <a href="671-second-minimum-node-in-a-binary-tree.html">
+            
+                    
+                    671 Second Minimum Node In a Binary Tree
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.5" data-path="680-valid-palindrome-ii.html">
+            
+                <a href="680-valid-palindrome-ii.html">
+            
+                    
+                    680 Valid Palindrome II
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.6" data-path="690-employee-importance.html">
+            
+                <a href="690-employee-importance.html">
+            
+                    
+                    690 Employee Importance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.7" data-path="692-top-k-frequent-words.html">
+            
+                <a href="692-top-k-frequent-words.html">
+            
+                    
+                    692 Top K Frequent Words
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.8" data-path="698-partition-to-k-equal-sum-subsets.html">
+            
+                <a href="698-partition-to-k-equal-sum-subsets.html">
+            
+                    
+                    698 Partition to K Equal Sum Subsets
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.15.9" data-path="699-falling-squares.html">
+            
+                <a href="699-falling-squares.html">
+            
+                    
+                    699 Falling Squares
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16" >
+            
+                <span>
+            
+                    
+                    Solutions 701 - 750
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.16.1" data-path="714-best-time-to-buy-and-sell-stock-with-transaction-fee.html">
+            
+                <a href="714-best-time-to-buy-and-sell-stock-with-transaction-fee.html">
+            
+                    
+                    714 Best Time to Buy and Sell Stock with Transaction Fee
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.2" data-path="716-max-stack.html">
+            
+                <a href="716-max-stack.html">
+            
+                    
+                    716 Max Stack
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.3" data-path="744-find-smallest-letter-greater-than-target.html">
+            
+                <a href="744-find-smallest-letter-greater-than-target.html">
+            
+                    
+                    744 Find Smallest Letter Greater Than Target
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.4" data-path="730-count-different-palindromic-subsequences.html">
+            
+                <a href="730-count-different-palindromic-subsequences.html">
+            
+                    
+                    730 Count Different Palindromic Subsequences
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.5" data-path="733-flood-fill.html">
+            
+                <a href="733-flood-fill.html">
+            
+                    
+                    733 Flood Fill
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.16.6" data-path="735-asteroid-collision.html">
+            
+                <a href="735-asteroid-collision.html">
+            
+                    
+                    735 Asteroid Collision
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.17" data-path="best-time-to-buy-and-sell-stock.html">
+            
+                <a href="best-time-to-buy-and-sell-stock.html">
+            
+                    
+                    Best Time to Buy and Sell Stock
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >82 Remove Duplicates from Sorted List II – Medium</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="82-leetcode-java-remove-duplicates-from-sorted-list-ii-&#x2013;-medium">82 LeetCode Java: Remove Duplicates from Sorted List II &#x2013; Medium</h1>
+<h3 id="problem">Problem:</h3>
+<p>Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.</p>
+<p>For example,
+Given 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5, return 1-&gt;2-&gt;5.
+Given 1-&gt;1-&gt;1-&gt;2-&gt;3, return 2-&gt;3.</p>
+<h3 id="thoughts">Thoughts:</h3>
+<p>The difference comparing to the version I is that instead of keeping the duplicate elements, removing all occurrence of duplicate elements.</p>
+<p>Having a fakeHead is most of time a good practice to handle edge cases.</p>
+<h3 id="solutions">Solutions:</h3>
+<pre><code class="lang-java"><span class="hljs-comment">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">deleteDuplicates</span><span class="hljs-params">(ListNode head)</span> </span>{
+        <span class="hljs-keyword">if</span> (head == <span class="hljs-keyword">null</span> || head.next == <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">return</span> head;
+        }
+        ListNode fakeHead = <span class="hljs-keyword">new</span> ListNode(-<span class="hljs-number">1</span>);
+        fakeHead.next = head;
+        ListNode it = fakeHead;
+        <span class="hljs-keyword">while</span> (it.next != <span class="hljs-keyword">null</span> &amp;&amp; it.next.next != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">if</span> (it.next.val == it.next.next.val) {
+                <span class="hljs-keyword">int</span> val = it.next.val;
+                <span class="hljs-keyword">while</span> (it.next != <span class="hljs-keyword">null</span> &amp;&amp; it.next.val == val) {
+                    it.next = it.next.next;
+                }
+            }
+            <span class="hljs-keyword">else</span> {
+                it = it.next;
+            }
+        }
+        <span class="hljs-keyword">return</span> fakeHead.next;
+    }
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="81_leetcode_java_search_in_rotated_sorted_array_ii.html" class="navigation navigation-prev " aria-label="Previous page: 81 Search in Rotated Sorted Array II">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="83_leetcode_java_remove_duplicates_from_sorted_lis.html" class="navigation navigation-next " aria-label="Next page: 83  Remove Duplicates from Sorted List – Easy">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"82 Remove Duplicates from Sorted List II – Medium","level":"1.3.29","depth":2,"next":{"title":"83  Remove Duplicates from Sorted List – Easy","level":"1.3.30","depth":2,"path":"83_leetcode_java_remove_duplicates_from_sorted_lis.md","ref":"83_leetcode_java_remove_duplicates_from_sorted_lis.md","articles":[]},"previous":{"title":"81 Search in Rotated Sorted Array II","level":"1.3.28","depth":2,"path":"81_leetcode_java_search_in_rotated_sorted_array_ii.md","ref":"81_leetcode_java_search_in_rotated_sorted_array_ii.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"82_leetcode_java_remove_duplicates_from_sorted_lis.md","mtime":"2021-04-21T19:50:38.110Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
