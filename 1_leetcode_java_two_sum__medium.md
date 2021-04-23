@@ -1,4 +1,4 @@
-# 1 Leetcode Java: Two Sum – Medium
+# 1 Leetcode C++: Two Sum – Medium
 
 
 ### Problem

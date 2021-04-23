@@ -51,7 +51,7 @@ public class Solution {
             result.next = new ListNode(tmp % 10);
             result = result.next;
             toAdd = tmp / 10;
-             
+
         }
         if (toAdd > 0){
             result.next = new ListNode(toAdd);
