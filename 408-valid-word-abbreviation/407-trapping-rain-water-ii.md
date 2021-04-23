@@ -67,7 +67,7 @@ public class Solution {
         }
         int level = Integer.MIN_VALUE;
         int water = 0;
-        int[][] dir = new int[][]{{0, 1},{0, -1},{1, 0},{-1, 0}};
+        int[][] dir = new int[][]{ {0, 1},{0, -1},{1, 0},{-1, 0}};
         while (!q.isEmpty()) {
             Node node = q.poll();
             int x = node.x, y = node.y, h = node.h;
