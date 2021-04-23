@@ -47,7 +47,7 @@
 
 ![DataStructureSelection](data_structures/Data%20Structures%20Selection.png "Data Structures Selection")
 -------------------------------------------------------
-### 1.2 Vector `std::vector`
+### 1.2 Vector `std::vector` (Sequence Containers)
 **Use for**
 * Simple storage
 * Adding but not deleting
@@ -118,7 +118,7 @@ std::vector<std::vector<int>> vi3(10, std::vector<int>(10, -1));
 v.clear();
 ```
 -------------------------------------------------------
-### 1.3 Deque `std::deque`
+### 1.3 Deque `std::deque` (Sequence Containers)
 **Use for**
 * Similar purpose of `std::vector`
 * Basically `std::vector` with efficient `push_front` and `pop_front`
@@ -165,7 +165,7 @@ d.pop_back();                   // tail
 d.clear();
 ```
 -------------------------------------------------------
-### 1.4 List `std::list` and `std::forward_list`
+### 1.4 List `std::list` and `std::forward_list` (Sequence Containers)
 **Use for**
 * Insertion into the middle/beginning of the list
 * Efficient sorting (pointer swap vs. copying)
@@ -245,6 +245,14 @@ l.sort();
 // Reverse: Reverse the list order
 l.reverse();
 ```
+
+	Vector vs Deque vs List :
+		◊ Vector only push_back and deque/list both push_back and push_front
+		◊ A vector is a single contiguous memory block.
+		◊ A deque is a set of linked memory blocks, where more than one element is stored in each memory block.
+		◊ A list is a set of elements dispersed in memory, i.e.: only one element is stored per memory "block".
+
+
 -------------------------------------------------------
 ### 1.5 Map `std::map` and `std::unordered_map`
 **Use for**
@@ -294,6 +302,7 @@ std::map<std::string, std::string> m;
 
 // Insert
 m.insert(std::pair<std::string, std::string>("key", "value"));
+m.insert{"key", "value"});
 
 // Access by key
 std::string value = m.at("key");
@@ -305,6 +314,9 @@ unsigned int size = m.size();
 for(std::map<std::string, std::string>::iterator it = m.begin(); it != m.end(); it++) {
     std::cout << *it << std::endl;
 }
+
+for(auto const &i : m)
+ std::cout << it.first << it.second << std::endl;
 
 // Remove by key
 m.erase("key");
@@ -379,7 +391,7 @@ bool exists = (s.find(20) != s.end());
 unsigned int count = s.count(20);
 ```
 -------------------------------------------------------
-### 1.7 Stack `std::stack`
+### 1.7 Stack `std::stack` (Adapter on (Sequence Containers))
 **Use for**
 * First-In Last-Out operations
 * Reversal of elements
@@ -413,7 +425,7 @@ s.pop();
 int top = s.top();
 ```
 -------------------------------------------------------
-### 1.8 Queue `std::queue`
+### 1.8 Queue `std::queue` (Adapter on (Sequence Containers))
 **Use for**
 * First-In First-Out operations
 * Ex: Simple online ordering system (first come first served)
@@ -445,11 +457,13 @@ unsigned int size = q.size();
 q.pop();
 ```
 -------------------------------------------------------
-### 1.9 Priority Queue `std::priority_queue`
+### 1.9 Priority Queue `std::priority_queue` (Adapter on (Sequence Containers))
 **Use for**
 * First-In First-Out operations where **priority** overrides arrival time
 * Ex: CPU scheduling (smallest job first, system/user priority)
 * Ex: Medical emergencies (gunshot wound vs. broken arm)
+* **use multiset if you have to delete an element**
+* **use rbegin rend of multiset to use small or bigger element**
 
 **Notes**
 * Often implemented as a `std::vector`
@@ -473,6 +487,22 @@ unsigned int size = p.size();
 
 // Remove
 p.pop();
+
+priority_queue <int> prq;
+for (int i=0; i<5; i++) prq.push(i+1); // 5 4 3 2 1 default bigger element on top
+cout << prq.top() << endl; // 5
+prq.pop (); // removes 5
+priority_queue<int> q;
+for(int n : {1,8,5,6,3,4,0,9,7,2}) q.push(n); //9 8 7 6 5 4 3 2 1 0
+std::priority_queue<int, std::vector<int>, std::greater<int> > q2;
+for(int n : {1,8,5,6,3,4,0,9,7,2})       q2.push(n); // 0 1 2 3 4 5 6 7 8 9
+// Using lambda to compare elements.
+auto cmp = [](int left, int right) { return (left ^ 1) < (right ^ 1); };
+std::priority_queue<int, std::vector<int>, decltype(cmp)> q3(cmp);
+// 8 9 6 7 4 5 2 3 0 1
+auto p_comp = [] (const std::pair<int, int>& left, const std::pair<int, int>& right) { return left.first < right.first;};
+std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(p_comp)> q4(p_comp);
+
 ```
 -------------------------------------------------------
 ### 1.10 Heap `std::priority_queue`
@@ -486,6 +516,249 @@ p.pop();
 **Max Heap Example (using a binary tree)**
 
 ![MaxHeap](General/MaxHeap.png)
+
+
+### 1.10 Tuple:
+**Example Code**
+```c++
+std::tuple<int, short, float, std::string>  tps{1, 2, 10.0f, "aa"};
+auto a1 = std::get<0>(tps);
+auto a2 = std::get<1>(tps);
+
+
+double gpa1;
+char grade1;
+std::string name1;
+auto t =  std::make_tuple(3.8, 'A', "Lisa Simpson");
+std::tie(gpa1, grade1, name1) = t;
+
+std::partition:
+std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
+// 0 8 2 6 4 5 3 7 1 9omp);
+
+```
+-------------------------------------------------------
+
+
+## nth_element
+**Example Code**
+```c++
+std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+std::nth_element(v.begin(), v.begin() + v.size()/2, v.end());
+// find nth smallest element in the array => this case find median
+nth_element is a partial sorting algorithm that rearranges elements in [first, last) such that:
+
+std::nth_element(v.begin(), v.begin()+1, v.end(), std::less<int>());
+The element pointed at by nth is changed to whatever element would occur in that position
+if [first, last) were sorted.
+All of the elements before this new nth element are less than or equal to the elements
+after the new nth element.
+
+
+ std::vector<int> v{5, 6, 4, 3, 2, 6, 7, 9, 3};
+    std::nth_element(v.begin(), v.begin() + v.size()/2, v.end());
+    std::cout << "The median is " << v[v.size()/2] << '\n';
+     std::nth_element(v.begin(), v.begin()+1, v.end(), std::greater<int>());
+    std::cout << "The second largest element is " << v[1] << '\n';
+	This means that std::nth_element can bail out early - as soon as it can tell what
+	the n'th element of your range is going to be, it can stop. For instance, for a range
+	[9,3,6,2,1,7,8,5,4,0]
+	asking it to give you the fourth element may yield something like
+	[2,0,1,3,8,5,6,9,7,4]
+        The list was partially sorted, just good enough to be able to tell that the
+        fourth element in order will be 3.
+
+```
+-------------------------------------------------------
+## string
+``` cpp
+	string str1("first string");
+	string str4(str1, 6, 6); //    from 6th index (second parameter) & 6 characters (third parameter)
+	string str3(5, '#');// initialization by character with number of occurence
+	str2.clear() ; // clears all the chars
+	char ch_f = str6.front();  // Same as "ch_f = str6[0];"
+	char ch_b = str6.back();   // "ch_b = str6[str6.length() - 1];"
+	str6.append(" extension"); 	//  same as str6 += " extension"
+	str4.append(str6, 0, 6);  // from 0th position append 6 characters
+	if (str6.find(str4) != string::npos) cout << "str4 found in str6 at " << str6.find(str4) ;
+	Find returns zero index based index
+	str6.substr(7, 3) // substring from 7th index 3 chars
+	str6.substr(7) // substring from position 7th index till the end
+	str6.erase(7, 4); // erase 4 chars from position 7
+	str6 = "This is a examples";
+	//  replace(a, b, str)  remove  b characters from a index and place str at index a
+	str6.replace(2, 7, "ese are test"); // these are test examples
+	str.find_first_of("reef") // find position of any character in r/e/f
+
+```
+-------------------------------------------------------
+## istringstream
+```c++
+istringstream iss("/a/b/c/../../c/")
+while(getline(iss, dir, "/"){ std::cout << dir << std::endl; // prints a b c .. .. c}
+const char* const delim = ", ";
+std::ostringstream imploded;
+std::copy(strings.begin(), strings.end(),  std::ostream_iterator<std::string>(imploded, delim));
+
+auto it = std::find(src.cbegin(), src.cend(), 'd');
+
+std::copy(it, src.cend(), std::ostream_iterator<char>(std::cout));
+````
+-------------------------------------------------------
+## other
+``` c++
+std::partition
+	    std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+	    auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
+	    std::copy(std::begin(v), it, std::ostream_iterator<int>(std::cout, " "));
+	    std::cout << " * ";
+	    std::copy(it, std::end(v), std::ostream_iterator<int>(std::cout, " "));
+	    //    0 8 2 6 4  *  5 3 7 1 9
+	template <class ForwardIt>
+ void quicksort(ForwardIt first, ForwardIt last)
+ {
+    if(first == last) return;
+    auto pivot = *std::next(first, std::distance(first,last)/2);
+    ForwardIt middle1 = std::partition(first, last,
+                         [pivot](const auto& em){ return em < pivot; });
+    ForwardIt middle2 = std::partition(middle1, last,
+                         [pivot](const auto& em){ return !(pivot < em); });
+    quicksort(first, middle1);
+    quicksort(middle2, last);
+ }
+
+back_inserter:
+    std::vector<int> v{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::fill_n(std::back_inserter(v), 3, -1);
+    for (int n : v) std::cout << n << ' '; //1 2 3 4 5 6 7 8 9 10 -1 -1 -1
+
+int getRandNum_New() {
+    static std::minstd_rand eng{std::random_device{}()};
+    static std::uniform_int_distribution<int> dist{0, 5};
+    return dist(eng);
+
+    // or
+    /* static std::minstd_rand eng{std::random_device{}()};
+       return eng() % 6;     */
+generate_random_array
+	int arr[100];
+	std::random_device rd;
+	std::default_random_engine dre(rd());
+	std::uniform_int_distribution<int> uid(0,9);
+	std::generate(arr, arr + sizeof(arr) / sizeof(int), [&] () { return uid(dre); });
+
+Std::fill
+	std::vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	std::fill(v.begin(), v.end(), -1); // all -1s
+
+Std::generate
+    std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; }); //  0 1 2 3 …vec.size()
+Std::iota
+   std::list<int> l(10);
+    std::iota(l.begin(), l.end(), -4); //Contents of the list: -4 -3 -2 -1 0 1 2 3 4 5
+
+Std::fill vs std::generate vs std::iota
+
+Fill assigns a value whereast generate generates a value based on function provided
+Iota generates sequence of numbers from a range or initial value etc
+
+
+Stream iterators:
+std::istringstream istr("1\t 2     3 4");
+std::vector<int> v;
+
+// Constructing stream iterators and copying data from stream into vector.
+std::copy(
+    // Iterator which will read stream data as integers.
+    std::istream_iterator<int>(istr),
+    // Default constructor produces end-of-stream iterator.
+    std::istream_iterator<int>(),
+    std::back_inserter(v));
+
+// Print vector contents.
+std::copy(v.begin(), v.end(),
+    //Will print values to standard output as integers delimeted by " -- ".
+    std::ostream_iterator<int>(std::cout, " -- "));
+
+std::istreambuf_iterartor
+std::ostream_iterator
+std::istream_iterator
+````
+-------------------------------------------------------
+## Sorting Algorithms
+```cpp
+std::array<int, 10> s{5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
+
+std::partial_sort(s.begin(), s.begin() + 3, s.end());
+for (int a : s) {
+    std::cout << a << " "; //0 1 2 7 8 6 5 9 4 3
+}
+std::array<int, 10> s = {5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
+
+// sort using the default operator< default if a <  b returns true
+std::sort(s.begin(), s.end()); // 0 1 2 3 4 5 6 7 8 9
+std::sort(s.begin(), s.end(), std::greater<int>());  //9 8 7 6 5 4 3 2 1 0
+// sort using a lambda expression
+std::sort(s.begin(), s.end(), [](int a, int b) {  // 9 8 7 6 5 4 3 2 1 0
+        return a > b;
+});
+```
+-------------------------------------------------------
+###Sorted Data Algorithms
+ These are the algorithms that require data being pre-sorted.
+	• Binary search: It checks for data in a data range. It returns a Boolean as a result.
+	 std::vector<int> haystack {1, 3, 4, 5, 9};
+	    std::vector<int> needles {1, 2, 3};
+
+	    for (auto needle : needles) {
+	        std::cout << "Searching for " << needle << '\n';
+	        if (std::binary_search(haystack.begin(), haystack.end(), needle)) {
+	            std::cout << "Found " << needle << '\n';
+	        } else {
+	            std::cout << "no dice!\n";
+	        }
+	    }
+
+	• Merge: Merge operation does two ranges of sorted data into one range of big sorted data.
+
+	    std::vector<int> dst;
+	    std::merge(v1.begin(), v1.end(), v2.begin(), v2.end(), std::back_inserter(dst));
+
+
+	• Set operations: Set Union, Set intersection, Set difference,
+	 Symmetric difference all these are set operations.
+	std::vector<int> v1 = {1, 2, 3, 4, 5};
+	        std::vector<int> v2 = {      3, 4, 5, 6, 7};
+	        std::vector<int> dest1;
+
+	        std::set_union(v1.begin(), v1.end(),
+	                       v2.begin(), v2.end(),
+	                       std::back_inserter(dest1)); // 1 2 3 4 5 6 7
+
+	 std::vector<int> v1 {1, 2, 5, 5, 5, 9}; // sorted vector
+	    std::vector<int> v2 {2, 5, 7}; // sorted vector
+	    std::vector<int> diff;
+
+	    std::set_difference(v1.begin(), v1.end(), v2.begin(), v2.end(),
+	            std::inserter(diff, diff.begin()));
+	       // 1 2 5 5 5 9 minus 2 5 7 is: 1 5 5 9
+
+
+	std::vector<int> v1{1,2,3,4,5,6,7,8};
+	    std::vector<int> v2{        5,  7,  9,10};
+	    std::sort(v1.begin(), v1.end());
+	    std::sort(v2.begin(), v2.end());
+	     std::vector<int> v_intersection;
+	    std::set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(), std::back_inserter(v_intersection)); // 5 7
+
+	std::unique
+		std::sort(v.begin(), v.end()); // {1 1 2 3 4 4 5}
+	       print(3);
+	       last = std::unique(v.begin(), v.end());
+	       // v now holds {1 2 3 4 5 x x}, where 'x' is indeterminate
+	       v.erase(last, v.end());
+
 -------------------------------------------------------
 ## 2.0 Trees
 ### 2.1 Binary Tree

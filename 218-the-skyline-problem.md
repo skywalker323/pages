@@ -29,7 +29,7 @@ Notes:
 public class Solution {
     private class Node implements Comparable<Node>{
         private int x;
-        private int height; 
+        private int height;
         public Node(int x, int height) {
             this.x = x;
             this.height = height;

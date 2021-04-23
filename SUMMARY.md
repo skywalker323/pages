@@ -462,5 +462,5 @@
    * [735 Asteroid Collision](735-asteroid-collision.md)
 * [Best Time to Buy and Sell Stock](best-time-to-buy-and-sell-stock.md)
 * [Data Structures](data_structures/README.md)
-   * [Binary Tree](data_structures/binary_tree.md)
+   * [Overview](data_structures/binary_tree.md)
 
