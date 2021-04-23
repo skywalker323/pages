@@ -35,7 +35,7 @@ class Solution {
         if (oColor == newColor) {
             return image;
         }
-        int[][] dir = new int[][]{{0, 1},{0, -1},{1, 0},{-1, 0}};
+        int[][] dir = new int[][]{ {0, 1},{0, -1},{1, 0},{-1, 0}};
         image[sr][sc] = newColor;
         for (int i = 0; i < dir.length; i ++) {
             int nextX = sr + dir[i][0];
