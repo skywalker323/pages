@@ -1,0 +1,57 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\KoyyalamudiHari\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add gulp gulp-gh-pages gulp-load-plugins --save-dev
+
+PATH: 
+  ;;C:\Python38\Scripts\;C:\Python38\;C:\Progra~2\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\ProgramData\chocolatey\bin;c:\tools;C:\Users\KoyyalamudiHari\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\10\bin\10.0.18362.0\x86;C:\tools\lxrunoffline;C:\tools\sl;C:\Program Files\nodejs\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Python27;;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.6.3\bin;C:\Program Files (x86)\GitExtensions\;C:\Program Files (x86)\Sennheiser\SoftphoneSDK\;C:\dev\bof-addin_sample\output\bin\32\Debug\DAPI;C:\dev\bof-addin_sample\output\bin\32\Debug\DAPI\DDE;C:\dev\bof-addin2\bof-addin\output\bin\32\Debug\DAPI;C:\dev\bof-addin2\bof-addin\output\bin\32\Debug\DAPI\DDE;C:\Users\KoyyalamudiHari\.windows-build-tools\python27\;C:\dev\bof-addin\output\bin\32\Debug\DAPI;C:\dev\bof-addin\output\bin\32\Debug\DAPI\DDE;C:\Users\KoyyalamudiHari\AppData\Local\Microsoft\WindowsApps;C:\blp\DAPI;C:\blp\DAPI\DDE;C:\Program Files\kdiff3;C:\Users\KoyyalamudiHari\AppData\Local\atom\bin;C:\Users\KoyyalamudiHari\AppData\Roaming\npm;C:\Users\KoyyalamudiHari\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\KoyyalamudiHari\.windows-build-tools\python27\Scripts;C:\Users\KoyyalamudiHari\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\lib\gsudo\bin\;C:\tools\neovim\Neovim\bin;C:\Program Files\CMake\bin;C:\Users\KoyyalamudiHari\.dotnet\tools
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  12.11.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://artprod.dev.bloomberg.com/artifactory/api/npm/npm-repos/gitbook-plugin-highlight: tunneling socket could not be established, cause=getaddrinfo ENOTFOUND bproxy.tdmz1.bloomberg.com
+      at ClientRequest.onError (C:\Users\KoyyalamudiHari\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:152235:17)
+      at Object.onceWrapper (events.js:300:26)
+      at ClientRequest.emit (events.js:210:5)
+      at Socket.socketErrorListener (_http_client.js:406:9)
+      at Socket.emit (events.js:210:5)
+      at emitErrorNT (internal/streams/destroy.js:91:8)
+      at emitErrorAndCloseNT (internal/streams/destroy.js:59:3)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+
+npm manifest: 
+  {
+    "name": "lcs2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+      "gitbook-plugin-highlight": "2.0.3",
+      "yarn": "1.22.10"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/kharigopal/lcs.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/kharigopal/lcs/issues"
+    },
+    "homepage": "https://github.com/kharigopal/lcs#readme"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

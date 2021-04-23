@@ -1,0 +1,27 @@
+{
+  "name": "lcs2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gitbook-plugin-highlight": "2.0.3",
+    "gulp": "4.0.2",
+    "gulp-gh-pages": "0.5.4",
+    "gulp-load-plugins": "2.0.6",
+    "yarn": "1.22.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kharigopal/lcs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kharigopal/lcs/issues"
+  },
+  "homepage": "https://github.com/kharigopal/lcs#readme"
+}

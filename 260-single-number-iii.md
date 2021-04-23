@@ -1,0 +1,67 @@
+# 260. Single Number III
+
+### Problem:
+
+ My Submissions
+Total Accepted: 56553
+Total Submissions: 115017
+Difficulty: Medium
+Contributors: Admin
+Given an array of numbers nums, in which exactly two elements appear only once and all the other elements appear exactly twice. Find the two elements that appear only once.
+
+For example:
+
+Given nums = [1, 2, 1, 3, 2, 5], return [3, 5].
+
+Note:
+The order of the result is not important. So in the above example, [5, 3] is also correct.
+Your algorithm should run in linear runtime complexity. Could you implement it using only constant space complexity?
+
+### Solutions:
+
+```java
+public class Solution {
+    public int[] singleNumber(int[] nums) {
+        HashSet<Integer> app = new HashSet<Integer>();
+        for (int i = 0; i < nums.length; i ++) {
+            if (app.contains(nums[i])) {
+                app.remove(nums[i]);
+            }
+            else {
+                app.add(nums[i]);
+            }
+        }
+        int[] result = new int[2];
+        Iterator<Integer> it = app.iterator();
+        result[0] = it.next();
+        result[1] = it.next();
+        return result;
+    }
+}
+```
+```java
+public class Solution {
+    public int[] singleNumber(int[] nums) {
+        int ab = 0;
+        for (int i = 0; i < nums.length; i ++) {
+            ab = ab ^ nums[i];
+        }
+        int oneIndex = 0;
+        for (int i = 0; i < 32; i ++) {
+            if (((ab >>> i) & 1) == 1) {
+                oneIndex = i;
+                break;
+            }
+        }
+        int[] result =  new int[2];
+        result[0] = 0;
+        for (int i = 0; i < nums.length; i ++) {
+            if (((nums[i] >>> oneIndex) & 1) == 1) {
+                result[0] = result[0] ^ nums[i];
+            }
+        }
+        result[1] = ab ^ result[0];
+        return result;
+    }
+}
+```
