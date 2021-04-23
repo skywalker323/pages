@@ -101,7 +101,7 @@ public class Solution {
         }
     }
     private void visit(int[][] rooms, int i, int j) {
-        int[][] dir = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int[][] dir = new int[][]{ {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
         for (int k = 0; k < dir.length; k ++) {
             int ni = i + dir[k][0];
             int nj = j + dir[k][1];
