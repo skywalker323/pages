@@ -18,6 +18,14 @@
 		- [1.8 Queue `std::queue`](#18-queue-stdqueue)
 		- [1.9 Priority Queue `std::priority_queue`](#19-priority-queue-stdpriority_queue)
 		- [1.10 Heap `std::priority_queue`](#110-heap-stdpriority_queue)
+		- [1.11 nth_element 'nth_element`](#nth_element)
+		- [1.12 string `string` ](#string)
+		- [1.13 istringstream `istringstream`](#istringstream)
+		- [1.14 other `other`](#other)
+		- [1.15 Sorting Algorithms `Sorting Algorithms`](#Sorting_Algorithms)
+		- [1.16 Sorted Data Algorithms `Sorted Data Algorithms`](#Sorted_Data_Algorithms)
+		- [1.17 Tuple `Tuple`](#Tuple)
+
 	- [2.0 Trees](#20-trees)
 		- [2.1 Binary Tree](#21-binary-tree)
 		- [2.2 Balanced Trees](#22-balanced-trees)
@@ -518,30 +526,9 @@ std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, declt
 ![MaxHeap](General/MaxHeap.png)
 
 
-### 1.10 Tuple:
-**Example Code**
-```c++
-std::tuple<int, short, float, std::string>  tps{1, 2, 10.0f, "aa"};
-auto a1 = std::get<0>(tps);
-auto a2 = std::get<1>(tps);
 
 
-double gpa1;
-char grade1;
-std::string name1;
-auto t =  std::make_tuple(3.8, 'A', "Lisa Simpson");
-std::tie(gpa1, grade1, name1) = t;
-
-std::partition:
-std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
-auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
-// 0 8 2 6 4 5 3 7 1 9omp);
-
-```
--------------------------------------------------------
-
-
-## nth_element
+### 1.11 nth_element
 **Example Code**
 ```c++
 std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
@@ -571,7 +558,7 @@ after the new nth element.
 
 ```
 -------------------------------------------------------
-## string
+### 1.12 string
 ``` cpp
 	string str1("first string");
 	string str4(str1, 6, 6); //    from 6th index (second parameter) & 6 characters (third parameter)
@@ -593,7 +580,7 @@ after the new nth element.
 
 ```
 -------------------------------------------------------
-## istringstream
+### 1.13 istringstream
 ```c++
 istringstream iss("/a/b/c/../../c/")
 while(getline(iss, dir, "/"){ std::cout << dir << std::endl; // prints a b c .. .. c}
@@ -606,7 +593,7 @@ auto it = std::find(src.cbegin(), src.cend(), 'd');
 std::copy(it, src.cend(), std::ostream_iterator<char>(std::cout));
 ````
 -------------------------------------------------------
-## other
+### 1.14 other
 ``` c++
 std::partition
 	    std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
@@ -686,7 +673,7 @@ std::ostream_iterator
 std::istream_iterator
 ````
 -------------------------------------------------------
-## Sorting Algorithms
+### 1.15 Sorting Algorithms
 ```cpp
 std::array<int, 10> s{5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
 
@@ -705,7 +692,7 @@ std::sort(s.begin(), s.end(), [](int a, int b) {  // 9 8 7 6 5 4 3 2 1 0
 });
 ```
 -------------------------------------------------------
-###Sorted Data Algorithms
+### 1.16 Sorted Data Algorithms
  These are the algorithms that require data being pre-sorted.
 	• Binary search: It checks for data in a data range. It returns a Boolean as a result.
 	 std::vector<int> haystack {1, 3, 4, 5, 9};
@@ -760,6 +747,29 @@ std::sort(s.begin(), s.end(), [](int a, int b) {  // 9 8 7 6 5 4 3 2 1 0
 	       v.erase(last, v.end());
 
 -------------------------------------------------------
+### 1.17 Tuple
+**Example Code**
+```c++
+std::tuple<int, short, float, std::string>  tps{1, 2, 10.0f, "aa"};
+auto a1 = std::get<0>(tps);
+auto a2 = std::get<1>(tps);
+
+
+double gpa1;
+char grade1;
+std::string name1;
+auto t =  std::make_tuple(3.8, 'A', "Lisa Simpson");
+std::tie(gpa1, grade1, name1) = t;
+
+std::partition:
+std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
+// 0 8 2 6 4 5 3 7 1 9omp);
+
+```
+-------------------------------------------------------
+
+
 ## 2.0 Trees
 ### 2.1 Binary Tree
 * A binary tree is a tree with at most two (2) child nodes per parent
