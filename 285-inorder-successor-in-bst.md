@@ -19,27 +19,23 @@ Note: If the given node has no in-order successor in the tree, return null.
  * }
  */
 public class Solution {
-    public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-        if (p.right != null) {
-            TreeNode node = p.right;
-            while (node.left != null) {
-                node = node.left;
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        stack<TreeNode*> st;
+        bool b=false;
+
+        while(true){
+            while(root){
+                st.push(root);
+                root=root->left;
             }
-            return node;
+            if(st.empty()) return NULL;
+            TreeNode *t=st.top();
+            st.pop();
+            if(b) return t;
+            if(t==p)  b=true;
+            root=t->right;
         }
-        TreeNode node = root;
-        TreeNode min = null;
-        while (node != p && node != null) {
-            if (node.val < p.val) {
-                node = node.right;
-            }
-            else {
-                min = node;
-                node = node.left;
-            }
-        }
-        return min;
     }
-    
+
 }
 ```

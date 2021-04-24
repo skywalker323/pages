@@ -49,32 +49,43 @@ Note:
 ### Solutions
 ```java
 class Solution {
-    public int[] asteroidCollision(int[] asteroids) {
-        LinkedList<Integer> q = new LinkedList<Integer>();
-        for (int i = 0; i < asteroids.length; i ++) {
-            int speed = asteroids[i];
-            if (speed > 0 || q.isEmpty() || q.peekLast() < 0) {
-                q.add(speed);
-                continue;
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        list<int> l;
+
+        for(int i=0; i < asteroids.size(); i++)
+        {
+            if( !l.empty())
+            {
+                if(l.back() >0 && asteroids[i] <0)
+                {
+                    while(!l.empty() && l.back() > 0 && l.back() < abs(asteroids[i]))
+                    {
+                        l.pop_back();
+                    }
+
+
+                    if( l.empty() || l.back() <0)
+                    {
+                        l.push_back(asteroids[i]);
+                        continue;
+                    }
+
+                    if( l.back() == abs(asteroids[i]))
+                        l.pop_back();
+                }
+                else
+                {
+                  l.push_back(asteroids[i]);
+                }
             }
-            int pre = q.peekLast();
-            if (pre > -speed) {
-                continue;
-            }
-            else if (pre == -speed) {
-                q.pollLast();
-            }
-            else {
-                q.pollLast();
-                i --;
+            else
+            {
+                l.push_back(asteroids[i]);
             }
         }
-        int[] res = new int[q.size()];
-        int i = 0;
-        for (Integer num:q) {
-            res[i ++] = num;
-        }
-        return res;
+
+        return vector<int>(l.begin(), l.end());
     }
-}
+};
 ```

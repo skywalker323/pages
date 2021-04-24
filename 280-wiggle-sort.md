@@ -8,30 +8,36 @@ For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5
 
 ### Solutions:
 
-```java
-public class Solution {
-    public void wiggleSort(int[] nums) {
-        Arrays.sort(nums);
-        for (int i = 2; i< nums.length;) {
-            int tmp = nums[i];
-            nums[i] = nums[i -1];
-            nums[i - 1] = tmp;
-            i = i + 2;
+```cpp
+class Solution {
+public:
+    void wiggleSort(vector<int>& nums) {
+        if(nums.empty() ) return;
+        sort(nums.begin(), nums.end());
+        for(int i =1; i < nums.size() -1; i=i+2)
+        {
+            swap(nums[i], nums[i+1]);
         }
     }
-}
+};
 ```
 
 ```java
 public class Solution {
-    public void wiggleSort(int[] nums) {
-        for (int i = 1; i < nums.length; i ++) {
-            if ((i % 2 != 0 && nums[i] < nums[i - 1]) || (i % 2 == 0 && nums[i] > nums[i - 1])) {
-                int tmp = nums[i];
-                nums[i] = nums[i - 1];
-                nums[i - 1] = tmp;
+   public void wiggleSort(int[] nums) {
+    boolean less = true;
+    for (int i = 0; i < nums.length - 1; i++) {
+        if (less) {
+            if (nums[i] > nums[i + 1]) {
+                swap(nums, i, i + 1);
+            }
+        } else {
+            if (nums[i] < nums[i + 1]) {
+                swap(nums, i, i + 1);
             }
         }
+        less = !less;
     }
+}
 }
 ```

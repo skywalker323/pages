@@ -22,8 +22,8 @@
 		- [1.12 string `string` ](#string)
 		- [1.13 istringstream `istringstream`](#istringstream)
 		- [1.14 other `other`](#other)
-		- [1.15 Sorting Algorithms `Sorting Algorithms`](#Sorting_Algorithms)
-		- [1.16 Sorted Data Algorithms `Sorted Data Algorithms`](#Sorted_Data_Algorithms)
+		- [1.15 Sorting Algorithms `Sorting Algorithms`](#Sorting-Algorithms)
+		- [1.16 Sorted Data Algorithms `Sorted Data Algorithms`](#Sorted-Data-Algorithms)
 		- [1.17 Tuple `Tuple`](#Tuple)
 
 	- [2.0 Trees](#20-trees)
@@ -528,7 +528,7 @@ std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, declt
 
 
 
-### 1.11 nth_element
+### 1.11 nth_element `nth_element`
 **Example Code**
 ```c++
 std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
@@ -558,7 +558,7 @@ after the new nth element.
 
 ```
 -------------------------------------------------------
-### 1.12 string
+### 1.12 string `string`
 ``` cpp
 	string str1("first string");
 	string str4(str1, 6, 6); //    from 6th index (second parameter) & 6 characters (third parameter)
@@ -580,7 +580,7 @@ after the new nth element.
 
 ```
 -------------------------------------------------------
-### 1.13 istringstream
+### 1.13 istringstream `istringstream`
 ```c++
 istringstream iss("/a/b/c/../../c/")
 while(getline(iss, dir, "/"){ std::cout << dir << std::endl; // prints a b c .. .. c}
@@ -593,7 +593,7 @@ auto it = std::find(src.cbegin(), src.cend(), 'd');
 std::copy(it, src.cend(), std::ostream_iterator<char>(std::cout));
 ````
 -------------------------------------------------------
-### 1.14 other
+### 1.14 other `other`
 ``` c++
 std::partition
 	    std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
@@ -673,7 +673,7 @@ std::ostream_iterator
 std::istream_iterator
 ````
 -------------------------------------------------------
-### 1.15 Sorting Algorithms
+### 1.15 Sorting Algorithms `Sorting Algorithms`
 ```cpp
 std::array<int, 10> s{5, 7, 4, 2, 8, 6, 1, 9, 0, 3};
 
@@ -692,7 +692,7 @@ std::sort(s.begin(), s.end(), [](int a, int b) {  // 9 8 7 6 5 4 3 2 1 0
 });
 ```
 -------------------------------------------------------
-### 1.16 Sorted Data Algorithms
+### 1.16 Sorted Data Algorithms `Sorted Data Algorithms`
  These are the algorithms that require data being pre-sorted.
 	• Binary search: It checks for data in a data range. It returns a Boolean as a result.
 	 std::vector<int> haystack {1, 3, 4, 5, 9};
@@ -747,7 +747,7 @@ std::sort(s.begin(), s.end(), [](int a, int b) {  // 9 8 7 6 5 4 3 2 1 0
 	       v.erase(last, v.end());
 
 -------------------------------------------------------
-### 1.17 Tuple
+### 1.17 Tuple `Tuple`
 **Example Code**
 ```c++
 std::tuple<int, short, float, std::string>  tps{1, 2, 10.0f, "aa"};

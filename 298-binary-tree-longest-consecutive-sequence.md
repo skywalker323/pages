@@ -21,9 +21,9 @@ Longest consecutive sequence path is 3-4-5, so return 3.
    2
     \
      3
-    / 
-   2    
-  / 
+    /
+   2
+  /
  1
 ```
 Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
@@ -31,88 +31,35 @@ Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
 ### Solutions:
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    private int result = 0;
-    public int longestConsecutive(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        result = 0;
-        lc(root);
-        return result;
+class Solution {
+public:
+    int longestConsecutive(TreeNode* root) {
+        int res = 0;
+        dfs(root, res); // recursively find the answer
+        return res;
     }
-    private int lc(TreeNode node) {
-        if (node == null) {
-            return 0;
-        }
-        int left = lc(node.left);
-        int right = lc(node.right);
-        int max = 1;
-        if (node.left == null || node.left.val == node.val + 1) {
-            max = Math.max(left + 1, max);
-        }
-        if (node.right == null || node.right.val == node.val + 1) {
-            max = Math.max(right + 1, max);
-        }
-        result = Math.max(result, max);
-        return max;
-    }
-}
-```
 
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public int longestConsecutive(TreeNode root) {
-        if (root == null) {
-            return 0;
+private:
+    int dfs(TreeNode* root, int& res)
+    {
+        if (!root)             return 0; // null pointer
+
+        int len = 1; // longest length of path starting from current node
+        int left = dfs(root->left, res); // longest path starting from left child
+        int right = dfs(root->right, res); // longest path starting from right child
+
+        if (root->left && root->val + 1 == root->left->val)
+        {
+            len = max(len, left + 1); // if current node and left child are consecutive, update the longest path starting from current node
         }
-        int max = 0;
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        Queue<Integer> l = new LinkedList<Integer>();
-        q.add(root);
-        l.add(1);
-        while (q.size() > 0) {
-            TreeNode node = q.poll();
-            int len = l.poll();
-            max = Math.max(max, len);
-            if (node.left != null) {
-                if (node.left.val == node.val + 1) {
-                    l.add(len + 1);
-                }
-                else {
-                    l.add(1);
-                }
-                q.add(node.left);
-            }
-            if (node.right != null) {
-                if (node.right.val == node.val + 1) {
-                    l.add(len + 1);
-                }
-                else {
-                    l.add(1);
-                }
-                q.add(node.right);
-            }
+
+        if (root->right && root->val + 1 == root->right->val)
+        {
+            len = max(len, right + 1); // if current node and right child are consecutive, update the longest path starting from current node
         }
-        return max;
+
+        res = max(res, len); // update the overall longest path
+        return len; // return the longest path starting from current node
     }
-}
+};
 ```

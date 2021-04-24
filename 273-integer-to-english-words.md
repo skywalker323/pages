@@ -14,81 +14,50 @@ For example,
 ### Solutions
 
 ```java
-class Solution {
-    public String numberToWords(int num) {
+unordered_map<int, string>intToStr = {{1, "One "}, {2, "Two "}, {3, "Three "}, {4, "Four "}, {5, "Five "},
+     {6, "Six "}, {7, "Seven "}, {8, "Eight "}, {9, "Nine "}, {10, "Ten "}, {11, "Eleven "}, {12, "Twelve "},
+     {13, "Thirteen "}, {14, "Fourteen "}, {15, "Fifteen "}, {16, "Sixteen "}, {17, "Seventeen "},
+     {18, "Eighteen "}, {19, "Nineteen "}, {20, "Twenty "}, {30, "Thirty "}, {40, "Forty "}, {50, "Fifty "},
+     {60, "Sixty "}, {70, "Seventy "}, {80, "Eighty "}, {90, "Ninety "},
+     {1000, "Thousand "}, {1000000, "Million "}, {1000000000, "Billion "}};
+
+    string uptoThreeDigitStr(int num)
+    {
+        string res;
+        if (num >= 100) {
+            res += intToStr[num/100];
+            res += "Hundred ";
+            num %= 100;
+        }
+        if (intToStr.find(num) != intToStr.end()) {
+            res += intToStr[num];
+        } else {
+            int rem = num % 10;
+            res += intToStr[num-rem];
+            res += intToStr[rem];
+        }
+        return res;
+    }
+
+    string numberToWords(int num) {
+        std::vector<int>dv {1000000000, 1000000, 1000};
         if (num == 0) {
-            return "Zero";
+            return string("Zero");
         }
-        ArrayList<String> unit = new ArrayList<String>();
-        HashMap<Integer, String> singles = new HashMap<Integer, String>();
-        HashMap<Integer, String> doubles = new HashMap<Integer, String>();
-        init(unit, singles, doubles);
-        String res = "";
-        int index = 0;
-        while (num != 0) {
-            int tmp = num % 1000;
-            if (tmp != 0) {
-                String part = "";
-                int hund = tmp / 100;
-                if (hund != 0) {
-                    part = part + singles.get(hund) + " Hundred";
-                }
-                tmp = tmp % 100;
-                if (tmp >= 10 && tmp <= 19) {
-                    part = part + " " + doubles.get(tmp);
-                }
-                else {
-                    int tens = tmp / 10;
-                    if (tens != 0) {
-                        part = part + " " + doubles.get(tens);
-                    }
-                    int ones = tmp % 10;
-                    if (ones != 0) {
-                        part = part + " " + singles.get(ones);
-                    }
-                }
-                part = part + " " + unit.get(index);
-                part = part.trim() + " ";
-                res = part + res;
+
+        string res;
+        for (auto d:dv) {
+            if (num >= d) {
+                res += uptoThreeDigitStr(num/d);
+                res += intToStr[d];
+                num %= d;
             }
-            index ++;
-            num = num / 1000;
         }
-        return res.trim();
+        if (num) {
+            res += uptoThreeDigitStr(num);
+        }
+        res.erase(res.end()-1);
+        return res;
     }
-    private void init(ArrayList<String> unit, HashMap<Integer, String> singles, HashMap<Integer, String> doubles) {
-        unit.add("");
-        unit.add("Thousand");
-        unit.add("Million");
-        unit.add("Billion");
-        singles.put(1, "One");
-        singles.put(2, "Two");
-        singles.put(3, "Three");
-        singles.put(4, "Four");
-        singles.put(5, "Five");
-        singles.put(6, "Six");
-        singles.put(7, "Seven");
-        singles.put(8, "Eight");
-        singles.put(9, "Nine");
-        doubles.put(10, "Ten");
-        doubles.put(11, "Eleven");
-        doubles.put(12, "Twelve");
-        doubles.put(13, "Thirteen");
-        doubles.put(14, "Fourteen");
-        doubles.put(15, "Fifteen");
-        doubles.put(16, "Sixteen");
-        doubles.put(17, "Seventeen");
-        doubles.put(18, "Eighteen");
-        doubles.put(19, "Nineteen");
-        doubles.put(2, "Twenty");
-        doubles.put(3, "Thirty");
-        doubles.put(4, "Forty");
-        doubles.put(5, "Fifty");
-        doubles.put(6, "Sixty");
-        doubles.put(7, "Seventy");
-        doubles.put(8, "Eighty");
-        doubles.put(9, "Ninety");
-    }
-}
 ```
 

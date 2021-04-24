@@ -99,7 +99,7 @@ class Solution {
                 }
             }
         }
-     
+
         return res;
     }
 }

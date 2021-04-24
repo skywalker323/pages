@@ -27,7 +27,7 @@ public class Solution {
         }
         data.put(n, min);
         return min;
-   
+
     }
 }
 ```
