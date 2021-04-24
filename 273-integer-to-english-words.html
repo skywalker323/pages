@@ -6172,6 +6172,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.18" data-path="data_structures/">
+            
+                <a href="data_structures/">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="data_structures/binary_tree.html">
+            
+                <a href="data_structures/binary_tree.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -6225,82 +6257,53 @@
 12345 -&gt; &quot;Twelve Thousand Three Hundred Forty Five&quot;
 1234567 -&gt; &quot;One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven&quot;
 </code></pre><h3 id="solutions">Solutions</h3>
-<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">numberToWords</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>{
+<pre><code class="lang-java">unordered_map&lt;<span class="hljs-keyword">int</span>, string&gt;intToStr = {
+{<span class="hljs-number">1</span>, <span class="hljs-string">&quot;One &quot;</span>}, {<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Two &quot;</span>}, {<span class="hljs-number">3</span>, <span class="hljs-string">&quot;Three &quot;</span>}, {<span class="hljs-number">4</span>, <span class="hljs-string">&quot;Four &quot;</span>}, {<span class="hljs-number">5</span>, <span class="hljs-string">&quot;Five &quot;</span>},
+     {<span class="hljs-number">6</span>, <span class="hljs-string">&quot;Six &quot;</span>}, {<span class="hljs-number">7</span>, <span class="hljs-string">&quot;Seven &quot;</span>}, {<span class="hljs-number">8</span>, <span class="hljs-string">&quot;Eight &quot;</span>}, {<span class="hljs-number">9</span>, <span class="hljs-string">&quot;Nine &quot;</span>}, {<span class="hljs-number">10</span>, <span class="hljs-string">&quot;Ten &quot;</span>}, {<span class="hljs-number">11</span>, <span class="hljs-string">&quot;Eleven &quot;</span>}, {<span class="hljs-number">12</span>, <span class="hljs-string">&quot;Twelve &quot;</span>},
+     {<span class="hljs-number">13</span>, <span class="hljs-string">&quot;Thirteen &quot;</span>}, {<span class="hljs-number">14</span>, <span class="hljs-string">&quot;Fourteen &quot;</span>}, {<span class="hljs-number">15</span>, <span class="hljs-string">&quot;Fifteen &quot;</span>}, {<span class="hljs-number">16</span>, <span class="hljs-string">&quot;Sixteen &quot;</span>}, {<span class="hljs-number">17</span>, <span class="hljs-string">&quot;Seventeen &quot;</span>},
+     {<span class="hljs-number">18</span>, <span class="hljs-string">&quot;Eighteen &quot;</span>}, {<span class="hljs-number">19</span>, <span class="hljs-string">&quot;Nineteen &quot;</span>}, {<span class="hljs-number">20</span>, <span class="hljs-string">&quot;Twenty &quot;</span>}, {<span class="hljs-number">30</span>, <span class="hljs-string">&quot;Thirty &quot;</span>}, {<span class="hljs-number">40</span>, <span class="hljs-string">&quot;Forty &quot;</span>}, {<span class="hljs-number">50</span>, <span class="hljs-string">&quot;Fifty &quot;</span>},
+     {<span class="hljs-number">60</span>, <span class="hljs-string">&quot;Sixty &quot;</span>}, {<span class="hljs-number">70</span>, <span class="hljs-string">&quot;Seventy &quot;</span>}, {<span class="hljs-number">80</span>, <span class="hljs-string">&quot;Eighty &quot;</span>}, {<span class="hljs-number">90</span>, <span class="hljs-string">&quot;Ninety &quot;</span>},
+     {<span class="hljs-number">1000</span>, <span class="hljs-string">&quot;Thousand &quot;</span>}, {<span class="hljs-number">1000000</span>, <span class="hljs-string">&quot;Million &quot;</span>}, {<span class="hljs-number">1000000000</span>, <span class="hljs-string">&quot;Billion &quot;</span>}
+     };
+
+    <span class="hljs-function">string <span class="hljs-title">uptoThreeDigitStr</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span>
+    </span>{
+        string res;
+        <span class="hljs-keyword">if</span> (num &gt;= <span class="hljs-number">100</span>) {
+            res += intToStr[num/<span class="hljs-number">100</span>];
+            res += <span class="hljs-string">&quot;Hundred &quot;</span>;
+            num %= <span class="hljs-number">100</span>;
+        }
+        <span class="hljs-keyword">if</span> (intToStr.find(num) != intToStr.end()) {
+            res += intToStr[num];
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">int</span> rem = num % <span class="hljs-number">10</span>;
+            res += intToStr[num-rem];
+            res += intToStr[rem];
+        }
+        <span class="hljs-keyword">return</span> res;
+    }
+
+    <span class="hljs-function">string <span class="hljs-title">numberToWords</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>{
+        std::vector&lt;<span class="hljs-keyword">int</span>&gt;dv {<span class="hljs-number">1000000000</span>, <span class="hljs-number">1000000</span>, <span class="hljs-number">1000</span>};
         <span class="hljs-keyword">if</span> (num == <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Zero&quot;</span>;
+            <span class="hljs-keyword">return</span> string(<span class="hljs-string">&quot;Zero&quot;</span>);
         }
-        ArrayList&lt;String&gt; unit = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();
-        HashMap&lt;Integer, String&gt; singles = <span class="hljs-keyword">new</span> HashMap&lt;Integer, String&gt;();
-        HashMap&lt;Integer, String&gt; doubles = <span class="hljs-keyword">new</span> HashMap&lt;Integer, String&gt;();
-        init(unit, singles, doubles);
-        String res = <span class="hljs-string">&quot;&quot;</span>;
-        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">while</span> (num != <span class="hljs-number">0</span>) {
-            <span class="hljs-keyword">int</span> tmp = num % <span class="hljs-number">1000</span>;
-            <span class="hljs-keyword">if</span> (tmp != <span class="hljs-number">0</span>) {
-                String part = <span class="hljs-string">&quot;&quot;</span>;
-                <span class="hljs-keyword">int</span> hund = tmp / <span class="hljs-number">100</span>;
-                <span class="hljs-keyword">if</span> (hund != <span class="hljs-number">0</span>) {
-                    part = part + singles.get(hund) + <span class="hljs-string">&quot; Hundred&quot;</span>;
-                }
-                tmp = tmp % <span class="hljs-number">100</span>;
-                <span class="hljs-keyword">if</span> (tmp &gt;= <span class="hljs-number">10</span> &amp;&amp; tmp &lt;= <span class="hljs-number">19</span>) {
-                    part = part + <span class="hljs-string">&quot; &quot;</span> + doubles.get(tmp);
-                }
-                <span class="hljs-keyword">else</span> {
-                    <span class="hljs-keyword">int</span> tens = tmp / <span class="hljs-number">10</span>;
-                    <span class="hljs-keyword">if</span> (tens != <span class="hljs-number">0</span>) {
-                        part = part + <span class="hljs-string">&quot; &quot;</span> + doubles.get(tens);
-                    }
-                    <span class="hljs-keyword">int</span> ones = tmp % <span class="hljs-number">10</span>;
-                    <span class="hljs-keyword">if</span> (ones != <span class="hljs-number">0</span>) {
-                        part = part + <span class="hljs-string">&quot; &quot;</span> + singles.get(ones);
-                    }
-                }
-                part = part + <span class="hljs-string">&quot; &quot;</span> + unit.get(index);
-                part = part.trim() + <span class="hljs-string">&quot; &quot;</span>;
-                res = part + res;
+
+        string res;
+        <span class="hljs-keyword">for</span> (auto d:dv) {
+            <span class="hljs-keyword">if</span> (num &gt;= d) {
+                res += uptoThreeDigitStr(num/d);
+                res += intToStr[d];
+                num %= d;
             }
-            index ++;
-            num = num / <span class="hljs-number">1000</span>;
         }
-        <span class="hljs-keyword">return</span> res.trim();
+        <span class="hljs-keyword">if</span> (num) {
+            res += uptoThreeDigitStr(num);
+        }
+        res.erase(res.end()-<span class="hljs-number">1</span>);
+        <span class="hljs-keyword">return</span> res;
     }
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(ArrayList&lt;String&gt; unit, HashMap&lt;Integer, String&gt; singles, HashMap&lt;Integer, String&gt; doubles)</span> </span>{
-        unit.add(<span class="hljs-string">&quot;&quot;</span>);
-        unit.add(<span class="hljs-string">&quot;Thousand&quot;</span>);
-        unit.add(<span class="hljs-string">&quot;Million&quot;</span>);
-        unit.add(<span class="hljs-string">&quot;Billion&quot;</span>);
-        singles.put(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;One&quot;</span>);
-        singles.put(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Two&quot;</span>);
-        singles.put(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;Three&quot;</span>);
-        singles.put(<span class="hljs-number">4</span>, <span class="hljs-string">&quot;Four&quot;</span>);
-        singles.put(<span class="hljs-number">5</span>, <span class="hljs-string">&quot;Five&quot;</span>);
-        singles.put(<span class="hljs-number">6</span>, <span class="hljs-string">&quot;Six&quot;</span>);
-        singles.put(<span class="hljs-number">7</span>, <span class="hljs-string">&quot;Seven&quot;</span>);
-        singles.put(<span class="hljs-number">8</span>, <span class="hljs-string">&quot;Eight&quot;</span>);
-        singles.put(<span class="hljs-number">9</span>, <span class="hljs-string">&quot;Nine&quot;</span>);
-        doubles.put(<span class="hljs-number">10</span>, <span class="hljs-string">&quot;Ten&quot;</span>);
-        doubles.put(<span class="hljs-number">11</span>, <span class="hljs-string">&quot;Eleven&quot;</span>);
-        doubles.put(<span class="hljs-number">12</span>, <span class="hljs-string">&quot;Twelve&quot;</span>);
-        doubles.put(<span class="hljs-number">13</span>, <span class="hljs-string">&quot;Thirteen&quot;</span>);
-        doubles.put(<span class="hljs-number">14</span>, <span class="hljs-string">&quot;Fourteen&quot;</span>);
-        doubles.put(<span class="hljs-number">15</span>, <span class="hljs-string">&quot;Fifteen&quot;</span>);
-        doubles.put(<span class="hljs-number">16</span>, <span class="hljs-string">&quot;Sixteen&quot;</span>);
-        doubles.put(<span class="hljs-number">17</span>, <span class="hljs-string">&quot;Seventeen&quot;</span>);
-        doubles.put(<span class="hljs-number">18</span>, <span class="hljs-string">&quot;Eighteen&quot;</span>);
-        doubles.put(<span class="hljs-number">19</span>, <span class="hljs-string">&quot;Nineteen&quot;</span>);
-        doubles.put(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;Twenty&quot;</span>);
-        doubles.put(<span class="hljs-number">3</span>, <span class="hljs-string">&quot;Thirty&quot;</span>);
-        doubles.put(<span class="hljs-number">4</span>, <span class="hljs-string">&quot;Forty&quot;</span>);
-        doubles.put(<span class="hljs-number">5</span>, <span class="hljs-string">&quot;Fifty&quot;</span>);
-        doubles.put(<span class="hljs-number">6</span>, <span class="hljs-string">&quot;Sixty&quot;</span>);
-        doubles.put(<span class="hljs-number">7</span>, <span class="hljs-string">&quot;Seventy&quot;</span>);
-        doubles.put(<span class="hljs-number">8</span>, <span class="hljs-string">&quot;Eighty&quot;</span>);
-        doubles.put(<span class="hljs-number">9</span>, <span class="hljs-string">&quot;Ninety&quot;</span>);
-    }
-}
 </code></pre>
 
                                 
@@ -6345,7 +6348,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"273 Integer to English Words","level":"1.7.21","depth":2,"next":{"title":"274 H-Index","level":"1.7.22","depth":2,"path":"274-h-index.md","ref":"274-h-index.md","articles":[]},"previous":{"title":"272 Closest Binary Search Tree Value II","level":"1.7.20","depth":2,"path":"271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.md","ref":"271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"273-integer-to-english-words.md","mtime":"2021-04-21T19:50:26.499Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"273 Integer to English Words","level":"1.7.21","depth":2,"next":{"title":"274 H-Index","level":"1.7.22","depth":2,"path":"274-h-index.md","ref":"274-h-index.md","articles":[]},"previous":{"title":"272 Closest Binary Search Tree Value II","level":"1.7.20","depth":2,"path":"271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.md","ref":"271-encode-and-decode-strings/272-closest-binary-search-tree-value-ii.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"273-integer-to-english-words.md","mtime":"2021-04-24T18:22:07.656Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:30:12.873Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

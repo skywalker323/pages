@@ -6172,6 +6172,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.18" data-path="data_structures/">
+            
+                <a href="data_structures/">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="data_structures/binary_tree.html">
+            
+                <a href="data_structures/binary_tree.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -6233,94 +6265,43 @@
 <pre><code>   2
     \
      3
-    / 
-   2    
-  / 
+    /
+   2
+  /
  1
 </code></pre><p>Longest consecutive sequence path is 2-3,not3-2-1, so return 2.</p>
 <h3 id="solutions">Solutions:</h3>
-<pre><code class="lang-java"><span class="hljs-comment">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        }
-        result = <span class="hljs-number">0</span>;
-        lc(root);
-        <span class="hljs-keyword">return</span> result;
+<pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+        <span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;
+        dfs(root, res); <span class="hljs-comment">// recursively find the answer</span>
+        <span class="hljs-keyword">return</span> res;
     }
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> <span class="hljs-title">lc</span><span class="hljs-params">(TreeNode node)</span> </span>{
-        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span>&amp; res)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (!root)             <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">// null pointer</span>
+
+        <span class="hljs-keyword">int</span> len = <span class="hljs-number">1</span>; <span class="hljs-comment">// longest length of path starting from current node</span>
+        <span class="hljs-keyword">int</span> left = dfs(root-&gt;left, res); <span class="hljs-comment">// longest path starting from left child</span>
+        <span class="hljs-keyword">int</span> right = dfs(root-&gt;right, res); <span class="hljs-comment">// longest path starting from right child</span>
+
+        <span class="hljs-keyword">if</span> (root-&gt;left &amp;&amp; root-&gt;val + <span class="hljs-number">1</span> == root-&gt;left-&gt;val)
+        {
+            len = max(len, left + <span class="hljs-number">1</span>); <span class="hljs-comment">// if current node and left child are consecutive, update the longest path starting from current node</span>
         }
-        <span class="hljs-keyword">int</span> left = lc(node.left);
-        <span class="hljs-keyword">int</span> right = lc(node.right);
-        <span class="hljs-keyword">int</span> max = <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span> (node.left == <span class="hljs-keyword">null</span> || node.left.val == node.val + <span class="hljs-number">1</span>) {
-            max = Math.max(left + <span class="hljs-number">1</span>, max);
+
+        <span class="hljs-keyword">if</span> (root-&gt;right &amp;&amp; root-&gt;val + <span class="hljs-number">1</span> == root-&gt;right-&gt;val)
+        {
+            len = max(len, right + <span class="hljs-number">1</span>); <span class="hljs-comment">// if current node and right child are consecutive, update the longest path starting from current node</span>
         }
-        <span class="hljs-keyword">if</span> (node.right == <span class="hljs-keyword">null</span> || node.right.val == node.val + <span class="hljs-number">1</span>) {
-            max = Math.max(right + <span class="hljs-number">1</span>, max);
-        }
-        result = Math.max(result, max);
-        <span class="hljs-keyword">return</span> max;
+
+        res = max(res, len); <span class="hljs-comment">// update the overall longest path</span>
+        <span class="hljs-keyword">return</span> len; <span class="hljs-comment">// return the longest path starting from current node</span>
     }
-}
-</code></pre>
-<pre><code class="lang-java"><span class="hljs-comment">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">longestConsecutive</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) {
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-        }
-        <span class="hljs-keyword">int</span> max = <span class="hljs-number">0</span>;
-        Queue&lt;TreeNode&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;TreeNode&gt;();
-        Queue&lt;Integer&gt; l = <span class="hljs-keyword">new</span> LinkedList&lt;Integer&gt;();
-        q.add(root);
-        l.add(<span class="hljs-number">1</span>);
-        <span class="hljs-keyword">while</span> (q.size() &gt; <span class="hljs-number">0</span>) {
-            TreeNode node = q.poll();
-            <span class="hljs-keyword">int</span> len = l.poll();
-            max = Math.max(max, len);
-            <span class="hljs-keyword">if</span> (node.left != <span class="hljs-keyword">null</span>) {
-                <span class="hljs-keyword">if</span> (node.left.val == node.val + <span class="hljs-number">1</span>) {
-                    l.add(len + <span class="hljs-number">1</span>);
-                }
-                <span class="hljs-keyword">else</span> {
-                    l.add(<span class="hljs-number">1</span>);
-                }
-                q.add(node.left);
-            }
-            <span class="hljs-keyword">if</span> (node.right != <span class="hljs-keyword">null</span>) {
-                <span class="hljs-keyword">if</span> (node.right.val == node.val + <span class="hljs-number">1</span>) {
-                    l.add(len + <span class="hljs-number">1</span>);
-                }
-                <span class="hljs-keyword">else</span> {
-                    l.add(<span class="hljs-number">1</span>);
-                }
-                q.add(node.right);
-            }
-        }
-        <span class="hljs-keyword">return</span> max;
-    }
-}
+};
 </code></pre>
 
                                 
@@ -6365,7 +6346,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"298 Binary Tree Longest Consecutive Sequence","level":"1.7.44","depth":2,"next":{"title":"299 Bulls and Cows","level":"1.7.45","depth":2,"path":"299-bulls-and-cows.md","ref":"299-bulls-and-cows.md","articles":[]},"previous":{"title":"297 Serialize and Deserialize Binary Tree","level":"1.7.43","depth":2,"path":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","ref":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"298-binary-tree-longest-consecutive-sequence.md","mtime":"2021-04-21T19:50:27.502Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"298 Binary Tree Longest Consecutive Sequence","level":"1.7.44","depth":2,"next":{"title":"299 Bulls and Cows","level":"1.7.45","depth":2,"path":"299-bulls-and-cows.md","ref":"299-bulls-and-cows.md","articles":[]},"previous":{"title":"297 Serialize and Deserialize Binary Tree","level":"1.7.43","depth":2,"path":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","ref":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"298-binary-tree-longest-consecutive-sequence.md","mtime":"2021-04-23T21:42:41.256Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:30:12.873Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

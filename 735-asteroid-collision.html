@@ -6172,6 +6172,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.18" data-path="data_structures/">
+            
+                <a href="data_structures/">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="data_structures/binary_tree.html">
+            
+                <a href="data_structures/binary_tree.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -6254,34 +6286,45 @@ Asteroids moving the same direction never meet, so no asteroids will meet each o
 </ul>
 <h3 id="solutions">Solutions</h3>
 <pre><code class="lang-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] asteroidCollision(<span class="hljs-keyword">int</span>[] asteroids) {
-        LinkedList&lt;Integer&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;Integer&gt;();
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; asteroids.length; i ++) {
-            <span class="hljs-keyword">int</span> speed = asteroids[i];
-            <span class="hljs-keyword">if</span> (speed &gt; <span class="hljs-number">0</span> || q.isEmpty() || q.peekLast() &lt; <span class="hljs-number">0</span>) {
-                q.add(speed);
-                <span class="hljs-keyword">continue</span>;
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">asteroidCollision</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; asteroids)</span> </span>{
+        list&lt;<span class="hljs-keyword">int</span>&gt; l;
+
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i &lt; asteroids.size(); i++)
+        {
+            <span class="hljs-keyword">if</span>( !l.empty())
+            {
+                <span class="hljs-keyword">if</span>(l.back() &gt;<span class="hljs-number">0</span> &amp;&amp; asteroids[i] &lt;<span class="hljs-number">0</span>)
+                {
+                    <span class="hljs-keyword">while</span>(!l.empty() &amp;&amp; l.back() &gt; <span class="hljs-number">0</span> &amp;&amp; l.back() &lt; abs(asteroids[i]))
+                    {
+                        l.pop_back();
+                    }
+
+
+                    <span class="hljs-keyword">if</span>( l.empty() || l.back() &lt;<span class="hljs-number">0</span>)
+                    {
+                        l.push_back(asteroids[i]);
+                        <span class="hljs-keyword">continue</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span>( l.back() == abs(asteroids[i]))
+                        l.pop_back();
+                }
+                <span class="hljs-keyword">else</span>
+                {
+                  l.push_back(asteroids[i]);
+                }
             }
-            <span class="hljs-keyword">int</span> pre = q.peekLast();
-            <span class="hljs-keyword">if</span> (pre &gt; -speed) {
-                <span class="hljs-keyword">continue</span>;
-            }
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pre == -speed) {
-                q.pollLast();
-            }
-            <span class="hljs-keyword">else</span> {
-                q.pollLast();
-                i --;
+            <span class="hljs-keyword">else</span>
+            {
+                l.push_back(asteroids[i]);
             }
         }
-        <span class="hljs-keyword">int</span>[] res = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[q.size()];
-        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">for</span> (Integer num:q) {
-            res[i ++] = num;
-        }
-        <span class="hljs-keyword">return</span> res;
+
+        <span class="hljs-keyword">return</span> vector&lt;<span class="hljs-keyword">int</span>&gt;(l.begin(), l.end());
     }
-}
+};
 </code></pre>
 
                                 
@@ -6326,7 +6369,7 @@ Asteroids moving the same direction never meet, so no asteroids will meet each o
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"735 Asteroid Collision","level":"1.16.6","depth":2,"next":{"title":"Best Time to Buy and Sell Stock","level":"1.17","depth":1,"path":"best-time-to-buy-and-sell-stock.md","ref":"best-time-to-buy-and-sell-stock.md","articles":[]},"previous":{"title":"733 Flood Fill","level":"1.16.5","depth":2,"path":"733-flood-fill.md","ref":"733-flood-fill.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"735-asteroid-collision.md","mtime":"2021-04-23T00:51:20.283Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"735 Asteroid Collision","level":"1.16.6","depth":2,"next":{"title":"Best Time to Buy and Sell Stock","level":"1.17","depth":1,"path":"best-time-to-buy-and-sell-stock.md","ref":"best-time-to-buy-and-sell-stock.md","articles":[]},"previous":{"title":"733 Flood Fill","level":"1.16.5","depth":2,"path":"733-flood-fill.md","ref":"733-flood-fill.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"735-asteroid-collision.md","mtime":"2021-04-23T21:18:59.321Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:30:12.873Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

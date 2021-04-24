@@ -6172,6 +6172,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.18" data-path="../data_structures/">
+            
+                <a href="../data_structures/">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="../data_structures/binary_tree.html">
+            
+                <a href="../data_structures/binary_tree.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -6231,123 +6263,91 @@
 Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.</p>
 <h3 id="solutions">Solutions:</h3>
 <p>BFS</p>
-<pre><code class="lang-java"><span class="hljs-comment">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Codec</span> </span>{
-
+<pre><code class="lang-cpp"><span class="hljs-keyword">class</span> Codec {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-built_in">ostringstream</span> res;
     <span class="hljs-comment">// Encodes a tree to a single string.</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">serialize</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
-        Queue&lt;TreeNode&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;TreeNode&gt;();
-        q.add(root);
-        <span class="hljs-keyword">while</span> (!q.isEmpty()) {
-            TreeNode node = q.poll();
-            <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) {
-                sb.append(<span class="hljs-string">&quot;# &quot;</span>);
+    <span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">serialize</span><span class="hljs-params">(TreeNode* root)</span> </span>{
+        <span class="hljs-keyword">if</span>( !root) <span class="hljs-keyword">return</span> res.str();
+        <span class="hljs-built_in">queue</span>&lt;TreeNode*&gt; Q;
+        Q.push(root);
+        TreeNode* cur;
+
+        <span class="hljs-keyword">while</span>(!Q.empty())
+        {
+                cur = Q.front();
+                Q.pop();
+                <span class="hljs-keyword">if</span>(cur)
+                {
+                     <span class="hljs-keyword">if</span>( cur ==root)
+                         res &lt;&lt;  cur-&gt;val ;
+                    <span class="hljs-keyword">else</span>
+                        res &lt;&lt; <span class="hljs-string">&quot;,&quot;</span> &lt;&lt; cur-&gt;val ;
+                    Q.push(cur-&gt;left);
+                    Q.push(cur-&gt;right);
+                }
+                <span class="hljs-keyword">else</span>
+                {
+                    <span class="hljs-keyword">if</span>( cur ==root)
+                        res &lt;&lt; <span class="hljs-string">&quot;null&quot;</span>;
+                    <span class="hljs-keyword">else</span>
+                        res &lt;&lt; <span class="hljs-string">&quot;,null&quot;</span>;
+                }
             }
-            <span class="hljs-keyword">else</span> {
-                sb.append(node.val + <span class="hljs-string">&quot; &quot;</span>);
-                q.add(node.left);
-                q.add(node.right);
-            }
-        }
-        <span class="hljs-keyword">return</span> sb.toString().trim();
+
+
+        <span class="hljs-keyword">return</span> res.str();
     }
 
     <span class="hljs-comment">// Decodes your encoded data to tree.</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">deserialize</span><span class="hljs-params">(String data)</span> </span>{
-        <span class="hljs-keyword">if</span> (data.equals(<span class="hljs-string">&quot;#&quot;</span>)) {
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-        }
-        String[] nodes = data.split(<span class="hljs-string">&quot; &quot;</span>);
-        TreeNode root = <span class="hljs-keyword">null</span>;
-        Queue&lt;TreeNode&gt; q = <span class="hljs-keyword">new</span> LinkedList&lt;TreeNode&gt;();
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; nodes.length; i ++) {
-            <span class="hljs-keyword">if</span> (q.isEmpty()) {
-                root = <span class="hljs-keyword">new</span> TreeNode(Integer.parseInt(nodes[i]));
-                q.add(root);
-            }
-            <span class="hljs-keyword">else</span> {
-                TreeNode left = <span class="hljs-keyword">null</span>;
-                TreeNode right = <span class="hljs-keyword">null</span>;
-                <span class="hljs-keyword">if</span> (!nodes[i].equals(<span class="hljs-string">&quot;#&quot;</span>)){
-                    left = <span class="hljs-keyword">new</span> TreeNode(Integer.parseInt(nodes[i]));
-                    q.add(left);
-                }
-                <span class="hljs-keyword">if</span> (!nodes[i + <span class="hljs-number">1</span>].equals(<span class="hljs-string">&quot;#&quot;</span>)){
-                    right = <span class="hljs-keyword">new</span> TreeNode(Integer.parseInt(nodes[i + <span class="hljs-number">1</span>]));
-                    q.add(right);
-                }
-                TreeNode parent = q.poll();
-                parent.left = left;
-                parent.right = right;
-                i = i + <span class="hljs-number">1</span>;
-            }
-        }
-        <span class="hljs-keyword">return</span> root;
-    }
-}
+    <span class="hljs-function">TreeNode* <span class="hljs-title">deserialize</span><span class="hljs-params">(<span class="hljs-built_in">string</span> data)</span> </span>{
 
-<span class="hljs-comment">// Your Codec object will be instantiated and called as such:</span>
-<span class="hljs-comment">// Codec codec = new Codec();</span>
-<span class="hljs-comment">// codec.deserialize(codec.serialize(root));</span>
-</code></pre>
-<pre><code class="lang-java"><span class="hljs-comment">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Codec</span> </span>{
+      <span class="hljs-keyword">if</span>( data.empty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;
+      <span class="hljs-keyword">if</span>( data == <span class="hljs-string">&quot;null&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;
 
-    <span class="hljs-comment">// Encodes a tree to a single string.</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">serialize</span><span class="hljs-params">(TreeNode root)</span> </span>{
-        StringBuilder sb = <span class="hljs-keyword">new</span> StringBuilder();
-        serialize(root, sb);
-        <span class="hljs-keyword">return</span> sb.toString().trim();
-    }
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">serialize</span><span class="hljs-params">(TreeNode node, StringBuilder sb)</span> </span>{
-        <span class="hljs-keyword">if</span> (node == <span class="hljs-keyword">null</span>) {
-            sb.append(<span class="hljs-string">&quot;# &quot;</span>);
-        }
-        <span class="hljs-keyword">else</span> {
-            sb.append(node.val+ <span class="hljs-string">&quot; &quot;</span>);
-            serialize(node.left, sb);
-            serialize(node.right, sb);
-        }
-    }
+      <span class="hljs-function"><span class="hljs-built_in">istringstream</span> <span class="hljs-title">iss</span><span class="hljs-params">(data)</span></span>;
+      <span class="hljs-built_in">string</span> s;
+      <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; nos;
+      <span class="hljs-keyword">while</span>(<span class="hljs-built_in">std</span>::getline(iss, s, <span class="hljs-string">&apos;,&apos;</span>))
+      {
+          <span class="hljs-keyword">if</span>( s == <span class="hljs-string">&quot;null&quot;</span>)
+              nos.push_back(INT_MIN);
+          <span class="hljs-keyword">else</span>
+              nos.push_back(stoi(s));
+      }
 
-    <span class="hljs-comment">// Decodes your encoded data to tree.</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> TreeNode <span class="hljs-title">deserialize</span><span class="hljs-params">(String data)</span> </span>{
-        String[] nodes = data.split(<span class="hljs-string">&quot; &quot;</span>);
-        <span class="hljs-keyword">return</span> deserialize(nodes, <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]{<span class="hljs-number">0</span>});
-    }
-    <span class="hljs-function"><span class="hljs-keyword">private</span> TreeNode <span class="hljs-title">deserialize</span><span class="hljs-params">(String[] nodes, <span class="hljs-keyword">int</span>[] index)</span> </span>{
-        <span class="hljs-keyword">if</span> (nodes[index[<span class="hljs-number">0</span>]].equals(<span class="hljs-string">&quot;#&quot;</span>)) {
-            index[<span class="hljs-number">0</span>] ++;
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-        }
-        TreeNode node = <span class="hljs-keyword">new</span> TreeNode(Integer.parseInt(nodes[index[<span class="hljs-number">0</span>]]));
-        index[<span class="hljs-number">0</span>] ++;
-        node.left = deserialize(nodes, index);
-        node.right = deserialize(nodes, index);
-        <span class="hljs-keyword">return</span> node;
-    }
-}
+       <span class="hljs-keyword">if</span>(nos.empty()) <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;
 
-<span class="hljs-comment">// Your Codec object will be instantiated and called as such:</span>
-<span class="hljs-comment">// Codec codec = new Codec();</span>
-<span class="hljs-comment">// codec.deserialize(codec.serialize(root));</span>
+       <span class="hljs-keyword">int</span> node_no = <span class="hljs-number">1</span>;
+       TreeNode* root = <span class="hljs-keyword">new</span> TreeNode(nos[<span class="hljs-number">0</span>]);
+       TreeNode* cur ;
+       <span class="hljs-built_in">queue</span>&lt;TreeNode*&gt; st;
+       st.push(root);
+       <span class="hljs-keyword">while</span>(!st.empty())
+       {
+           cur = st.front();
+           st.pop();
+
+           <span class="hljs-keyword">if</span>( cur &amp;&amp; (node_no*<span class="hljs-number">2</span>) &lt; nos.size())
+           {
+              <span class="hljs-keyword">if</span>(nos[node_no*<span class="hljs-number">2</span><span class="hljs-number">-1</span>] == INT_MIN)
+                  cur-&gt;left = <span class="hljs-literal">nullptr</span>;
+              <span class="hljs-keyword">else</span>
+                cur-&gt;left = <span class="hljs-keyword">new</span> TreeNode(nos[node_no*<span class="hljs-number">2</span><span class="hljs-number">-1</span>]);
+              <span class="hljs-keyword">if</span>(nos[node_no*<span class="hljs-number">2</span>] == INT_MIN)
+                  cur-&gt;right = <span class="hljs-literal">nullptr</span>;
+               <span class="hljs-keyword">else</span>
+                cur-&gt;right = <span class="hljs-keyword">new</span> TreeNode(nos[node_no*<span class="hljs-number">2</span>]);
+
+              st.push(cur-&gt;left);
+              st.push(cur-&gt;right);
+           }
+           node_no++;
+       }
+
+      <span class="hljs-keyword">return</span> root;
+    }
+};
 </code></pre>
 
                                 
@@ -6392,7 +6392,7 @@ Note: Do not use class member/global/static variables to store states. Your seri
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"297 Serialize and Deserialize Binary Tree","level":"1.7.43","depth":2,"next":{"title":"298 Binary Tree Longest Consecutive Sequence","level":"1.7.44","depth":2,"path":"298-binary-tree-longest-consecutive-sequence.md","ref":"298-binary-tree-longest-consecutive-sequence.md","articles":[]},"previous":{"title":"295 Find Median from Data Stream","level":"1.7.42","depth":2,"path":"295-find-median-from-data-stream.md","ref":"295-find-median-from-data-stream.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","mtime":"2021-04-21T19:50:40.056Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"297 Serialize and Deserialize Binary Tree","level":"1.7.43","depth":2,"next":{"title":"298 Binary Tree Longest Consecutive Sequence","level":"1.7.44","depth":2,"path":"298-binary-tree-longest-consecutive-sequence.md","ref":"298-binary-tree-longest-consecutive-sequence.md","articles":[]},"previous":{"title":"295 Find Median from Data Stream","level":"1.7.42","depth":2,"path":"295-find-median-from-data-stream.md","ref":"295-find-median-from-data-stream.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"298-binary-tree-longest-consecutive-sequence/297-serialize-and-deserialize-binary-tree.md","mtime":"2021-04-24T00:17:43.237Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:30:12.873Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

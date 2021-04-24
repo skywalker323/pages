@@ -6172,6 +6172,38 @@
             
         </li>
     
+        <li class="chapter " data-level="1.18" data-path="data_structures/">
+            
+                <a href="data_structures/">
+            
+                    
+                    Data Structures
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.18.1" data-path="data_structures/binary_tree.html">
+            
+                <a href="data_structures/binary_tree.html">
+            
+                    
+                    Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -6220,42 +6252,52 @@
                                 <h1 id="282-expression-add-operators">282. Expression Add Operators</h1>
 <h3 id="problem">Problem:</h3>
 <p>Given a string that contains only digits 0-9 and a target value, return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.</p>
-<p>Examples: </p>
-<pre><code>&quot;123&quot;, 6 -&gt; [&quot;1+2+3&quot;, &quot;1*2*3&quot;] 
+<p>Examples:</p>
+<pre><code>&quot;123&quot;, 6 -&gt; [&quot;1+2+3&quot;, &quot;1*2*3&quot;]
 &quot;232&quot;, 8 -&gt; [&quot;2*3+2&quot;, &quot;2+3*2&quot;]
 &quot;105&quot;, 5 -&gt; [&quot;1*0+5&quot;,&quot;10-5&quot;]
 &quot;00&quot;, 0 -&gt; [&quot;0+0&quot;, &quot;0-0&quot;, &quot;0*0&quot;]
 &quot;3456237490&quot;, 9191 -&gt; []
 </code></pre><h3 id="solutions">Solutions:</h3>
-<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{
-    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;String&gt; <span class="hljs-title">addOperators</span><span class="hljs-params">(String num, <span class="hljs-keyword">int</span> target)</span> </span>{
-        List&lt;String&gt; result = <span class="hljs-keyword">new</span> LinkedList&lt;String&gt;();
-        process(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, result, num, target);
-        <span class="hljs-keyword">return</span> result;
-    }
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(String curr, <span class="hljs-keyword">long</span> sum, <span class="hljs-keyword">long</span> addToSum, List&lt;String&gt; result, String num, <span class="hljs-keyword">int</span> target)</span> </span>{
-        <span class="hljs-keyword">if</span> (num.length() == <span class="hljs-number">0</span> &amp;&amp; target == sum) {
-            result.add(curr);
+<pre><code class="lang-cpp"><span class="hljs-keyword">class</span> Solution {
+<span class="hljs-keyword">public</span>:
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">p</span><span class="hljs-params">(<span class="hljs-built_in">string</span> c, <span class="hljs-keyword">long</span> sum, <span class="hljs-keyword">long</span> aToSum, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt;&amp; r, <span class="hljs-built_in">string</span> num, <span class="hljs-keyword">int</span> t)</span>
+    </span>{
+        <span class="hljs-keyword">if</span>(num.size() == <span class="hljs-number">0</span> &amp;&amp; t == sum)
+        {
+            r.push_back(c);
             <span class="hljs-keyword">return</span>;
         }
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= num.length(); i ++) {
-            String first = num.substring(<span class="hljs-number">0</span>, i);
-            String second = num.substring(i);
-            <span class="hljs-keyword">if</span> (first.charAt(<span class="hljs-number">0</span>) == <span class="hljs-string">&apos;0&apos;</span> &amp;&amp; first.length() &gt; <span class="hljs-number">1</span>) {
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= num.size(); i ++) {
+             <span class="hljs-built_in">string</span> first = num.substr(<span class="hljs-number">0</span>, i);
+             <span class="hljs-built_in">string</span> second = num.substr(i);
+            <span class="hljs-keyword">if</span> (first[<span class="hljs-number">0</span>] == <span class="hljs-string">&apos;0&apos;</span> &amp;&amp; first.size() &gt; <span class="hljs-number">1</span>) {
                 <span class="hljs-keyword">return</span>;
             }
-            <span class="hljs-keyword">long</span> firstLong = Long.parseLong(first);
-            <span class="hljs-keyword">if</span> (curr.equals(<span class="hljs-string">&quot;&quot;</span>)) {
-                process(first, firstLong, firstLong, result, second, target);
+
+            <span class="hljs-keyword">long</span> firstLong =stol(first);
+
+            <span class="hljs-keyword">if</span> (c  ==<span class="hljs-string">&quot;&quot;</span> ) {
+                p(first, firstLong, firstLong, r, second, t);
             }
             <span class="hljs-keyword">else</span> {
-                process(curr + <span class="hljs-string">&quot;+&quot;</span> + first, sum + firstLong, firstLong, result, second, target);
-                process(curr + <span class="hljs-string">&quot;-&quot;</span> + first, sum - firstLong, -firstLong, result, second, target);
-                process(curr + <span class="hljs-string">&quot;*&quot;</span> + first, (sum - addToSum) + addToSum * firstLong, addToSum * firstLong, result, second, target);
+                p(c + <span class="hljs-string">&quot;+&quot;</span> + first, sum + firstLong, firstLong, r, second, t);
+                p(c + <span class="hljs-string">&quot;-&quot;</span> + first, sum - firstLong, -firstLong, r, second, t);
+                p(c + <span class="hljs-string">&quot;*&quot;</span> + first, (sum - aToSum) + aToSum * firstLong,
+                           aToSum * firstLong, r, second, t);
             }
+
         }
     }
-}
+
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; addOperators(<span class="hljs-built_in">string</span> num, <span class="hljs-keyword">int</span> target) {
+        <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; results;
+        p(<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, results, num, target);
+        <span class="hljs-keyword">return</span> results;
+    }
+};
 </code></pre>
 
                                 
@@ -6300,7 +6342,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"282 Expression Add Operators","level":"1.7.30","depth":2,"next":{"title":"283 Move Zeroes","level":"1.7.31","depth":2,"path":"283-move-zeroes.md","ref":"283-move-zeroes.md","articles":[]},"previous":{"title":"281 Zigzag Iterator","level":"1.7.29","depth":2,"path":"281-zigzag-iterator.md","ref":"281-zigzag-iterator.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"282-expression-add-operators.md","mtime":"2021-04-21T19:50:26.954Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-23T04:13:59.569Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"282 Expression Add Operators","level":"1.7.30","depth":2,"next":{"title":"283 Move Zeroes","level":"1.7.31","depth":2,"path":"283-move-zeroes.md","ref":"283-move-zeroes.md","articles":[]},"previous":{"title":"281 Zigzag Iterator","level":"1.7.29","depth":2,"path":"281-zigzag-iterator.md","ref":"281-zigzag-iterator.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight"],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"282-expression-add-operators.md","mtime":"2021-04-24T01:52:40.314Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-04-24T18:30:12.873Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
