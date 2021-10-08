@@ -523,7 +523,7 @@ std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, declt
 
 **Max Heap Example (using a binary tree)**
 
-![MaxHeap](General/MaxHeap.png)
+![MaxHeap](/General/MaxHeap.png)
 
 
 
@@ -778,7 +778,7 @@ auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
 
 **Binary Search Tree**
 
-![BinarySearchTree](General/BinarySearchTree.png)
+![BinarySearchTree](/General/BinarySearchTree.png)
 -------------------------------------------------------
 ### 2.2 Balanced Trees
 * Balanced trees are a special type of tree which maintains its balance to ensure `O(log(n))` operations
