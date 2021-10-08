@@ -511,6 +511,8 @@ std::priority_queue<int, std::vector<int>, decltype(cmp)> q3(cmp);
 auto p_comp = [] (const std::pair<int, int>& left, const std::pair<int, int>& right) { return left.first < right.first;};
 std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(p_comp)> q4(p_comp);
 
+// q4 max pq
+
 ```
 -------------------------------------------------------
 ### 1.10 Heap `std::priority_queue`
@@ -624,16 +626,19 @@ int getRandNum_New() {
     static std::minstd_rand eng{std::random_device{}()};
     static std::uniform_int_distribution<int> dist{0, 5};
     return dist(eng);
-
+}
     // or
     /* static std::minstd_rand eng{std::random_device{}()};
        return eng() % 6;     */
-generate_random_array
-	int arr[100];
-	std::random_device rd;
-	std::default_random_engine dre(rd());
-	std::uniform_int_distribution<int> uid(0,9);
-	std::generate(arr, arr + sizeof(arr) / sizeof(int), [&] () { return uid(dre); });
+
+void generate_random_array()
+{
+    vector<int> arr(100);
+    std::random_device rd;
+    std::default_random_engine dre(rd());
+    std::uniform_int_distribution<int> uid(0,9);
+    std::generate(begin(arr), end(arr), [&] () { return uid(dre); });
+}
 
 Std::fill
 	std::vector<int> v{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
