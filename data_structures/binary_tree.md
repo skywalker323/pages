@@ -53,7 +53,7 @@
 
 ![ComplexityChart](/data_structures/ComplexityChart.png "Complexity Chart")
 
-![DataStructureSelection](/data_structures/Data%20StructuresSelection.png "Data Structures Selection")
+![DataStructureSelection](/data_structures/DataStructuresSelection.png "Data Structures Selection")
 -------------------------------------------------------
 ### 1.2 Vector `std::vector` (Sequence Containers)
 **Use for**
