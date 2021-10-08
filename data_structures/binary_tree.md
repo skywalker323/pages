@@ -49,11 +49,11 @@
 ## 1.0 Data Structures
 ### 1.1 Overview
 
-![DataStructures](data_structures/Data%20Structures.png "Data Structures")
+![DataStructures](/data_structures/DataStructures.png "Data Structures")
 
-![ComplexityChart](data_structures/Complexity%20Chart.png "Complexity Chart")
+![ComplexityChart](/data_structures/ComplexityChart.png "Complexity Chart")
 
-![DataStructureSelection](data_structures/Data%20Structures%20Selection.png "Data Structures Selection")
+![DataStructureSelection](/data_structures/Data%20StructuresSelection.png "Data Structures Selection")
 -------------------------------------------------------
 ### 1.2 Vector `std::vector` (Sequence Containers)
 **Use for**
