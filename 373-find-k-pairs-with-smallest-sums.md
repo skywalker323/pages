@@ -4,11 +4,12 @@
 
 You are given two integer arrays nums1 and nums2 sorted in ascending order and an integer k.
 
-Define a pair (u,v) which consists of one element from the first array and one element from the second array.
+Define a pair \(u,v\) which consists of one element from the first array and one element from the second array.
 
-Find the k pairs (u1,v1),(u2,v2) ...(uk,vk) with the smallest sums.
+Find the k pairs \(u1,v1\),\(u2,v2\) ...\(uk,vk\) with the smallest sums.
 
 Example 1:
+
 ```
 Given nums1 = [1,7,11], nums2 = [2,4,6],  k = 3
 
@@ -17,7 +18,9 @@ Return: [1,2],[1,4],[1,6]
 The first 3 pairs are returned from the sequence:
 [1,2],[1,4],[1,6],[7,2],[7,4],[11,2],[7,6],[11,4],[11,6]
 ```
+
 Example 2:
+
 ```
 Given nums1 = [1,1,2], nums2 = [1,2,3],  k = 2
 
@@ -28,6 +31,7 @@ The first 2 pairs are returned from the sequence:
 ```
 
 Example 3:
+
 ```
 Given nums1 = [1,2], nums2 = [3],  k = 3 
 
@@ -39,32 +43,31 @@ All possible pairs are returned from the sequence:
 
 ### Solutions:
 
-```java
-public class Solution {
-    public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
-        int[] index = new int[nums1.length];
-        List<int[]> result = new LinkedList<int[]>();
-        for (int i = 0; i < k; i ++) {
-            int min = Integer.MAX_VALUE;
-            int chosen = -1;
-            for (int j = 0; j < nums1.length; j ++) {
-                if (index[j] >= nums2.length) {
-                    continue;
-                }
-                int tmp = nums1[j] + nums2[index[j]];
-                if (tmp < min) {
-                    min = tmp;
-                    chosen = j;
-                }
-            }
-            if (chosen != -1) {
-                result.add(new int[]{nums1[chosen], nums2[index[chosen]]});
-                index[chosen] ++;
-            }
+```cpp
+Inspired by the index-array solution, we can further optimize the priority_queue solution where we only insert the next potential smallest one each time avoid inserting all the pairs at the first time. Time complexity now would be O(klogm) where k is from the problem while m is the size of the second array.
+
+Analysis for validity If the current smallest pair is (i, j), then next potential smallest pair should be (i+1, j) or (i, j+1). But to ensure each pair will be covered, we can insert the next column index into the minimal heap only when the row index is 0. Minimal heap is where all the potential smallest pairs are stored. P.S. To ease the problem, you can put each index pair as each cell of a matrix composed of the index of the two arrays.
+
+class Solution {
+public:
+    vector<pair<int, int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) 
+    {
+        vector<pair<int,int>> v;
+        if(nums1.empty() || nums2.empty()) return v;
+        auto cmp = [&nums1, &nums2](const pair<int, int>& a, const pair<int, int>&b) {
+            return nums1[a.first]+nums2[a.second] > nums1[b.first]+nums2[b.second]; };
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> minHeap(cmp);
+        minHeap.emplace(0, 0);
+        while(minHeap.size() && k--)
+        {
+            auto t = minHeap.top(); minHeap.pop();
+            v.emplace_back(nums1[t.first], nums2[t.second]);
+            if(t.first<nums1.size()-1) minHeap.emplace(t.first+1, t.second);
+            if(t.first==0 && t.second<nums2.size()-1) minHeap.emplace(t.first, t.second+1);
         }
-        return result;
+        return v;
     }
-}
+};
 ```
 
 ```java
@@ -106,3 +109,6 @@ public class Solution {
     }
 }
 ```
+
+
+
