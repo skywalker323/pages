@@ -37,43 +37,53 @@ Given m = 1, n = 1, return 9.
 ### Solutions:
 
 ```java
-public class Solution {
-    public int numberOfPatterns(int m, int n) {
-        int sum = 0;
-        int[][] jump = new int[10][10];
-        boolean[] visited = new boolean[10];
-        jump[1][3] = jump[3][1] = 2;
-        jump[1][7] = jump[7][1] = 4;
-        jump[1][9] = jump[9][1] = 5;
-        jump[2][8] = jump[8][2] = 5;
-        jump[3][7] = jump[7][3] = 5;
-        jump[3][9] = jump[9][3] = 6;
-        jump[4][6] = jump[6][4] = 5;
-        jump[7][9] = jump[9][7] = 8;
-        sum += dfs(jump, m, n, 1, 1, visited)*4;
-        sum += dfs(jump, m, n, 1, 2, visited)*4;
-        sum += dfs(jump, m, n, 1, 5, visited);
-        return sum;
-    }
-    private int dfs(int[][] jump, int m, int n, int step, int num, boolean[] visited) {
-        if (step > n) {
-            return 0;
+This problem is intimidating at first glance, but once you understand the jumping logic, the problem boils down to a simple DFS.
+
+For building the pattern using numbers 1 - 10 without duplicates we use dfs and keep track of numbers we have already used so that we avoid duplicates. Imagine a tree:
+
+				1
+			2 3 4 5 6 7 8 9 used{ 1 }
+	3 4 5 6 7 8 9 used{ 1, 2 }    2 4 5 6 7 8 9 used{ 1, 3 } ...
+Our base case is when the current pattern length is at n (max length)
+
+Now we just need to consider the logic around jumping from one number to another number. Jumping here means going from one number to the next requires traversal of another number. We initialize a jumps array where:
+jumps[from][to] = jumped|undefined
+If we are jumping then we make sure the jump is valid by checking that our used set has the number that will be jumped.
+
+Runtime Complexity: O(n!) the upper bound for the number of patterns
+
+let jumps = Array.from(new Array(10), () => new Array(10))
+
+jumps[1][3] = jumps[3][1] = 2;
+jumps[4][6] = jumps[6][4] = 5;
+jumps[7][9] = jumps[9][7] = 8;
+jumps[1][7] = jumps[7][1] = 4;
+jumps[2][8] = jumps[8][2] = 5;
+jumps[3][9] = jumps[9][3] = 6;
+jumps[1][9] = jumps[9][1] = jumps[3][7] = jumps[7][3] = 5;
+
+var numberOfPatterns = function(m, n) {
+    let count = 0
+    buildPattern()
+    return count
+    
+    function buildPattern(curr = '', used = new Set) {
+        if (curr.length >= m) {
+            count++
         }
-        if (step == n) {
-            return 1;
+        if (curr.length === n) {
+            return
         }
-        int sum = 0;
-        if (step >= m) {
-            sum ++;
-        }
-        visited[num] = true;
-        for (int i = 1; i <= 9; i ++) {
-            if (num != i && (jump[num][i] == 0 || visited[jump[num][i]] == true) && visited[i] == false) {
-                sum += dfs(jump, m, n, step + 1, i, visited);
+        for (let i = 1; i < 10; i++) {
+            if (used.has(i)) continue
+            let jumping = jumps[i][curr[curr.length - 1]]
+            if (jumping) {
+                if (!used.has(jumping)) continue
             }
+            used.add(i)
+            buildPattern(curr + i, used)
+            used.delete(i)
         }
-        visited[num] = false;
-        return sum;
     }
-}
+};
 ```
