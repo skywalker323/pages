@@ -45,24 +45,24 @@ ex , after modifies sorting we get -> (4, 4), (5, 2), (5,0), (6, 1), (7, 0), (7,
 and after applying the logic we get
 (5, 0), (7, 0), (5, 2), (6, 1), (4, 4), (7, 1)
 
-static bool comp(const vector<int> &a, const vector<int> &b){
-	if(a[0] < b[0])	return true;
-	if(a[0] == b[0] && a[1] > b[1])	return true;
-	return false;
+bool comp(const vector<int> &a, const vector<int> &b){
+    if(a[0] < b[0])    return true;
+    if(a[0] == b[0] && a[1] > b[1])    return true;
+    return false;
 }
 
 vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
-	int n = people.size();
-	sort(people.begin(), people.end(), comp);
+    int n = people.size();
+    sort(people.begin(), people.end(), comp);
 
-	for(int i = n-2; i >= 0; i--){
-		auto p = people[i];
-		int itr = people[i][1];
-		for(int k = i; k < i + itr; k++){
-			people[k] = people[k+1];
-		}
-		people[i + itr] = p;
-	}
+    for(int i = n-2; i >= 0; i--){
+        auto p = people[i];
+        int itr = people[i][1];
+        for(int k = i; k < i + itr; k++){
+            people[k] = people[k+1];
+        }
+        people[i + itr] = p;
+    }
 }
 ```
 

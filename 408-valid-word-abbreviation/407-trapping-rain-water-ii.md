@@ -49,16 +49,23 @@ int trap(vector<int>& height) {
         int n=height.size(),mx,ans=0;  //mx--->max_bar_height
         if(n<=2) return 0;
         mx=height[0];
-        vector<int> vec(n,0);       //vector to store amount of water that can be stored initialised to zero
-        for(int i=1;i<n;i++){       //traversing fron left to right
-            if(height[i]>mx) mx=height[i]; //if a bar is greater than the previous one then on that bar 
-			                                // no amount of water can be stored,updating the max_bar
-            else vec[i]=mx-height[i];    //amount that can be stored
+        vector<int> vec(n,0);      
+         //vector to store amount of water that can be stored initialised to zero
+        for(int i=1;i<n;i++){       
+        //traversing fron left to right
+            if(height[i]>mx) mx=height[i]; 
+            //if a bar is greater than the previous one then on that bar 
+            // no amount of water can be stored,updating the max_bar
+            else vec[i]=mx-height[i];    
+            //amount that can be stored
         }
-        mx=height[n-1];                   //rightmost bar as greatest
+        mx=height[n-1];                   
+        //rightmost bar as greatest
         for(int i=n-2;i>=0;i--){
-            if(height[i]>mx) mx=height[i];     //updating the greatest bar
-            else ans+=min(mx-height[i],vec[i]);  //storing the actual ans
+            if(height[i]>mx) mx=height[i];    
+             //updating the greatest bar
+            else ans+=min(mx-height[i],vec[i]);  
+            //storing the actual ans
         }
         return ans;
     }
