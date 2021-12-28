@@ -7,8 +7,9 @@ Given a non-negative integer num represented as a string, remove k digits from t
 Note:
 
 * The length of num is less than 10002 and will be ≥ k.
-* The given num does not contain any leading zero.
+* The given num does not contain any leading zero.  
   Example 1:
+
   ```
   Input: num = "1432219", k = 3
   Output: "1219"
@@ -16,6 +17,7 @@ Note:
   ```
 
   Example 2:
+
   ```
   Input: num = "10200", k = 1
   Output: "200"
@@ -23,6 +25,7 @@ Note:
   ```
 
   Example 3:
+
   ```
   Input: num = "10", k = 2
   Output: "0"
@@ -34,94 +37,24 @@ Note:
 ```cpp
 string removeKdigits(string num, int k) {
        string ans = "";                                         // treat ans as a stack in below for loop
-       
+
        for (char c : num) {
            while (ans.length() && ans.back() > c && k) {
                ans.pop_back();                                  // make sure digits in ans are in ascending order
                k--;                                             // remove one char
            }
-           
+
            if (ans.length() || c != '0') { ans.push_back(c); }  // can't have leading '0'
        }
-       
+
        while (ans.length() && k--) { ans.pop_back(); }          // make sure remove k digits in total
-       
+
        return ans.empty() ? "0" : ans;
 }
 ```
 
 ```java
-public class Solution {
-    public String removeKdigits(String num, int k) {
-        if (num.length() == k) {
-            return "0";
-        }
-        Stack<Character> stack = new Stack<Character>();
-        int i = 0;
-        for (int j = 0; j < k; j ++) {
-            if (i >= num.length() || (!stack.isEmpty() && stack.peek() > num.charAt(i))) {
-                stack.pop();
-                continue;
-            }
-            while (i < num.length() - 1 && num.charAt(i) <= num.charAt(i + 1)) {
-                stack.push(num.charAt(i));
-                i ++;
-            }
-            i ++;
-        }
-        while (i < num.length()) {
-            stack.push(num.charAt(i));
-            i ++;
-        }
-        String sb = "";
-        while (!stack.isEmpty()) {
-            sb = stack.pop() + sb;
-        }
-        i = 0;
-        while (i < sb.length() - 1 && sb.charAt(i) == '0') {
-            i ++;
-        }
-        return sb.substring(i);
-    }
-}
-```
 
-```java
-class Solution {
-    public String removeKdigits(String num, int k) {
-        if (num == null || num.length() == 0) {
-            return "";
-        }
-        if (k >= num.length()) {
-            return "0";
-        }
-        LinkedList<Character> cands = new LinkedList<>();
-        for (int i = 0; i < num.length(); i ++) {
-            char c = num.charAt(i);
-            while (cands.size() > 0 && c < cands.peekLast() && k > 0) {
-                cands.pollLast();
-                k --;
-            }
-            cands.add(c);
-        }
-        while (k > 0) {
-            cands.pollLast();
-            k --;
-        }
-        //remove leading 0
-        while (cands.size() > 0 && cands.peekFirst() == '0') {
-            cands.pollFirst();
-        }
-        if (cands.size() == 0) {
-            return "0";
-        }
-        StringBuilder sb = new StringBuilder();
-        while (cands.size() > 0) {
-            sb.append(cands.pollFirst());
-        }
-        return sb.toString();
-    }
-}
 ```
 
 
