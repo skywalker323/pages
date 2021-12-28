@@ -2,12 +2,13 @@
 
 ### Problem:
 
-Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers (h, k), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue.
+Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers \(h, k\), where h is the height of the person and k is the number of people in front of this person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue.
 
-Note:
+Note:  
 The number of people is less than 1,100.
 
 Example
+
 ```
 Input:
 [[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
@@ -18,96 +19,60 @@ Output:
 
 ### Solutions:
 
+```cpp
+imagine your are standing in a queue in ascending format, and you get a card,
+telling you how many people taller / equal than you should stand in front of you.
 
-```java
-public class Solution {
-    public int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people, (new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[0] == o2[0]) {
-                    return o1[1] - o2[1];
-                } else {
-                    return o2[0] - o1[0];
-                }
-            }
-        }));
-        List<int[]> resultList = new LinkedList<>();
-        for(int[] cur : people){
-            resultList.add(cur[1], cur);
-        }
-        return resultList.toArray(new int[people.length][]);
-    }
+what will you do ?
+because the queue is sorted according to height, i know for sure that people behind me are taller than me,
+so i will just move k value back in queue,
+but theres a problem, consider value {7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}
+after sorting we get (4, 4), (5, 0), (5,2), (6, 1), (7, 0), (7, 1)
+
+now our logic above will work fine till we reach (5, 0), because k value is 0, we wont move it,
+but if we check the our result till now,
+we get wrong answer for (5, 2), (5, 0), (6, 1), (7, 0), (5, 2) -> now (5, 2) comes before 3 elements >= then itself,
+
+how to fix this ?
+by simply putting the values of  same height but greater k before than the lesser one, ex ->
+if we do normal sorting our result will be 
+  normal sorting -> (5, 0), (5, 2)
+  but after applying our logic
+  modified sorting -> (5, 2), (5, 0)
+now if we use modified sorting we will get correct answers
+ex , after modifies sorting we get -> (4, 4), (5, 2), (5,0), (6, 1), (7, 0), (7, 1)
+
+and after applying the logic we get
+(5, 0), (7, 0), (5, 2), (6, 1), (4, 4), (7, 1)
+
+static bool comp(const vector<int> &a, const vector<int> &b){
+	if(a[0] < b[0])	return true;
+	if(a[0] == b[0] && a[1] > b[1])	return true;
+	return false;
+}
+
+vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+	int n = people.size();
+	sort(people.begin(), people.end(), comp);
+
+	for(int i = n-2; i >= 0; i--){
+		auto p = people[i];
+		int itr = people[i][1];
+		for(int k = i; k < i + itr; k++){
+			people[k] = people[k+1];
+		}
+		people[i + itr] = p;
+	}
 }
 ```
 
 ```java
-public class Solution {
-    public int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people, (new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[0] == o2[0]) {
-                    return o1[1] - o2[1];
-                } else {
-                    return o2[0] - o1[0];
-                }
-            }
-        }));
-        for (int i = 1; i < people.length; ++i) {
-            int cnt = 0;
-            for (int j = 0; j < i; ++j) {
-                if (cnt == people[i][1]) {
-                    int[] t = people[i];
-                    for (int k = i - 1; k >= j; --k) {
-                        people[k + 1] = people[k];
-                    }
-                    people[j] = t;
-                    break;
-                }
-                if (people[j][0] >= people[i][0]) 
-                    ++cnt;
-            }
-        }
-        return people;
-    }
-}
+
 ```
 
 ```java
-class Solution {
-    public int[][] reconstructQueue(int[][] people) {
-        if (people.length == 0 || people[0].length == 0) {
-            return people;
-        }
-        int[][] res = new int[people.length][people[0].length];
-        boolean[] filled = new boolean[people.length];
-        Arrays.sort(people, new Comparator<int[]>(){
-           public int compare(int[] p1, int[] p2) {
-               if (p1[0] == p2[0]) {
-                   return p2[1] - p1[1];
-               }
-               else {
-                   return p1[0] - p2[0];
-               }
-           } 
-        });
-        for (int i = 0; i < people.length; i ++) {
-            int[] p = people[i];
-            int count = 0;
-            for (int j = 0; j < people.length; j ++) {
-                if (filled[j] == false) {
-                    count ++;
-                    if (count == p[1] + 1) {
-                        filled[j] = true;
-                        res[j][0] = p[0];
-                        res[j][1] = p[1];
-                        break;
-                    }
-                }
-            }
-        }
-        return res;
-    }
-}
+
 ```
+
+
+
