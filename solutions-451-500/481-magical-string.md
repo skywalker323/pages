@@ -50,41 +50,54 @@ The outer loop has size n-3 and inner loop has max size 2, so O(n) for time comp
       int ones = 1; queue<int> q({2});
       for (int L = 3, d = 1; L < n; d ^= 3, q.pop())
         for (int i = 0; i++ < q.front() && L++ < n; q.push(d), ones += d%2) ;
-        
+
       return n? ones : 0;
   }
 ```
 
 ```java
-public class Solution {
-    public int magicalString(int n) {
-        if (n <= 0) {
-            return 0;
+int magicalString(int n) {
+        // We can increase the magical string by looking at the last character as well as the groups 
+        // that are examined so far. For example, we start from index 0 ('1'), then we need to find
+        // the next character. It has to be different from '1' so it will be '2', and the string becomes
+        // "12", hence the next group must have 2 '2's, hence the string will be "122".
+        // Following the steps, each time we use the character at index called 'group' to determine which 
+        // characters (1 or 2) to append to the magical string. There are a few scenarios and it is specified
+        // in the code below.
+        if (n <= 1)
+        {
+            return n == 1 ? 1 : 0; // base case
         }
-        if (n <= 3) {
-            return 1;
-        }
-        int[] data = new int[100002];
-        data[0] = 1;
-        data[1] = 2;
-        data[2] = 2;
-
-        int i = 2, j = 2;
-        int count = 1;
-        int num = 1;
-        while (i < n) {
-            for (int k = 0; k < data[j]; k ++) {
-                data[++i] = num;
-                if (num == 1 && i < n) {
-                    count ++;
-                }
+        
+        int res = 1, group = 1; // result, the index called group
+        string s{"1"}; // initial magical string
+        while (s.size() < n) // when the size of magical string < n
+        {
+            char c = s[s.size() - 1]; // the last character of magical string
+            if (c == '1' && (s.size() <= group || s[group] == '2'))
+            {
+                s += "22"; // the appended character must be different from the last character
             }
-            j ++;
-            num = num ^ 3;
+            else if (c == '2' && (s.size() <= group || s[group] == '1'))
+            {
+                s += "1"; // if s[group] is '1' or empty, we must append only 1 '1' 
+                ++res; // update the result
+            }
+            else if (c == '1' && s[group] == '1')
+            {
+                s += "2"; // s[group] is the number of '2's to be appended
+            }
+            else
+            {
+                s += "11"; // for all other cases, append '11' and update the result
+                res += s.size() > n ? 1 : 2;
+            }
+            
+            ++group;
         }
-        return count;
+        
+        return res;
     }
-}
 ```
 
 ```java
