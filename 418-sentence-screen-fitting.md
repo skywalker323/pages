@@ -169,7 +169,8 @@ public:
             int i=0;
             for (; i< sentence.size(); ++i) {           
                 string str= sentence[i];
-/*addSpace will be 0 or 1, this logic check whether we need to consider space at the end of picked word or not*/
+        /*addSpace will be 0 or 1, this logic check whether we need to consider space at
+         the end of picked word or not*/
                 int addSpace = ((i==sentence.size()-1) && (spaceNeeded > remain - str.length()+ (rows-r)*cols) ||
                              remain==str.length())?0:1;
                 if(remain>= str.length()+ addSpace){
@@ -178,15 +179,18 @@ public:
                     continue;
                 } else { /*moving to a new row*/
                     //cout<<endl;                
-                    remain = cols; /*resset the remaining space in each row */    
-                    i--;  /*since we need to revisit the last word again since we could not fit it in previous row*/
+                    remain = cols;
+                     /*resset the remaining space in each row */    
+                    i--; 
+                     /*since we need to revisit the last word again since we could not fit it in previous row*/
                     r++;
                     if(r>=rows)
                         break;
                 }
             }
 
-            if(i== sentence.size()) /*update the counter only and only if we covered all the words.*/
+            if(i== sentence.size()) 
+            /*update the counter only and only if we covered all the words.*/
                 ret++;
         }
 
