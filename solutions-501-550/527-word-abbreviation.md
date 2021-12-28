@@ -9,85 +9,80 @@ Given an array of n distinct non-empty strings, you need to generate minimal pos
 3. If the abbreviation doesn't make the word shorter, then keep it as original.
 
 Example:
+
 ```
 Input: ["like", "god", "internal", "me", "internet", "interval", "intension", "face", "intrusion"]
 Output: ["l2e","god","internal","me","i6t","interval","inte4n","f2e","intr4n"]
 ```
-Note:
-1. Both n and the length of each word will not exceed 400.
-2. The length of each word is greater than 1.
-3. The words consist of lowercase English letters only.
+
+Note:  
+1. Both n and the length of each word will not exceed 400.  
+2. The length of each word is greater than 1.  
+3. The words consist of lowercase English letters only.  
 4. The return answers should be in the same order as the original array.
 
 ### Solutions:
 
 ```java
-public class Solution {
-    public List<String> wordsAbbreviation(List<String> dict) {
-        List<String> res = new ArrayList<String>();
-        HashMap<String, List<Integer>> map = new HashMap<String, List<Integer>>();
-        int i = 0;
-        for (String s:dict) {
-            if (s.length() <= 3) {
-                res.add(s);
-                i ++;
-                continue;
-            }            
-            String tmp = s.charAt(0) + ((s.length() - 2) + "") + s.charAt(s.length() - 1);
-            if (!map.containsKey(tmp)) {
-                map.put(tmp, new LinkedList<Integer>());
+The idea is to sort the dict first, by comparing 3 things:
+1) a.size( ) == b.size( )
+2) first and last character
+3) the remaining characters
+After sorting, we only need compare a certain word to its previous and next word for longest common prefix, 
+in order to decide its abbreviation. n is the size of dict, and m is the average length
+ of word in dict. Sorting complexity is O(mnlogn), and the procedure after sorting is O(mn).
+
+
+class Solution {
+public:
+    vector<string> wordsAbbreviation(vector<string>& dict) {
+        int n = dict.size();
+        vector<string> ans = dict;
+        // sort the dict
+        sort(dict.begin(), dict.end(), mycompare);
+        unordered_map<string, string> mp;
+        // prefix is the longest common prefix between dict[i] and dict[i-1]
+        int prefix = 0; 
+        for (int i = 0; i < n; ++i) {
+            int j = 0;
+            // j is the longest prefix length between dict[i] and dict[i+1]
+           // if dict[i] is last word, or the length is different, or the last character is different, j = 0;
+            if (i < n-1 && dict[i].size() == dict[i+1].size() && dict[i].back() == dict[i+1].back()) {
+                while (j < dict[i].size() && dict[i][j] == dict[i+1][j])
+                    j++;
             }
-            map.get(tmp).add(i);
-            res.add(tmp);
-            i ++;
+            if (j > prefix) prefix = j;
+            // build abbreviation if it is shorter than word, and put it in a map
+            if (dict[i].size() > prefix+3) {
+                string s = dict[i].substr(0, prefix+1)+to_string(dict[i].size()-prefix-2)+dict[i].back();
+                mp[dict[i]] = s;
+            }
+            // update prefix to be longest prefix with previous word
+            prefix = j;
         }
-        while (map.size() > 0) {
-            HashMap<String, List<Integer>> newMap = new HashMap<String, List<Integer>>();
-            List<String> toRemove = new LinkedList<String>();
-            for (String key:map.keySet()) {
-                List<Integer> indexes = map.get(key);
-                if (indexes.size() == 1) {
-                    toRemove.add(key);
-                }
-            }
-            for (String key:toRemove) {
-                map.remove(key);
-            }
-            for (String key:map.keySet()) {
-                List<Integer> indexes = map.get(key);
-                String prefix = findCommonPrefix(indexes, dict);
-                for (Integer j:indexes) {
-                    String original = dict.get(j);
-                    if (original.length() - prefix.length() <=3) {
-                        res.set(j, original);
-                    }
-                    else {
-                        String replace = prefix + original.charAt(prefix.length()) + (original.length() - prefix.length() - 2) + original.charAt(original.length() - 1);
-                        res.set(j, replace);
-                        if (!newMap.containsKey(replace)) {
-                            newMap.put(replace, new LinkedList<Integer>());
-                        }
-                        newMap.get(replace).add(j);
-                    }
-                }
-            }
-            map = newMap;
+        for (int i = 0; i < n; ++i) {
+            if (mp.count(ans[i])) ans[i] = mp[ans[i]];
         }
-        return res;
+        return ans;
     }
-    private String findCommonPrefix(List<Integer> indexes, List<String> dict) {
-        String prefix = dict.get(indexes.get(0));
-        for (int i = 1; i < indexes.size(); i ++) {
-            int index = indexes.get(i);
-            String compare = dict.get(index);
-            for (int j = prefix.length(); j >= 0; j --) {
-                if (prefix.substring(0, j).equals(compare.substring(0, j))) {
-                    prefix = prefix.substring(0, j);
-                    break;
-                }
+private:
+    static bool mycompare(string& a, string& b) {
+        if (a.size() == b.size()) {
+            if (a.back() < b.back()) 
+                return true;
+            else if (a.back() > b.back()) 
+                return false;
+            for (int i = 0; i < a.size()-1; ++i) {
+                if (a[i] < b[i]) 
+                    return true;
+                else if (a[i] > b[i])
+                    return false;
             }
         }
-        return prefix;
+        return a.size() < b.size();
     }
-}
+};
 ```
+
+
+
