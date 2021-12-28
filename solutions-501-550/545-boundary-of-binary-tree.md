@@ -1,6 +1,7 @@
 # 545 Boundary of Binary Tree
 
 ### Problem:
+
 Given a binary tree, return the values of its boundary in anti-clockwise direction starting from root. Boundary includes left boundary, leaves, and right boundary in order without duplicate nodes.
 
 Left boundary is defined as the path from root to the left-most node. Right boundary is defined as the path from root to the right-most node. If the root doesn't have left subtree or right subtree, then the root itself is left boundary or right boundary. Note this definition only applies to the input binary tree, and not applies to any subtrees.
@@ -10,6 +11,7 @@ The left-most node is defined as a leaf node you could reach when you always fir
 The right-most node is also defined by the same way with left and right exchanged.
 
 Example 1
+
 ```
 Input:
   1
@@ -29,6 +31,7 @@ So order them in anti-clockwise without duplicates and we have [1,3,4,2].
 ```
 
 Example 2
+
 ```
 Input:
     ____1_____
@@ -38,7 +41,7 @@ Input:
 4   5        6   
    / \      / \
   7   8    9  10  
-       
+
 Ouput:
 [1,2,4,7,8,9,10,6,3]
 
@@ -52,88 +55,34 @@ So order them in anti-clockwise without duplicate nodes we have [1,2,4,7,8,9,10,
 ### Solutions:
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public List<Integer> boundaryOfBinaryTree(TreeNode root) {
-        if (root == null) {
-            return new LinkedList<Integer>();
-        }
-        List<TreeNode> left = new LinkedList<TreeNode>();
-        if (root.left == null) {
-            left.add(root);
-        }
-        else {
-            TreeNode node = root;
-            while (node != null) {
-                left.add(node);
-                if (node.left != null) {
-                    node = node.left;
-                }
-                else {
-                    node = node.right;
-                }
-            }    
-        }
-        List<TreeNode> right = new LinkedList<TreeNode>();
-        if (root.right == null) {
-            right.add(root);
-        }
-        else {
-            TreeNode node = root;
-            while (node != null) {
-                right.add(0, node);
-                if (node.right != null) {
-                    node = node.right;
-                }
-                else {
-                    node = node.left;
-                }
-            }    
-        }
-        List<TreeNode> mid = new LinkedList<TreeNode>();
-        inorder(root, mid);
-        if (mid.size() > 0 && left.get(left.size() - 1) == mid.get(0)) {
-            mid.remove(0);
-        }
-        if (mid.size() > 0 && mid.get(mid.size() - 1) == right.get(0)) {
-            right.remove(0);
-        }
-        if (right.size() > 0 && right.get(right.size() - 1) == left.get(0)) {
-            right.remove(right.size() - 1);
-        }
-        List<Integer> res = new LinkedList<Integer>();
-        for (TreeNode n:left) {
-            res.add(n.val);
-        }
-        for (TreeNode n:mid) {
-            res.add(n.val);
-        }
-        for (TreeNode n:right) {
-            res.add(n.val);
-        }
-        return res;
+The boundary of tree can be split into 4 parts:
+
+1) left boudnary (do not count leaves here);
+2) leaves of left subtree;
+3) leaves of right subtree;
+4) right boundary (do not count leaves here).
+public:
+    vector<int> boundaryOfBinaryTree(TreeNode* r) {
+      if (!r) return boundary;
+      boundary.push_back(r->val);
+      sideBound(r->left, true), leaves(r->left), leaves(r->right), sideBound(r->right, false);
+      return boundary;
     }
-    private void inorder(TreeNode node, List<TreeNode> mid) {
-        if (node == null) {
-            return;
-        }
-        if (node.left == null && node.right == null) {
-            mid.add(node);
-        }
-        else {
-            inorder(node.left, mid);
-            inorder(node.right, mid);
-        }
-    }
-}
+  
+private:
+  vector<int> boundary;
+  
+  void sideBound(TreeNode* r, bool isLeft) { // add side boundary
+    if (!r || !r->left && !r->right) return; // do not add leaves
+    if (isLeft) boundary.push_back(r->val), sideBound(r->left? r->left : r->right, isLeft);
+    else sideBound(r->right? r->right : r->left, isLeft), boundary.push_back(r->val);
+  } 
+  
+  void leaves(TreeNode* r) { // add leaves
+    if (!r) return;
+    if (!r->left && !r->right) boundary.push_back(r->val);
+    leaves(r->left), leaves(r->right);
+  }
 ```
 
 ```java
@@ -197,3 +146,6 @@ public class Solution {
     }
 }
 ```
+
+
+
