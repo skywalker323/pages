@@ -4,14 +4,15 @@
 
 Given an m x n matrix of non-negative integers representing the height of each unit cell in a continent, the "Pacific ocean" touches the left and top edges of the matrix and the "Atlantic ocean" touches the right and bottom edges.
 
-Water can only flow in four directions (up, down, left, or right) from a cell to another one with height equal or lower.
+Water can only flow in four directions \(up, down, left, or right\) from a cell to another one with height equal or lower.
 
 Find the list of grid coordinates where water can flow to both the Pacific and Atlantic ocean.
 
-Note:
-The order of returned grid coordinates does not matter.
-Both m and n are less than 150.
+Note:  
+The order of returned grid coordinates does not matter.  
+Both m and n are less than 150.  
 Example:
+
 ```
 Given the following 5x5 matrix:
 
@@ -26,81 +27,95 @@ Given the following 5x5 matrix:
 Return:
 
 [[0, 4], [1, 3], [1, 4], [2, 2], [3, 0], [3, 1], [4, 0]] (positions with parentheses in above matrix).
-
-
 ```
 
 ### Solutions:
 
-```java
-public class Solution {
-    private class Land {
-        private int x;
-        private int y;
-        public Land(int x, int y) {
-            this.x = x;
-            this.y = y;
+```cpp
+ /*
+     * Approach followed is to find the containers from where the water flows to
+     * pacific ocean and containers from where the water flows to atlantic ocean.
+     * Result is the indices of the container from where the water is flown to
+     * either pacific or atlantic 
+    */
+
+    // DFS to find whether water from a specific container goes to the ocean i.e.., pacific or atlantic
+    void dfs(vector<vector<int>>& matrix, int row, int col, int prevContainerVal, vector<vector<bool>>& ocean)
+    {
+        // Water can move from a container to another in either top, bottom, left or right
+        // checking the cornor cases
+        if (row < 0 || row >= matrix.size() || col < 0 || col >= matrix[0].size()) {
+            // In ocean already
+            return;
         }
+
+        // water form a container to another can flow only when height is equal or lower
+        if (prevContainerVal > matrix[row][col] || ocean[row][col]) {
+            return;
+        }
+        //water can flow in the container, as it stasfies the required condition
+        ocean[row][col] = true;
+
+        // water can flow in 4 directions, 4 subproblems
+        // top
+        dfs(matrix, row - 1, col, matrix[row][col], ocean);
+        // bottom
+        dfs(matrix, row + 1, col, matrix[row][col], ocean);
+        // left
+        dfs(matrix, row, col - 1, matrix[row][col], ocean);
+        // right
+        dfs(matrix, row, col + 1, matrix[row][col], ocean);
+
+        return;
     }
-    public List<int[]> pacificAtlantic(int[][] matrix) {
-        List<int[]> result = new LinkedList<int[]>();
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return result;
+
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+        vector<vector<int>> res;
+
+        if (matrix.empty() || matrix[0].size() == 0) {
+            // There containers are empty there is no way to flow the water
+            return res;
         }
-        boolean[][] pa = new boolean[matrix.length][matrix[0].length];
-        boolean[][] at = new boolean[matrix.length][matrix[0].length];
-        Queue<Land> paq = new LinkedList<Land>();
-        Queue<Land> atq = new LinkedList<Land>();
-        for (int i = 0; i < matrix.length; i ++) {
-            pa[i][0] = true;
-            at[i][matrix[0].length - 1] = true;
-            paq.add(new Land(i, 0));
-            atq.add(new Land(i, matrix[0].length - 1));
+
+        int row = matrix.size();
+        int col = matrix[0].size();
+        // Boolean matrix to store whether the water flows into ocean(pacific, atlantic)
+        // from a specific container
+        vector<vector<bool>> pacific(row, vector<bool>(col, false));
+        vector<vector<bool>> atlantic(row, vector<bool>(col, false));
+
+        // Check whether water int the container can flow to the ocean
+        // first row(pacific) and last row(atlantic)
+        for (int i = 0; i < col; i++) {
+            dfs(matrix, 0, i, INT_MIN, pacific);
+            dfs(matrix, row - 1, i, INT_MIN, atlantic);
         }
-        for (int j = 0; j < matrix[0].length; j ++) {
-            pa[0][j] = true;
-            at[matrix.length - 1][j] = true;
-            paq.add(new Land(0, j));
-            atq.add(new Land(matrix.length - 1, j));
+
+        // first column(pacific) and last column(atlantic)
+        for (int i = 0; i < row; i++) {
+            dfs(matrix, i, 0, INT_MIN, pacific);
+            dfs(matrix, i, col - 1, INT_MIN, atlantic);
         }
-        while (!paq.isEmpty()) {
-            Land l = paq.poll();
-            int x = l.x, y = l.y;
-            process(matrix[x][y], x - 1, y, pa, paq, matrix);
-            process(matrix[x][y], x, y - 1, pa, paq, matrix);
-            process(matrix[x][y], x + 1, y, pa, paq, matrix);
-            process(matrix[x][y], x, y + 1, pa, paq, matrix);
-        }
-        while (!atq.isEmpty()) {
-            Land l = atq.poll();
-            int x = l.x, y = l.y;
-            process(matrix[x][y], x - 1, y, at, atq, matrix);
-            process(matrix[x][y], x, y - 1, at, atq, matrix);
-            process(matrix[x][y], x + 1, y, at, atq, matrix);
-            process(matrix[x][y], x, y + 1, at, atq, matrix);
-        }
-        for (int i = 0; i < matrix.length; i ++) {
-            for (int j = 0; j < matrix[0].length; j ++) {
-                if (pa[i][j] && at[i][j]) {
-                    result.add(new int[]{i, j});
+
+        // Finding the coordinates where water flows from pacific to atlantic.
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                // If the water in the i,j container flows to pacific and to atlantic, then
+                // there is a result
+                if (pacific[i][j] && atlantic[i][j]) {
+                    res.push_back({ i,j });
                 }
             }
         }
-        return result;
+
+        // returning the coording where the water flows from pacific to atlantic
+        return res;
     }
-    private void process(int before, int x, int y, boolean[][] data, Queue<Land> q, int[][] matrix) {
-        if (x < 0 || y < 0 || x >= data.length || y >= data[0].length || data[x][y] == true) {
-            return;
-        }
-        if (matrix[x][y] < before) {
-            return;
-        }
-        q.add(new Land(x, y));
-        data[x][y] = true;
-    }
-}
 ```
 
 ```java
 
 ```
+
+
+
