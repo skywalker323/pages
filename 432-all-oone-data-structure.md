@@ -28,18 +28,18 @@ class AllOne {
 public:
 
     void inc(string key) {
-        
-        // If the key doesn't exist, insert it with value 0.
+
+// If the key doesn't exist, insert it with value 0.
         if (!bucketOfKey.count(key))
             bucketOfKey[key] = buckets.insert(buckets.begin(), {0, {key}});
-            
-        // Insert the key in next bucket and update the lookup.
+
+// Insert the key in next bucket and update the lookup.
         auto next = bucketOfKey[key], bucket = next++;
         if (next == buckets.end() || next->value > bucket->value + 1)
             next = buckets.insert(next, {bucket->value + 1, {}});
         next->keys.insert(key);
         bucketOfKey[key] = next;
-        
+
         // Remove the key from its old bucket.
         bucket->keys.erase(key);
         if (bucket->keys.empty())
@@ -48,11 +48,11 @@ public:
 
     void dec(string key) {
 
-        // If the key doesn't exist, just leave.
+// If the key doesn't exist, just leave.
         if (!bucketOfKey.count(key))
             return;
 
-        // Maybe insert the key in previous bucket and update the lookup.
+// Maybe insert the key in previous bucket and update the lookup.
         auto prev = bucketOfKey[key], bucket = prev--;
         bucketOfKey.erase(key);
         if (bucket->value > 1) {
@@ -61,8 +61,8 @@ public:
             prev->keys.insert(key);
             bucketOfKey[key] = prev;
         }
-        
-        // Remove the key from its old bucket.
+
+// Remove the key from its old bucket.
         bucket->keys.erase(key);
         if (bucket->keys.empty())
             buckets.erase(bucket);
@@ -71,7 +71,7 @@ public:
     string getMaxKey() {
         return buckets.empty() ? "" : *(buckets.rbegin()->keys.begin());
     }
-    
+
     string getMinKey() {
         return buckets.empty() ? "" : *(buckets.begin()->keys.begin());
     }
