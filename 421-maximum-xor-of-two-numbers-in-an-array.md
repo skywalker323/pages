@@ -21,20 +21,99 @@ Explanation: The maximum result is 5 ^ 25 = 28.
 ### Solutions:
 
 ```java
+
+class Solution {
+public:
+    struct Node {
+      Node* zero_bit = nullptr;
+      Node* one_bit = nullptr;
+    };
+    Node* root = new Node();
+  
+    // All Trie represent incremental pieces of a final value (chars -> string)
+    // For an int, the incremental piece is a bit, so we will make Trie of bit-string
+    // The Trie should always be accessed in chunks of 32 nodes (including root), so no concept
+    // of intermediate versus final result (prefix vs word) is needed.
+    void insert(const int& num) {
+      Node* ptr = root;
+      // Access all the bits MSB to LSB meaning index 31 to index 0
+      for (int i = 31; i >= 0; i--) {
+        if ((num >> i) & 1) { // bit in position i is a 1. Add to Trie if missing and move that way
+          if (!ptr->one_bit) {
+            ptr->one_bit = new Node();
+          }
+          ptr = ptr->one_bit;
+        } else { // bit in position i is a 0. Add to Trie if missing and move that way
+          if (!ptr->zero_bit) {
+            ptr->zero_bit = new Node();
+          }
+          ptr = ptr->zero_bit;
+        }
+      }
+    }
+  
+    // For the input number, for each bit, search the Trie bits that yield the most
+    // bit-wise XOR as 1. Based on the rule of XOR:
+    // 0 XOR 1 = 1
+    // 1 XOR 0 = 1
+    // Effectively it means, for the given bit, take the opposite child
+    // If you couldn't take the child you wanted, the bit-wise XOR result is 0, so continue
+    // If you can take the child you want, then bit-wise XOR result is 1, so |= (1 << i) into a temp result.
+	// (pow(2,i) does the same but keeps things as int rather than bit-manipulations).
+	// This is to keep track of the output bit-wise XOR as you visit each child.
+    int getMaxXOR(const int& num) {
+      Node* ptr = root;
+      int temp = 0;
+      for (int i = 31; i >= 0; i--) {
+        if ((num >> i) & 1) {
+          if (ptr->zero_bit) {
+            temp += pow(2,i);
+            ptr = ptr->zero_bit;
+          } else {
+            ptr = ptr->one_bit;
+          }
+        } else {
+          if (ptr->one_bit) {
+            temp += pow(2,i);
+            ptr = ptr->one_bit;
+          } else {
+            ptr = ptr->zero_bit;
+          }
+        }
+      }
+      return temp;
+    }
+  
+    int findMaximumXOR(vector<int>& nums) {
+      for (const int &i : nums) {
+        insert(i);
+      }
+      int max = 0;
+      for (const int &i : nums) {
+        int ret = getMaxXOR(i);
+        if (ret > max) max = ret;
+      }
+      return max;
+    }
+};
+
+
+// second solution
+
 int findMaximumXOR(vector<int>& nums) {
         int n = nums.size();
-        
+
         if (n == 0 || n == 1)
             return 0;
         if (n == 2)
             return nums.at(0) ^ nums.at(1);
-        
+
         list<int> set0;
         list<int> set1;
         int i;
         int j;
         int maxValue;
-        
+
         for (i = 30; i >= 0; i--) {
             for (j = 0; j < n; j++) {
                 if ((nums.at(j) & (1<<i)) == 0)
@@ -42,7 +121,7 @@ int findMaximumXOR(vector<int>& nums) {
                 else
                     set1.push_back(nums.at(j));
             }
-            
+
             if (set0.size() != 0 && set1.size() != 0) {
                 maxValue = pow(2, i);
                 break;
@@ -52,12 +131,12 @@ int findMaximumXOR(vector<int>& nums) {
                 set1.clear();
             }
         }
-        
+
         if (i == -1)
             return 0;
-        
+
         maxValue += getMaxXor(set0, set1, i-1);
-        
+
         return maxValue;
 }
 
@@ -69,10 +148,10 @@ int getMaxXor(list<int>& set0, list<int>& set1, int pos) {
         list<int> set1list1;
         int i;
         list<int>::iterator it;
-        
+
         if (set0.size() == 0 || set1.size() == 0 || pos < 0)
             return 0;
-        
+
         for (it = set0.begin(); it != set0.end(); it++) {
             int value = *it;
             if ((value & (1<<pos)) == 0)
@@ -80,7 +159,7 @@ int getMaxXor(list<int>& set0, list<int>& set1, int pos) {
             else
                 set0list1.push_back(value);
         }
-        
+
         for (it = set1.begin(); it != set1.end(); it++) {
             int value = *it;
             if ((value & (1<<pos)) == 0)
@@ -88,7 +167,7 @@ int getMaxXor(list<int>& set0, list<int>& set1, int pos) {
             else
                 set1list1.push_back(value);
         }
-        
+
         if (set0list0.size() == 0 && set1list0.size() == 0)
             maxValue = getMaxXor(set0, set1, pos-1);
         else if (set0list1.size() == 0 && set1list1.size() == 0)
@@ -98,7 +177,7 @@ int getMaxXor(list<int>& set0, list<int>& set1, int pos) {
             int maxValue2 = getMaxXor(set0list1, set1list0, pos-1);
             maxValue = pow(2, pos) + (maxValue1 > maxValue2 ? maxValue1 : maxValue2);
         }
-        
+
         return maxValue;
  }
 Example input: [42, 5, 69, 22, 23, 8, 1, 17, 30, 75, 99]
