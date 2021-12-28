@@ -32,14 +32,14 @@ class Solution {
     void dfs(TreeNode* r, bool left)
     {
         if(!r) return;
-        
+
         if(r and !r->left and !r->right and left)
             res += r->val;
-        
+
         dfs(r->left, true);
         dfs(r->right, false);
     }
-    
+
      int sumOfLeftLeaves(TreeNode* root) {
         dfs(root, false); 
         return res;
