@@ -1,9 +1,11 @@
 # 515 Find Largest Value in Each Tree Row
 
 ### Problem
+
 You need to find the largest value in each row of a binary tree.
 
 Example:
+
 ```
 Input: 
 
@@ -17,40 +19,58 @@ Output: [1, 3, 9]
 ```
 
 ### Solutions
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+
+```cpp
 class Solution {
-    public List<Integer> largestValues(TreeNode root) {
-        List<Integer> res = new LinkedList<>();
-        Queue<TreeNode> q = new LinkedList<>();
-        if (root == null) {
-            return res;
+public:
+    vector<int> largestValues(TreeNode* root) {
+        vector<int> maxs;
+        find(root, 0, maxs);
+        return maxs;
+    }
+
+private:
+    void find(TreeNode* node, int row, vector<int>& maxs) {
+        if (!node) {
+            return;
         }
-        q.add(root);
-        while (!q.isEmpty()) {
-            int max = Integer.MIN_VALUE;
-            int size = q.size();
-            for (int i = 0; i < size; i ++) {
-                TreeNode node = q.poll();
-                max = Math.max(max, node.val);
-                if (node.left != null) {
-                    q.add(node.left);
-                }
-                if (node.right != null) {
-                    q.add(node.right);
-                }
-            }
-            res.add(max);
+
+        if (row >= maxs.size()) {
+            maxs.push_back(node->val);
         }
+        else {
+            maxs[row] = max(maxs[row], node->val);
+        }
+
+        find(node->left, row + 1, maxs);
+        find(node->right, row + 1, maxs);
+    }
+};
+Post Order
+In preorder solution the vector have been constantly resized, and each time add 1 because we don't know how deep the tree is. If change to post order, we can resize the vector only at leaf node, this should improve the performance.
+
+class Solution {
+public:
+    vector<int> largestValues(TreeNode* root) {
+        vector<int> res;
+        dfs(root, 1, res);
         return res;
     }
-}
+
+private:
+    void dfs(TreeNode* node, int depth, vector<int>& res) {
+        if (!node) {
+            return;
+        }
+        dfs(node->left, depth + 1, res);
+        dfs(node->right, depth + 1, res);
+        if (depth > res.size()) {
+            res.resize(depth, INT_MIN);
+        }
+        res[depth - 1] = max(res[depth - 1], node->val);
+    }
+};
 ```
+
+
+
