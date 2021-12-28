@@ -1,15 +1,17 @@
 # 460. LFU Cache
 
 ### Problem:
-Design and implement a data structure for Least Frequently Used (LFU) cache. It should support the following operations: get and put.
 
-get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-put(key, value) - Set or insert the value if the key is not already present. When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem, when there is a tie (i.e., two or more keys that have the same frequency), the least recently used key would be evicted.
+Design and implement a data structure for Least Frequently Used \(LFU\) cache. It should support the following operations: get and put.
 
-Follow up:
-Could you do both operations in O(1) time complexity?
+get\(key\) - Get the value \(will always be positive\) of the key if the key exists in the cache, otherwise return -1.  
+put\(key, value\) - Set or insert the value if the key is not already present. When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem, when there is a tie \(i.e., two or more keys that have the same frequency\), the least recently used key would be evicted.
+
+Follow up:  
+Could you do both operations in O\(1\) time complexity?
 
 Example:
+
 ```
 LFUCache cache = new LFUCache( 2 /* capacity */ );
 
@@ -27,100 +29,129 @@ cache.get(4);       // returns 4
 
 ### Solutions:
 
-```java
-public class LFUCache {
-    private class Node {
-        public Node pre;
-        public Node next;
-        public int key;
-        public int val;
-        public int freq;
-        public Node (int key, int val) {
-            this.key = key;
-            this.val = val;
-            this.pre = null;
-            this.next = null;
-            this.freq = 0;
-        }
-    }
-    private HashMap<Integer, Node> heads;
-    private HashMap<Integer, Node> tails;
-    private HashMap<Integer, Node> data;
-    private PriorityQueue<Integer> freqs;
-    private int capa;
-    public LFUCache(int capacity) {
-        this.capa = capacity;
-        heads = new HashMap<Integer, Node>();
-        tails = new HashMap<Integer, Node>();
-        heads.put(0, new Node(-1, -1));
-        tails.put(0, new Node(-1, -1));
-        heads.get(0).next = tails.get(0);
-        tails.get(0).pre = heads.get(0);
-        data = new HashMap<Integer, Node>();
-        freqs = new PriorityQueue<Integer>();
-    }
-    
-    public int get(int key) {
-        if (!data.containsKey(key) || capa == 0) {
-            return -1;
-        }
-        Node n = data.get(key);
-        increase(n);
-        return n.val;
-    }
-    private void increase(Node n) {
-        freqs.remove(n.freq);
-        n.freq ++;
-        freqs.add(n.freq);
-        remove(n);
-        if (!heads.containsKey(n.freq)) {
-            heads.put(n.freq, new Node(-1, -1));
-            tails.put(n.freq, new Node(-1, -1));
-            heads.get(n.freq).next = tails.get(n.freq);
-            tails.get(n.freq).pre = heads.get(n.freq);
-        }
-        // Node head = heads.get(n.freq);
-        Node tail = tails.get(n.freq);
-        n.pre = tail.pre;
-        tail.pre = n;
-        n.pre.next = n;
-        n.next = tail;
-    }
-    private void remove(Node n) {
-        Node pre = n.pre;
-        Node next = n.next;
-        pre.next = next;
-        next.pre = pre;
-    }
-    public void put(int key, int value) {
-        if (capa == 0) {
-            return;
-        }
-        if (data.containsKey(key)) {
-            data.get(key).val = value;
-            increase(data.get(key));
-            return;
-        }
-        if (data.size() == capa) {
-            int freq = freqs.poll();
-            Node n = heads.get(freq).next;
-            remove(n);
-            data.remove(n.key);
-        }
-        Node n = new Node(key, value);
-        data.put(key, n);
-        heads.get(0).next = n;
-        n.pre = heads.get(0);
-        tails.get(0).pre = n;
-        n.next = tails.get(0);
-        increase(n);
-    }
-}
+```cpp
+Based on ideas from this paper http://dhruvbird.com/lfu.pdf.
 
-/**
- * Your LFUCache object will be instantiated and called as such:
- * LFUCache obj = new LFUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */
+      Increasing frequencies
+  ----------------------------->
+
++------+    +---+    +---+    +---+
+| Head |----| 1 |----| 5 |----| 9 |  Frequencies
++------+    +-+-+    +-+-+    +-+-+
+              |        |        |
+            +-+-+    +-+-+    +-+-+     |
+            |2,3|    |4,3|    |6,2|     |
+            +-+-+    +-+-+    +-+-+     | Most recent 
+                       |        |       |
+                     +-+-+    +-+-+     |
+ key,value pairs     |1,2|    |7,9|     |
+                     +---+    +---+     v
+
+Similar to bucket sort, we place key,value pairs with the same frequency into the same bucket, within each bucket, the pairs are sorted according to most recent used, i.e., the one that is most recently used (set,get) is at the bottom of each bucket.
+
+
+I think this is a very interesting solution, thank you very much. Another idea would be to change the list<list<int>> to unordered_map<int, list<int>>: when we invalidate the LFU key-value pair, we immediately insert a new key whose frequency is 1, so we can maintain a minFreq and still be able to find LFU in O(1) time.
+
+Here I implemented your idea in my way (though slightly more complicate):
+
+class LFUCache {
+private:
+    unordered_map<int, int> valMap;  // key --> value
+    unordered_map<int, int> freqMap;  // key --> frequence
+    unordered_map<int, list<list<int>>::iterator> headMap;  // frequence --> bucket head
+    unordered_map<int, list<int>::iterator> nodeMap;  // key --> node in list
+    list<list<int>> buckets;  // buckets
+
+    int cap;
+    int num;
+
+    /* increase the frequence of @key */
+    void touch(int key) {
+        int freq = freqMap[key];
+        auto head = headMap[freq];  // head of the bucket containing key
+        auto node = nodeMap[key];  // the list node containing key
+        head->erase(node);  // delete the key from this bucket
+        // find new bucket head
+        auto newHead = head;
+        if (headMap.find(freq + 1) != headMap.end())
+            newHead = headMap[freq + 1];
+        else {
+            // Note: that's "insert before" for C++
+            buckets.insert(head, list<int>());
+            newHead--;
+        }
+        // insert the key into another bucket
+        // put the most recent values in the front
+        newHead->push_front(key);
+        // delete empty bucket (for convenience of finding LFU)
+        if (head->empty()) {
+            buckets.erase(head);
+            headMap.erase(freq);
+        }
+        // update the maps
+        freqMap[key]++;
+        headMap[freq + 1] = newHead;
+        nodeMap[key] = newHead->begin();
+    }
+
+public:
+    LFUCache(int capacity) {
+        cap = capacity;
+        num = 0;
+    }
+
+    int get(int key) {
+        if (valMap.find(key) == valMap.end()) return -1;
+        touch(key);  // update frequence
+        return valMap[key];
+    }
+
+    void put(int key, int value) {
+        if (cap == 0) return;
+
+        // Only update value
+        if (valMap.find(key) != valMap.end()) {
+            valMap[key] = value;
+            touch(key);
+            return;
+        }
+        // Need to evict a LFU key-value pair
+        if (num >= cap) {
+            // find the head of the bucket of minimum frequency
+            auto head = buckets.end();
+            head--;
+            // find least visited key of this frequency and delete it
+            int evict = head->back();
+            head->pop_back();
+            int freq = freqMap[evict];
+            // if this bucket becomes empty, then delete it
+            if (head->empty()) {
+                headMap.erase(freq);
+                buckets.pop_back();
+            }
+            // delete the evicted key
+            valMap.erase(evict);
+            freqMap.erase(evict);
+            nodeMap.erase(evict);
+            num--;
+        }
+
+        // find the head of frequency 1
+        if (headMap.find(1) == headMap.end()) {
+            buckets.push_back(list<int>());
+            auto head = buckets.end(); head--;
+            headMap[1] = head;
+        }
+        // insert new key at the front of list
+        auto head = headMap[1];
+        head->push_front(key);
+        nodeMap[key] = head->begin();
+        valMap[key] = value;
+        freqMap[key] = 1;
+        num++;
+    }
+};
 ```
+
+
+
