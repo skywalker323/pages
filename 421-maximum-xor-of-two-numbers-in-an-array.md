@@ -21,7 +21,6 @@ Explanation: The maximum result is 5 ^ 25 = 28.
 ### Solutions:
 
 ```java
-
 class Solution {
 public:
     struct Node {
@@ -29,7 +28,7 @@ public:
       Node* one_bit = nullptr;
     };
     Node* root = new Node();
-  
+
     // All Trie represent incremental pieces of a final value (chars -> string)
     // For an int, the incremental piece is a bit, so we will make Trie of bit-string
     // The Trie should always be accessed in chunks of 32 nodes (including root), so no concept
@@ -51,7 +50,7 @@ public:
         }
       }
     }
-  
+
     // For the input number, for each bit, search the Trie bits that yield the most
     // bit-wise XOR as 1. Based on the rule of XOR:
     // 0 XOR 1 = 1
@@ -59,8 +58,8 @@ public:
     // Effectively it means, for the given bit, take the opposite child
     // If you couldn't take the child you wanted, the bit-wise XOR result is 0, so continue
     // If you can take the child you want, then bit-wise XOR result is 1, so |= (1 << i) into a temp result.
-	// (pow(2,i) does the same but keeps things as int rather than bit-manipulations).
-	// This is to keep track of the output bit-wise XOR as you visit each child.
+    // (pow(2,i) does the same but keeps things as int rather than bit-manipulations).
+    // This is to keep track of the output bit-wise XOR as you visit each child.
     int getMaxXOR(const int& num) {
       Node* ptr = root;
       int temp = 0;
@@ -83,7 +82,7 @@ public:
       }
       return temp;
     }
-  
+
     int findMaximumXOR(vector<int>& nums) {
       for (const int &i : nums) {
         insert(i);
@@ -206,28 +205,39 @@ The max XOR value is (30 ^ 99) = 125. Below are the binary represntations of eac
 
 99 = 1 1 0 0 0 1 1
 
-Each number in the array is >= 0 and < pow(2,31). So, any number in the array can be represented by atmost 31 bits (bits[30:0]).
-The for loop in findMaximumXOR (lines 17-33) finds the max bit position where some of the numbers have '0' in that bit position and the other numbers have '1' in that bit position.
-The numbers that have '0' in that bit position go to set0 and the numbers that have '1' in that bit position go to set1. So, for the example above, we have:
+Each number in the array is >= 0 and < pow(2,31). So, any number in the array can be represented by atmost 31 bits
+ (bits[30:0]).
+The for loop in findMaximumXOR (lines 17-33) finds the max bit position where some of the numbers have '0' 
+in that bit position and the other numbers have '1' in that bit position.
+The numbers that have '0' in that bit position go to set0 and the numbers that have '1' in that bit position 
+go to set1. So, for the example above, we have:
 set0 = {42, 5, 22, 23, 8, 1, 17,30}
 set1 = {69, 75, 99}
 Bit position = 6.
 The value obtained by XORing bit 6 between set0 and set1 (forgetting the low order bits) is pow(2, 6) = 64.
 
-Next, findMaximumXOR() calls getMaxXor() passing set0 and set1 to recursively find the max value of the XOR between numbers in set0 and set1 for the remaning low order bits. The max XOR value would then be 64 + (the max value returned by getMaxXor()).
+Next, findMaximumXOR() calls getMaxXor() passing set0 and set1 to recursively find the max value of the XOR 
+between numbers in set0 and set1 for the remaning low order bits. The max XOR value would then be 64 + 
+(the max value returned by getMaxXor()).
 
 The first call would be getMaxXor({42, 5, 22, 23, 8, 1, 17,30}, {69, 75, 99}, 5).
-What getMaximumXOR() does is for bit position 5, it splits set0 into two sets - the numbers that have '0' in bit position 5 go to set0list0. The numbers that have '1' in bit position 5 goto set0list1. The same is done for set1 i.e. set1 is also split into two sets set1list0 and set1list1. For this specific example, we have:
+What getMaximumXOR() does is for bit position 5, it splits set0 into two sets - the numbers that have '0'
+ in bit position 5 go to set0list0. The numbers that have '1' in bit position 5 goto set0list1. 
+ The same is done for set1 i.e. set1 is also split into two sets set1list0 and set1list1.
+  For this specific example, we have:
 
 set0list0 = {5, 22, 23, 8, 1, 17, 30}
 set0list1 = {42}
 set1list0 = {69, 75}
 set1list1 = {99}
 
-Since at bit position 5 we found set0list0 and set1list1, that means XORing bit 5 (forgetting the low order bits) of numbers between set0list0 and set1list1 woul give pow(2, 5) = 32.
+Since at bit position 5 we found set0list0 and set1list1, that means XORing bit 5 (forgetting the low order bits)
+ of numbers between set0list0 and set1list1 woul give pow(2, 5) = 32.
 So, the maximum XOR value between numbers in set0list0 and set1list1 would be 32 + (set0list0, set1list1, 4).
-Arguing on the same lines, the maximum XOR value between numbers in set0list1 and set1list0 would be 32 + (set0list1, set1list0, 4).
-Note that we pair the "opposite" resulting sets to get to the max XOR value i.e. (set0list0, set1list1) and (set0list1, set1list0).
+Arguing on the same lines, the maximum XOR value between numbers in set0list1 and set1list0 would be 32 + 
+(set0list1, set1list0, 4).
+Note that we pair the "opposite" resulting sets to get to the max XOR value i.e. (set0list0, set1list1) and 
+(set0list1, set1list0).
 
 For this specific example the recursive calls would be:
 
@@ -259,7 +269,8 @@ set0list1 = {30}
 set1list0 = {}
 set1list1 = {99}
 
-Since both set0list0 and set1list0 are empty, we simply ignore this bit position and check the next lower bit position. So:
+Since both set0list0 and set1list0 are empty, we simply ignore this bit position and check the next lower 
+bit position. So:
 
 getMaxXor({30}, {99}, 0);
 
@@ -316,7 +327,8 @@ getMaxXor({30}, {99}, -1) //maxValue = 0
 
 So, the final max XOR value returned = 64 + 32 + 16 + 8 + 4 + 1 = 125.
 
-The run time is O(n) because we iterate 31 times, once for each bit position (i.e. bits 30 to 0). During each bit position, we check/visit each number at most once. So, the time complexity would be 31xn or O(n).
+The run time is O(n) because we iterate 31 times, once for each bit position (i.e. bits 30 to 0).
+ During each bit position, we check/visit each number at most once. So, the time complexity would be 31xn or O(n).
 ```
 
 
