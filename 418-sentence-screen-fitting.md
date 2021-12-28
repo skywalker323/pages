@@ -67,16 +67,21 @@ The character '-' signifies an empty space on the screen.
 
 ```java
 I got this idea from this solution
-It took me some time to understand the idea by reviewing the code, i will add more details here, and hopefully it helps others to understand easier.
+It took me some time to understand the idea by reviewing the code, i will add more details here, and 
+hopefully it helps others to understand easier.
 The idea behind this implementation is summarized below:
 
 If we know that how many words will be covered in a row starting each of the given words.
-We can iterate through the rows and by starting the very beginning word try to count the number of times we can fit the complete sentence in the screen.
-The extra memory (used memorization) called dp in the code is what discussed in number 1. In other words, d[i] shows if we start filling a row from ith word in the sentence, what will be the index of next word for the following row.
+We can iterate through the rows and by starting the very beginning word try to count the number of times 
+we can fit the complete sentence in the screen.
+The extra memory (used memorization) called dp in the code is what discussed in number 1. In other words, d[i]
+ shows if we start filling a row from ith word in the sentence, what will be the index of next word for the
+  following row.
 
 Here is small example (value of rows is not needed for this discussion, it is needed for item 2 discussed above):
 The last two lines in following example are very important.
-It basically reminds that once we reach the end of sentence we start to filling the columns from the beginning of the sentence.
+It basically reminds that once we reach the end of sentence we start to filling the columns from the beginning 
+of the sentence.
 
 
 {"ab", "cde", "fg", "j"}, rows=3, cols =6
@@ -88,7 +93,8 @@ It basically reminds that once we reach the end of sentence we start to filling 
 After building dp for all the words
 
 Now we need to start iterating through the rows.
-Staritng from the begining word and we try to keep track of a counter which can be increamented everytime we cover the complete sentence.
+Starting from the begining word and we try to keep track of a counter which can be increamented everytime we
+cover the complete sentence.
 agian notice in the code dp[k] shows the index of the next word whicch should be picked for the new row.
 
 /* This code is borrowed from the following link. It is originally posted by @wonderwddi
@@ -98,12 +104,12 @@ agian notice in the code dp[k] shows the index of the next word whicch should be
         int num = sentence.size();
         vector<int> dp (num, 0);
         int ret = 0;
-        
+
         for (int i = 0; i < num; i++) {
             int len = 0;
             int cnt = 0;
             int start = i;
-            
+
             while (len <= cols) {
                 len += sentence[start].size();
                 start = (start + 1) % num;
@@ -113,12 +119,12 @@ agian notice in the code dp[k] shows the index of the next word whicch should be
             }
             dp[i] = cnt - 1; /*cnt shows how many words are covered, but since we need to use as index in sentence needed to be decremented*/
         }
-        
+
         for (int i = 0, k = 0; i < rows; i++) {
             ret += dp[k]; /*this keep track the number of covered words*/
             k = (k + dp[k]) % num;
         }
-        
+
         return ret/num;
     }
 ```
@@ -129,18 +135,24 @@ In this approach we try to fill the screen and count the number of times the sen
 Important notes:
 We need to notice some key points:
 
-Each word should be completely presented in each row. In other words it is not allowed to show some characters of a word in row1 and the rest in row2.
+Each word should be completely presented in each row. In other words it is not allowed to show some characters of a 
+word in row1 and the rest in row2.
 We need to consider one extra character for having space among words after each character unless:
-The word is ended in last column. (i.e assume col size is 10 and we have {"abcd", "efghi"}, in this case the last character of the second word will be in 10th column of row i) ----> |abcd-efghi|
+The word is ended in last column. (i.e assume col size is 10 and we have {"abcd", "efghi"}, in this case the last 
+character of the second word will be in 10th column of row i) ----> |abcd-efghi|
 The last word is added and we do not have enough remaining space to show all the words in the sentence.
 Algorithm:
 
-First try to find the required spaces to put all the words of the given sentence once. The space after the last character is removed from this calculation. This will be used when we want to judge whether the extra space after picked word is needed or not.
+First try to find the required spaces to put all the words of the given sentence once. The space after the last 
+character is removed from this calculation. This will be used when we want to judge whether the extra space after
+ picked word is needed or not.
 Define a loop that iterates through e rows.
-Try to fill each row as much as possible until we reach a point that the remaining space is enough to fill the complete sentence.
+Try to fill each row as much as possible until we reach a point that the remaining space is enough to fill the 
+complete sentence.
 Move forward and keep track of remaining characters (initialized by col) in each row
 Also once we are done with covering all the words of the sentence update the counter.
-The following code implements the discussing idea. IF you uncomment the cout lines, it shows similar output as discussed in problem description.
+The following code implements the discussing idea. IF you uncomment the cout lines, it shows similar output as 
+discussed in problem description.
 class Solution {
 public:
     int wordsTyping(vector<string>& sentence, int rows, int cols) {
@@ -152,7 +164,7 @@ public:
             spaceNeeded+= sentence[i].length()+1;
         }
         spaceNeeded += sentence[sentence.size()-1].length();
-        
+
         while (r<rows){
             int i=0;
             for (; i< sentence.size(); ++i) {           
@@ -165,19 +177,19 @@ public:
                     remain = remain - str.length()-addSpace;
                     continue;
                 } else { /*moving to a new row*/
-                    //cout<<endl;				
-                    remain = cols; /*resset the remaining space in each row */	
+                    //cout<<endl;                
+                    remain = cols; /*resset the remaining space in each row */    
                     i--;  /*since we need to revisit the last word again since we could not fit it in previous row*/
                     r++;
                     if(r>=rows)
                         break;
                 }
             }
-            
+
             if(i== sentence.size()) /*update the counter only and only if we covered all the words.*/
                 ret++;
         }
-       
+
         return ret;
     }
 };
