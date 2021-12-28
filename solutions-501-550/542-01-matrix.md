@@ -1,77 +1,109 @@
 # 542. 01 Matrix
 
 ### Problem:
+
 Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.
 
-The distance between two adjacent cells is 1.
-Example 1: 
+The distance between two adjacent cells is 1.  
+Example 1:   
 Input:
+
 ```
 0 0 0
 0 1 0
 0 0 0
 ```
+
 Output:
+
 ```
 0 0 0
 0 1 0
 0 0 0
 ```
-Example 2: 
+
+Example 2:   
 Input:
+
 ```
 0 0 0
 0 1 0
 1 1 1
 ```
+
 Output:
+
 ```
 0 0 0
 0 1 0
 1 2 1
 ```
 
-Note:
-1. The number of elements of the given matrix will not exceed 10,000.
-2. There are at least one 0 in the given matrix.
+Note:  
+1. The number of elements of the given matrix will not exceed 10,000.  
+2. There are at least one 0 in the given matrix.  
 3. The cells are adjacent in only four directions: up, down, left and right.
 
 ### Solutions:
 
 ```java
-public class Solution {
-    public int[][] updateMatrix(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return matrix;
-        }
-        int[][] dirs = new int[][]{ {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        Queue<Integer> qx = new LinkedList<Integer>();
-        Queue<Integer> qy = new LinkedList<Integer>();
-        for (int i = 0; i < matrix.length; i ++) {
-            for (int j = 0; j < matrix[0].length; j ++) {
-                if (matrix[i][j] == 0) {
-                    qx.add(i);
-                    qy.add(j);
-                }
-                else {
-                    matrix[i][j] = Integer.MAX_VALUE;
-                }
-            }
-        }
-        while (!qx.isEmpty()) {
-            int x = qx.poll();
-            int y = qy.poll();
-            for (int i = 0; i < dirs.length; i ++) {
-                int nx = x + dirs[i][0];
-                int ny = y + dirs[i][1];
-                if (nx >= 0 && nx < matrix.length && ny >= 0 && ny < matrix[0].length && matrix[nx][ny] > matrix[x][y] + 1) {
-                    matrix[nx][ny] = matrix[x][y] + 1;
-                    qx.add(nx);
-                    qy.add(ny);
-                }
-            }
-        }
-        return matrix;
+//shortest paths-unweighted graph---->bfs(very standard)
+//but usually 1 source node---minimum distance from that particular node
+//but here multiple source nodes
+//so push all of them first
+//WHY???
+//WHEN WE POP AND EXPLORE WE ARE DOING SO IN INCREASING ORDER OF THEIR LEVELS
+//SO WHEN WE DISCOVER A NODE FIRST WE ARE EXPLORING IT FROM MINI POSSIBLE LEVEL NODE THAT IT IS CONNECTED TO
+//first the source..then level 1 nodes..then level 2 and so on
+//here the case is there are many level 0 nodes
+//so push all of them first!!!
+
+class Solution {
+public:
+    
+    
+    bool isvalid(int i,int j,int m,int n)
+    {
+        if(i==m||j==n||j<0||i<0)
+            return false;
+        return true;
     }
-}
+    
+    vector<vector<int>> dir={{1,0},{0,1},{0,-1},{-1,0}};
+    vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) 
+    {
+        queue<pair<int,int>> q;
+        int m=matrix.size();
+        int n=matrix[0].size();
+        vector<vector<int>> dis(m,vector<int>(n,-1));
+        for(int i=0;i<m;i++)
+            for(int j=0;j<n;j++)
+            {
+                if(matrix[i][j]==0)
+                { 
+                    q.push({i,j});
+                    dis[i][j]=0;
+                }
+            }
+        while(!q.empty())
+        {
+            pair<int,int> curr=q.front();
+            q.pop();
+            for(auto& x:dir)
+            {
+                int a=curr.first+x[0];
+                int b=curr.second+x[1];
+                if(isvalid(a,b,m,n)&&dis[a][b]==-1)
+                {
+                    q.push({a,b});
+                    dis[a][b]=dis[curr.first][curr.second]+1;
+                }
+            }
+        }
+        return dis;
+    }
+};
 ```
+
+
+
