@@ -13,12 +13,14 @@ We define the usage of capitals in a word to be right when one of the following 
 Otherwise, we define that this word doesn't use capitals in a right way.
 
 Example 1:
+
 ```
 Input: "USA"
 Output: True
 ```
 
 Example 2:
+
 ```
 Input: "FlaG"
 Output: False
@@ -47,9 +49,24 @@ public class Solution {
 ```
 
 ```java
-public class Solution {
-    public boolean detectCapitalUse(String word) {
-        return word.matches("[A-Z]*|[A-Z][a-z]+|[a-z]+");
+ bool detectCapitalUse(string word) {
+        string temp=word;
+        
+        //usa
+        transform(temp.begin(),temp.end(), temp.begin(),::tolower);
+        if(temp==word) return 1;
+        
+        //Usa
+        temp[0]=toupper(temp[0]);
+        if(temp==word) return 1; 
+        
+        //USA
+        transform(temp.begin(),temp.end(), temp.begin(),::toupper);
+        if(temp==word) return 1;
+        
+        return 0;
     }
-}
 ```
+
+
+
