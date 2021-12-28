@@ -5,6 +5,7 @@
 Given a string, sort it in decreasing order based on the frequency of characters.
 
 Example 1:
+
 ```
 Input:
 "tree"
@@ -47,40 +48,57 @@ Note that 'A' and 'a' are treated as two different characters.
 
 ### Solutions:
 
-```java
-public class Solution {
-    public String frequencySort(String s) {
-        HashMap<Character, Integer> appr = new HashMap<Character, Integer>();
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < s.length(); i ++) {
-            char c = s.charAt(i);
-            if (!appr.containsKey(c)) {
-                appr.put(c, 0);
-            }
-            appr.put(c, appr.get(c) + 1);
-            max = Math.max(max, appr.get(c));
+```cpp
+Solution I - Using Priority Queue
+First, we count the frequency of each letter using unordered_map freq.
+Then, to sort the frequencies, we use a priority_queue q with pairs: { freq, char }.
+Consrtucting the result is simple: just pop each pair from the queue and add that number of chars to res.
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char, int> freq;
+        for (auto a : s) freq[a]++;
+        
+        priority_queue<pair<int, char>> q;
+        for (auto [a, frq] : freq) q.push({frq, a});
+        
+        string res;
+        pair<int, char> curr;
+        while (!q.empty()) {
+            curr = q.top();
+            q.pop();
+            res += string(curr.first, curr.second);
         }
-        HashMap<Integer, Queue<Character>> index = new HashMap<Integer, Queue<Character>>();
-        for (Character c:appr.keySet()) {
-            int count = appr.get(c);
-            if (!index.containsKey(count)) {
-                index.put(count, new LinkedList<Character>());
-            }
-            index.get(count).add(c);
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = max; i > 0; i --) {
-            if (index.containsKey(i)) {
-                while (!index.get(i).isEmpty()) {
-                    char c = index.get(i).poll();
-                    for (int j = 0; j < i; j ++) {
-                        sb.append(c);
-                    }    
-                }
-            }
-            
-        }
-        return sb.toString();
+        
+        return res;
     }
-}
+};
+Solution II - Using Bucket Sort
+First, we count the frequency of each letter using unordered_map freq.
+Then, we use a vector to store buckets by the frequency. In each bucket we have a vector of the chars with that frequency.
+Constructing the result is simply looping the buckets from the end - to get the higher frequencies first, and adding the chars in the current frequency.
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char, int> freq;
+        for (auto a : s) freq[a]++;
+        
+        vector<vector<char>> buckets(s.size()+1);
+        for (auto [a, frq] : freq) buckets[frq].push_back(a);
+        
+        string res;
+        for (int i = s.size(); i > 0; i--) {
+            for (auto ch : buckets[i]) {
+                res += string(i, ch);
+            }
+        }
+        
+        return res;
+    }
+};
 ```
+
+
+
