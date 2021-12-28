@@ -1,17 +1,17 @@
-
 # 422 Valid Word Square
 
 ### Problem:
 
 Given a sequence of words, check whether it forms a valid word square.
 
-A sequence of words forms a valid word square if the kth row and column read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+A sequence of words forms a valid word square if the kth row and column read the exact same string, where 0 ≤ k &lt; max\(numRows, numColumns\).
 
-Note:
-The number of words given is at least 1 and does not exceed 500.
-Word length will be at least 1 and does not exceed 500.
-Each word contains only lowercase English alphabet a-z.
+Note:  
+The number of words given is at least 1 and does not exceed 500.  
+Word length will be at least 1 and does not exceed 500.  
+Each word contains only lowercase English alphabet a-z.  
 Example 1:
+
 ```
 Input:
 [
@@ -32,7 +32,9 @@ The fourth row and fourth column both read "dtye".
 
 Therefore, it is a valid word square.
 ```
+
 Example 2:
+
 ```
 Input:
 [
@@ -53,7 +55,9 @@ The fourth row and fourth column both read "dt".
 
 Therefore, it is a valid word square.
 ```
+
 Example 3:
+
 ```
 Input:
 [
@@ -75,19 +79,16 @@ Therefore, it is NOT a valid word square.
 ### Solutions:
 
 ```java
-public class Solution {
-    public boolean validWordSquare(List<String> words) {
-        for (int i = 0; i < words.size(); i ++) {
-            for (int j = 0; j < words.get(i).length(); j ++) {
-                if (i >= words.size() || j >= words.size() || j >= words.get(i).length() || i >= words.get(j).length()) {
-                    return false;
-                }
-                if (words.get(i).charAt(j) != words.get(j).charAt(i)) {
-                    return false;
-                }
+ bool validWordSquare(vector<string>& words) {
+        for(int i = 0; i < words.size(); ++i) {
+            for(int j = 0; j < words[i].size(); ++j)             {
+                if(j >= words.size() || words[j].size() <= i || words[j][i] != words[i][j])
+                   return false;
             }
         }
         return true;
-    }
-}
+   }
 ```
+
+
+
