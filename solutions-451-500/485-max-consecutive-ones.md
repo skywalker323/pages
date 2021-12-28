@@ -5,6 +5,7 @@
 Given a binary array, find the maximum number of consecutive 1s in this array.
 
 Example 1:
+
 ```
 Input: [1,1,0,1,1,1]
 Output: 3
@@ -20,21 +21,36 @@ Note:
 ### Solutions:
 
 ```java
-public class Solution {
-    public int findMaxConsecutiveOnes(int[] nums) {
-        int max = 0;
-        int count = 0;
-        for (int i = 0; i < nums.length; i ++) {
-            if (nums[i] == 1) {
-                count ++;
-            }
-            else {
-                max = Math.max(max, count);
-                count = 0;
-            }
-        }
-        max = Math.max(max, count);
-        return max;
-    }
-}
+  public int findMaxConsecutiveOnes(int[] nums) {
+        int maxHere = 0, max = 0;
+        for (int n : nums)
+            max = Math.max(max, maxHere = n == 0 ? 0 : maxHere + 1);
+        return max; 
+    } 
+The idea is to reset maxHere to 0 if we see 0, otherwise increase maxHere by 1
+The max of all maxHere is the solution
+
+110111
+^ maxHere = 1
+
+110111
+.^ maxHere = 2
+
+110111
+..^ maxHere = 0
+
+110111
+...^ maxHere = 1
+
+110111
+....^ maxHere = 2
+
+110111
+.....^ maxHere = 3
+We can also solve this problem by setting k = 0 of Max Consecutive Ones II
+
+
 ```
+
+
+
