@@ -9,12 +9,13 @@ A subsequence is a sequence that can be derived from one sequence by deleting so
 The input will be two strings, and the output needs to be the length of the longest uncommon subsequence. If the longest uncommon subsequence doesn't exist, return -1.
 
 Example 1:
+
 ```
 Input: "aba", "cdc"
 Output: 3
 Explanation: The longest uncommon subsequence is "aba" (or "cdc"), 
 because "aba" is a subsequence of "aba", 
-but not a subsequence of any other strings in the group of two strings. 
+but not a subsequence of any other strings in the group of two strings.
 ```
 
 Note:
@@ -26,11 +27,12 @@ Note:
 
 ```java
 public class Solution {
-    public int findLUSlength(String a, String b) {
-        if (a.equals(b)) {
-            return -1;
-        }
-        return Math.max(a.length(), b.length());
+    int findLUSlength(string a, string b) {
+        if(a==b) return -1;
+        return max(a.size(),b.size());
     }
 }
 ```
+
+
+

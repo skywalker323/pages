@@ -9,6 +9,7 @@ A subsequence is a sequence that can be derived from one sequence by deleting so
 The input will be a list of strings, and the output needs to be the length of the longest uncommon subsequence. If the longest uncommon subsequence doesn't exist, return -1.
 
 Example 1:
+
 ```
 Input: "aba", "cdc", "eae"
 Output: 3
@@ -17,109 +18,65 @@ Output: 3
 Note:
 
 1. All the given strings' lengths will not exceed 10.
-2. The length of the given list will be in the range of [2, 50].
-
+2. The length of the given list will be in the range of \[2, 50\].
 
 ### Solutions:
 
 ```java
-public class Solution {
-    public int findLUSlength(String[] strs) {
-        int max = 0;
-        Arrays.sort(strs, new Comparator<String>() {
-           public int compare(String s1, String s2) {
-                if (s2.length() != s1.length()) {
-                    return s2.length() - s1.length();   
-                }
-                return s1.compareTo(s2);
-           } 
-        });
-        Set<String> pres = new HashSet<String>();
-        for (int i = 0; i < strs.length; i ++) {
-            if (i == strs.length - 1 || !strs[i].equals(strs[i + 1])) {
-                boolean valid = true;
-                for (String pre:pres) {
-                    if (isSub(strs[i], pre)) {
-                        valid = false;
-                        break;
-                    }
-                }
-                if (valid == true) {
-                    return strs[i].length();
-                }
-                else {
-                    pres.add(strs[i]);
-                }
-            }
-            else {
-                String s = strs[i];
-                pres.add(s);
-                while (i < strs.length && strs[i].equals(s)) {
-                    i ++;
-                }
-                i --;
-            }
-            
-        }
-        return -1;
+First of all, you have to understand uncommon subsequences. The question takes me a while to realize it. Indeed, 
+there're many tricky solutions with one line codes by comparison with lengths of two strings. But Why? If you've
+ got it already, you can directly neglect the next paragraph.
+
+Given that A is a subsequence of B. B can be as A by deleting some characters in order. for example, cd is a 
+subsequence of caeedc. As a result of deleting aee and last c, you can get a string cd. According to the definition of uncommon subsequence, it is defined as the subsequence of one of these strings and this subsequence should not be any subsequence. Therefore, dcc is an uncommon subsequence of caeedc.That is to say, you cannot alter caeedc into dcc by deleting characters in order.
+
+Let's go back to LUS-One first. You want to find out the longest uncommon subsequence between two strings. Given that A and B. If A is a subsequence of B, and B is a subsequence of A. The answer would be -1, because A is not an uncommon subsequence of B, and B is not the uncommon subsequence of A neither. If A is an uncommon subsequence of B, the length of the uncommon subsequence is the length of A, and vice versa, you can get the length of B when B is an uncommon subsequence of A. Therefore, you can get one line code in C++.
+
+return a==b ? -1 : max(a.size(), b.size());
+Okay, Let's move toward LUS-Two. Based on I (One) question, you have to compare with all strings mutually in II (Two). First, we can define the LCS function withO(n), n depicts max(a.length(), b.length()) .
+
+bool LCS(const string& a, const string& b) {
+	if (b.size() < a.size()) return false;
+	int i = 0;
+    for(auto ch: b) {
+		if(i < a.size() && a[i] == ch) i++;
     }
-    private boolean isSub(String s, String l) {
-        if (s.length() > l.length()) {
-            return false;
-        }
-        if (s.length() == 1) {
-            return l.indexOf(s) != -1;
-        }
-        char c = s.charAt(0);
-        int cut = l.indexOf(c);
-        if (cut == -1) {
-            return false;
-        }
-        return isSub(s.substring(1), l.substring(cut + 1));
-    }
+    return i == a.size();
 }
+Then, we can compare with all strings with O(m²), m represents the size of vector<string>. We iterate all strings mutually, and if the strings are uncommon subsequence, we record the lengths. The time complexity of the solution is O(m²n), and beats 100% submissions with 8ms. The code shows as follows:
+
+class Solution {
+public:
+    int findLUSlength(vector<string>& strs) {
+        if (strs.empty()) return -1;
+        int rst = -1;
+        for(auto i = 0; i < strs.size(); ++i) {
+            int j = 0;
+            for(; j < strs.size(); ++j) {
+                if(i==j) continue;
+                if(LCS(strs[i], strs[j])) break;  // strs[j] is a subsequence of strs[i]
+            }
+            // strs[i] is not any subsequence of the other strings.
+            if(j==strs.size()) rst = max(rst, static_cast<int>(strs[i].size()));
+        }
+        return rst;
+    }
+    // iff a is a subsequence of b
+    bool LCS(const string& a, const string& b) {
+        if (b.size() < a.size()) return false;
+        int i = 0;
+        for(auto ch: b) {
+            if(i < a.size() && a[i] == ch) i++;
+        }
+        return i == a.size();
+    }
+};
+This is not a perfect solution right now, but it is quite easy to understand, even though the question gets plenty of negative votes not to be worth solving.
 ```
 
 ```java
-public class Solution {
-    public int findLUSlength(String[] strs) {
-        int max = 0;
-        Arrays.sort(strs, new Comparator<String>() {
-           public int compare(String s1, String s2) {
-                if (s2.length() != s1.length()) {
-                    return s2.length() - s1.length();   
-                }
-                return s1.compareTo(s2);
-           } 
-        });
-        Set<String> pres = new HashSet<String>();
-        for (int i = 0; i < strs.length; i ++) {
-            if (i == strs.length - 1 || !strs[i].equals(strs[i + 1])) {
-                boolean valid = true;
-                for (String pre:pres) {
-                    if (isSub(strs[i], pre)) {
-                        valid = false;
-                        break;
-                    }
-                }
-                if (valid == true) {
-                    return strs[i].length();
-                }
-            }
-            pres.add(strs[i]);
-        }
-        return -1;
-    }
-    private boolean isSub(String s, String l) {
-        int j = 0;
-        for (int i = 0; i < l.length(); i ++) {
-            char c = l.charAt(i);
-            if (j == s.length()) {
-                break;
-            }
-            if (c == s.charAt(j)) j ++;
-        }
-        return j == s.length();
-    }
-}
+
 ```
+
+
+
