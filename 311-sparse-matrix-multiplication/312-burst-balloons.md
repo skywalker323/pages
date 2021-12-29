@@ -6,7 +6,7 @@ Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number o
 
 Find the maximum coins you can collect by bursting the balloons wisely.
 
-Note:   
+Note:  
 \(1\) You may imagine nums\[-1\] = nums\[n\] = 1. They are not real therefore you can not burst them.  
 \(2\) 0 ≤ n ≤ 500, 0 ≤ nums\[i\] ≤ 100
 
@@ -23,7 +23,7 @@ Return 167
 
 ### Solutions:
 
-```
+```cpp
 /*This question is similar to matrix chain multiplication.
 If you think of bursting a balloon as multiplying two adjacent matrices, then this problem is exactly the 
 classical DP problem Matrix-chain multiplication found in section 15.2 in the book Introduction to Algorithms 
@@ -37,7 +37,7 @@ you need to do to multiply two matrices A[35] and B[58]. So in this example, the
 */
 
 int dp[502][502];
-    int solve(vector<int>& nums, int i, int j){
+int solve(vector<int>& nums, int i, int j){
         if(i>=j) return 0;
         if(dp[i][j] != -1) return dp[i][j];
         int ans = INT_MIN;
@@ -46,13 +46,13 @@ int dp[502][502];
             ans = max(ans,temp);
         }
         return dp[i][j] = ans;
-    }
-    int maxCoins(vector<int>& nums) {
+}
+int maxCoins(vector<int>& nums) {
         nums.insert(nums.begin(),1);
         nums.insert(nums.end(),1);
         memset(dp,-1,sizeof dp);
         return solve(nums,1,nums.size()-1); 
-    }
+}
 ```
 
 
