@@ -58,25 +58,25 @@ Note:
 ### Solutions:
 
 ```java
-We need to explore ALL the paths and find the shortest distance, but we can prune paths where the distance to reach a square is more than the currently shortest distance.
+/*We need to explore ALL the paths and find the shortest distance, but we can prune paths where the distance to reach a square is more than the currently shortest distance.
 Because of that, we can use either BFS or DFS since it doesnt matter as we need to explore ALL the paths.. The main difference is when each path will be pruned. In the average case, BFS would be a much better result cause more paths will be pruned since the first few moves to a particular square will generally yield the shortest distance.
 
 We use a distance[][] array that keeps track of the minimum distance to reach that square..
-And prune any visits to that square if the distance is more than the minimum distance.
+And prune any visits to that square if the distance is more than the minimum distance.*/
 
 public class Solution {
     int[][] steps = new int[][]{{-1,0}, {1, 0}, {0, -1}, {0, 1}}; //up down left right
-    
-    
+
+
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
         int m = maze.length;
         int n = maze[0].length;
-        
+
         int[][] distance = new int[m][n];  //can also use a hashmap
         for(int i = 0; i < m; i++) {
             Arrays.fill(distance[i], Integer.MAX_VALUE);
         }
-        
+
         Queue<int[]> queue = new LinkedList();
         distance[start[0]][start[1]] = 0;
         queue.add(start);
@@ -97,7 +97,7 @@ public class Solution {
         int shortest_distance = distance[destination[0]][destination[1]];
         return shortest_distance == Integer.MAX_VALUE ? -1 : shortest_distance; 
     }
-    
+
     public int[] move(int dir,  int x, int y, int[][] maze) {
         int[] pos = new int[]{x, y, 0};
         while (isValid(maze, pos[0] + steps[dir][0] , pos[1] +  steps[dir][1])) {
@@ -105,16 +105,16 @@ public class Solution {
             pos[1] += steps[dir][1];
             pos[2] += 1;
         }
-        
+
         return pos;
     }
-    
-    
+
+
     public boolean isValid(int[][] maze, int x, int y) {
         if (!(x>=0 && y >=0 && x < maze.length && y < maze[0].length)) { return false; }
         return maze[x][y] != 1; //not a wall
     }
-    
+
 }
 Another way to look at it is to model this as a Graph problem with weighted edges. Thus we want to find the shortest distance from a single source to the goal. Thus, it is the shortest path problem.
 This can be solved by Dijkstra's Algorithm. This is similar to what we did previously. Except that
@@ -125,22 +125,22 @@ Thus, we can terminate once we the destination node is polled from the queue. If
  public int shortestDistance(int[][] maze, int[] start, int[] destination) {
         int m = maze.length;
         int n = maze[0].length;
-        
+
         int[][] distance = new int[m][n];  //can also use a hashmap
         for (int i = 0; i < m; i++) {
             Arrays.fill(distance[i], Integer.MAX_VALUE);
         }
-       
+
         PriorityQueue<int[]> pq = new PriorityQueue<>((p1, p2) -> p1[2] - p2[2]); 
         distance[start[0]][start[1]] = 0;
         pq.add(new int[]{start[0], start[1], 0});
-        
+
         while (!pq.isEmpty()) {
             int[] pos = pq.poll();
             //visit.. Optional but help decrease runtime... 
             if (maze[pos[0]][pos[1]] == 2) { continue; }  //this is here because we might have inserted the same node twice in the PQ.
             maze[pos[0]][pos[1]] = 2; 
-            
+
             if (pos[0] == destination[0] && pos[1] == destination[1]) { 
                 return distance[pos[0]][pos[1]]; //this is now the shortest distance in the pq. 
                 //thus, this IS the shortest distance from the source to the destination.
@@ -158,7 +158,7 @@ Thus, we can terminate once we the destination node is polled from the queue. If
         }
         return -1;  // Does not reach destination
     }
-    
+
 Dijkstra's Algo seems to be an optimization of the first solution, since
 1.we always select the node with the least cost
 2. do not revisit visited nodes.. We might revisit nodes multiple times in the first solution..
