@@ -1,11 +1,13 @@
 # 301 Remove Invalid Parentheses
 
 ### Problem
+
 Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 
-Note: The input string may contain letters other than the parentheses ( and ).
+Note: The input string may contain letters other than the parentheses \( and \).
 
 Examples:
+
 ```
 "()())()" -> ["()()()", "(())()"]
 "(a)())()" -> ["(a)()()", "(a())()"]
@@ -13,101 +15,76 @@ Examples:
 ```
 
 ### Solutions
+
 BFS
+
 ```java
-class Solution {
-    public List<String> removeInvalidParentheses(String s) {
-        List<String> res = new LinkedList<String>();    
-        HashSet<String> visited = new HashSet<String>();
-        Queue<String> q = new LinkedList<String>();
-        q.add(s);
-        Queue<Integer> levels = new LinkedList<Integer>();
-        visited.add(s);
-        levels.add(0);
-        int found = -1;
-        while (!q.isEmpty()) {
-            String cand = q.poll();
-            int level = levels.poll();
-            if (found != -1 && level > found) {
-                break;
-            }
-            if (isValid(cand)) {
-                found = level;
-                res.add(cand);
-                continue;
-            }
-            for (int i = 0; i < cand.length(); i ++) {
-                String newcand = cand.substring(0, i) + cand.substring(i + 1);
-                if (!visited.contains(newcand)) {
-                    q.add(newcand);
-                    visited.add(newcand);
-                    levels.add(level + 1);
-                }
-            }
-            
+BFS Solutions
+
+BFS guarantees shortest path. Since the problem asks to remove minimum parenthesis, it is natural think of BFS. 
+A straightforward approach is to remove a parenthesis from the current string until we get a valid string. It 
+generates both duplicate and invalid strings. We can use a hash table to remove duplicates and check each string for 
+validity. 
+
+    vector<string> removeInvalidParentheses(string s) {
+        queue<string> q;
+        unordered_set<string> ht;
+        q.push(s);
+        vector<string> res;
+        while(!q.empty()) {
+            string ss = q.front();
+            q.pop();
+            if(ht.count(ss)) continue;
+            ht.insert(ss);
+            if(isValid(ss)) res.push_back(ss);
+            else if (res.empty()) 
+                for(int i=0;i<ss.size();i++) 
+                    if(ss[i]==')'|| ss[i]=='(') q.push(ss.substr(0,i)+ss.substr(i+1));
         }
         return res;
     }
-    private boolean isValid(String s) {
-        int count = 0;
-        for (int i = 0; i < s.length(); i ++) {
-            char c = s.charAt(i);
-            if (c == '(') {
-                count ++;
-            }
-            else if (c == ')'){
-                if (count <= 0) {
-                    return false;
-                }
-                count --;
-            }
+    bool isValid(string &s) {
+        int count=0;
+        for(auto c:s) {
+            if(c=='(') count++;
+            if(c==')')
+                if(count>0) count--;
+                else return false;
         }
-        return count == 0;
+        return !count;
     }
-}
+    
 ```
 
 DFS
+
 ```java
-public class Solution {
-    ArrayList<String> res = new ArrayList<String>();
-    int max = 0; 
-    public List<String> removeInvalidParentheses(String s) {
-        if(s == null) {
-            return res;
-        }
-        dfs(s, "", 0);
-        if(res.size() == 0) {
-            res.add("");
-        }
+A naive DFS is to generate all the 2^n substr. We use hash table to remove duplicates. and then 
+return the longest ones. It is less efficient than BFS because DFS does not guarantee shortest path. So we cannot stop after the first valid strings as in BFS.
+
+vector<string> removeInvalidParentheses(string s) 
+{
+        unordered_set<string> ht;
+        string cur;
+        dfs(0,cur,s,ht);
+        size_t ml = 0;
+        for(auto& str:ht) ml = max(ml,str.size());
+        vector<string> res;
+        for(auto& str:ht) if(str.size()==ml) res.push_back(str);
         return res;
-    }
-    public void dfs(String s, String cand, int left) {
-        if(s.length() == 0){
-            if(left == 0 && cand.length() != 0) {
-                if (cand.length() > max) {
-                    max = cand.length();
-                    res.clear();
-                }
-                if(cand.length() == max && !res.contains(cand)) {
-                    res.add(cand);
-                }
-            }
+}
+void dfs(int p, string& cur, string& s, unordered_set<string>& res) 
+{
+        if(p==s.size()) {
+            if(isValid(cur)) res.insert(cur);
             return;
         }
-        
-        if (s.charAt(0) == '(') {
-            dfs(s.substring(1), cand + "(", left + 1);
-            dfs(s.substring(1), cand, left);
-        }
-        else if (s.charAt(0) == ')') {
-            if (left > 0) {
-                dfs(s.substring(1), cand + ")", left - 1);
-            }
-            dfs(s.substring(1), cand, left);
-        }else{
-            dfs(s.substring(1), cand + s.charAt(0), left);
-        }
-    }
+        cur+=s[p];
+        dfs(p+1,cur,s,res);
+        cur.pop_back();
+        if(s[p]=='('||s[p]==')') dfs(p+1,cur,s,res); 
 }
 ```
+
+
+
