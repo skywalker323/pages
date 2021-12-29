@@ -23,10 +23,10 @@ BFS Solutions
 
 BFS guarantees shortest path. Since the problem asks to remove minimum parenthesis, it is natural think of BFS. 
 A straightforward approach is to remove a parenthesis from the current string until we get a valid string. It 
-generates both duplicate and invalid strings. We can use a hash table to remove duplicates and check each string for 
-validity. 
+generates both duplicate and invalid strings. We can use a hash table to remove duplicates and check each string 
+for  validity. 
 
-    vector<string> removeInvalidParentheses(string s) {
+vector<string> removeInvalidParentheses(string s) {
         queue<string> q;
         unordered_set<string> ht;
         q.push(s);
@@ -43,7 +43,8 @@ validity.
         }
         return res;
     }
-    bool isValid(string &s) {
+bool isValid(string &s) 
+{
         int count=0;
         for(auto c:s) {
             if(c=='(') count++;
@@ -52,7 +53,7 @@ validity.
                 else return false;
         }
         return !count;
-    }
+}
 ```
 
 DFS
