@@ -19,12 +19,12 @@ Examples:
 BFS
 
 ```java
-BFS Solutions
+/*BFS Solutions
 
 BFS guarantees shortest path. Since the problem asks to remove minimum parenthesis, it is natural think of BFS. 
 A straightforward approach is to remove a parenthesis from the current string until we get a valid string. It 
 generates both duplicate and invalid strings. We can use a hash table to remove duplicates and check each string 
-for  validity. 
+for  validity. */
 
 vector<string> removeInvalidParentheses(string s) {
         queue<string> q;
@@ -59,9 +59,11 @@ bool isValid(string &s)
 DFS
 
 ```java
-A naive DFS is to generate all the 2^n substr. We use hash table to remove duplicates. and then 
+/*A naive DFS is to generate all the 2^n substr. We use hash table to remove duplicates. and then 
 return the longest ones. It is less efficient than BFS because DFS does not guarantee shortest path. So we cannot 
-stop after the first valid strings as in BFS.
+stop after the first valid strings as in BFS. */
+
+
 
 vector<string> removeInvalidParentheses(string s) 
 {

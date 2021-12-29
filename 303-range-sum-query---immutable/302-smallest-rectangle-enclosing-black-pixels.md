@@ -20,6 +20,7 @@ Return 6.
 ### Solutions:
 
 ```java
+/*
 Suppose we have a 2D array
 
 "000000111000000"
@@ -53,6 +54,8 @@ To determine if a column vector has a black pixel is O(m) so the search in total
 
 We can do the same for the other boundaries. The area is then calculated by the boundaries.
 Thus the algorithm runs in O(m log n + n log m)
+
+*/
 
 
 vector<vector<char>> *image;
