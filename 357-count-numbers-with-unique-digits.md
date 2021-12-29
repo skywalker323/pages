@@ -40,4 +40,24 @@ public class Solution {
         return sum;
     }
 }
+
+
+int countNumbersWithUniqueDigits(int n) {
+        vector<int> ans1(n+1);
+        vector<int> ans2(n+1);
+        ans1[0] = 1;
+        ans2[0] = 0;
+        
+        for(int i=1;i<=n;i++){
+            int duplicate = (i-1)*ans1[i-1] + ans2[i-1]*10;
+            int non_duplicate = pow(10,i) - pow(10,i-1) - duplicate;
+            ans1[i] = non_duplicate;
+            ans2[i] = duplicate;
+        }
+        
+        for(int i=1;i<ans1.size();i++){
+            ans1[i] = ans1[i]+ans1[i-1];
+        }
+        return ans1[n];
+    }
 ```
