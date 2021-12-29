@@ -24,38 +24,35 @@ You can assume that no duplicate edges will appear in edges. Since all edges are
 ### Solutions:
 
 ```java
-public class Solution {
-    public int countComponents(int n, int[][] edges) {
-        HashMap<Integer, List<Integer>> adj = new HashMap<Integer, List<Integer>>();
-        init(adj, edges, n);
-        boolean[] visited = new boolean[n];
-        int count = 0;
-        for (int i = 0; i < n; i ++) {
-            if (visited[i] == false) {
-                count ++;
-                dfs(adj, i, visited);
+class Solution {
+public:
+    int countComponents(int n, vector<vector<int>>& edges) {
+        std::vector<std::vector<int>>adj_list(n,std::vector<int>());
+        std::vector<int>visited(n,0);
+        int result = 0;
+        for(int i=0;i<(int)edges.size();i++){
+            adj_list[edges[i][0]].push_back(edges[i][1]);
+            adj_list[edges[i][1]].push_back(edges[i][0]);
+        }
+        for(int i=0;i<n;i++){
+            if(visited[i] == 1) continue;
+            DFS(adj_list,visited,i);
+            result++;
+        }
+        return result;
+    }
+    void DFS(const std::vector<std::vector<int>>&adj_list,std::vector<int>&visited,int current){
+        if(visited[current]==1) return;
+        else{
+            visited[current]=1;
+            for(int i=0;i<(int)adj_list[current].size();i++){
+                int next =adj_list[current][i];
+                if(visited[next] == 1) continue;
+                DFS(adj_list,visited,next);
             }
         }
-        return count;
     }
-    private void dfs(HashMap<Integer, List<Integer>> adj, int index, boolean[] visited) {
-        visited[index] = true;
-        for (Integer j:adj.get(index)) {
-            if (visited[j] == false) {
-                dfs(adj, j, visited);
-            }
-        }
-    }
-    private void init(HashMap<Integer, List<Integer>> adj, int[][] edges, int n) {
-        for (int i = 0; i < n; i ++) {
-            adj.put(i, new LinkedList<Integer>());
-        }
-        for (int i = 0; i < edges.length; i ++) {
-            adj.get(edges[i][0]).add(edges[i][1]);
-            adj.get(edges[i][1]).add(edges[i][0]);
-        }
-    }
-}
+};
 ```
 
 ```java
