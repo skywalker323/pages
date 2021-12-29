@@ -1,11 +1,13 @@
 # 744 Find Smallest Letter Greater Than Target
 
 ### Problem
+
 Given a list of sorted characters letters containing only lowercase letters, and given a target letter target, find the smallest element in the list that is larger than the given target.
 
-Letters also wrap around. For example, if the target is target = 'z' and letters = ['a', 'b'], the answer is 'a'.
+Letters also wrap around. For example, if the target is target = 'z' and letters = \['a', 'b'\], the answer is 'a'.
 
 Examples:
+
 ```
 Input:
 letters = ["c", "f", "j"]
@@ -37,12 +39,14 @@ letters = ["c", "f", "j"]
 target = "k"
 Output: "c"
 ```
-Note:
-1. letters has a length in range [2, 10000].
-2. letters consists of lowercase letters, and contains at least 2 unique letters.
+
+Note:  
+1. letters has a length in range \[2, 10000\].  
+2. letters consists of lowercase letters, and contains at least 2 unique letters.  
 3. target is a lowercase letter.
 
 ### Solutions
+
 ```java
 class Solution {
     public char nextGreatestLetter(char[] letters, char target) {
@@ -60,6 +64,15 @@ class Solution {
         return minInGreater == null? min:minInGreater;
     }
 }
+
+
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+        auto it = upper_bound(letters.begin(), letters.end(), target);
+        return it == letters.end() ? letters[0] : *it;
+    }
+};
 ```
 
 ```java
@@ -82,3 +95,6 @@ class Solution {
     }
 }
 ```
+
+
+
