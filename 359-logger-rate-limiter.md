@@ -35,28 +35,33 @@ logger.shouldPrintMessage(11,"foo"); returns true;
 ### Solutions:
 
 ```java
-public class Logger {
-    private HashMap<String, Integer> appear;
-    /** Initialize your data structure here. */
-    public Logger() {
-        appear = new HashMap<String, Integer>();
+
+public:
+    unordered_map<string,int> rem;
+    Logger() {
+        rem.clear();
     }
     
-    /** Returns true if the message should be printed in the given timestamp, otherwise returns false.
-        If this method returns false, the message will not be printed.
-        The timestamp is in seconds granularity. */
-    public boolean shouldPrintMessage(int timestamp, String message) {
-        if (!appear.containsKey(message)) {
-            appear.put(message, timestamp);
-            return true;
+    bool shouldPrintMessage(int timestamp, string message) {
+        
+        if(rem.find(message) != rem.end()) {
+            
+            if(timestamp - rem[message]  < 10) {
+                return false;
+                
+            }
+            else
+                rem[message] = timestamp;
+  
         }
-        if (timestamp - appear.get(message) >= 10) {
-            appear.put(message, timestamp);
-            return true;
+        
+        else {
+            
+            rem[message] = timestamp;
         }
-        return false;
+            return true;
     }
-}
+};
 
 /**
  * Your Logger object will be instantiated and called as such:
