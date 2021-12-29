@@ -116,12 +116,14 @@ public class Solution {
     }
 
 }
+/*
 Another way to look at it is to model this as a Graph problem with weighted edges. Thus we want to find the shortest distance from a single source to the goal. Thus, it is the shortest path problem.
 This can be solved by Dijkstra's Algorithm. This is similar to what we did previously. Except that
 
 It uses a Priority Queue instead of a normal Queue to find the Node with the least distance from the starting point
 Once that node is pop out from the queue, we know that the distance is definately the LEAST from the starting point and that value cannot be altered anymore. Thus, it can be marked as visited.
 Thus, we can terminate once we the destination node is polled from the queue. If that doesnt happen, means it didnt reach the destination
+*/
  public int shortestDistance(int[][] maze, int[] start, int[] destination) {
         int m = maze.length;
         int n = maze[0].length;
@@ -158,14 +160,14 @@ Thus, we can terminate once we the destination node is polled from the queue. If
         }
         return -1;  // Does not reach destination
     }
-
+/*
 Dijkstra's Algo seems to be an optimization of the first solution, since
 1.we always select the node with the least cost
 2. do not revisit visited nodes.. We might revisit nodes multiple times in the first solution..
 3. terminate straight away when we find the destination.
 
 However, the running time for the Dijkstra's algo is around 100-150ms while the first solution is 90-100ms.
-Does anyone know why?
+Does anyone know why?*/
 ```
 
 
