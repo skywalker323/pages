@@ -5,6 +5,7 @@ Given a n x n matrix where each of the rows and columns are sorted in ascending 
 Note that it is the kth smallest element in the sorted order, not the kth distinct element.
 
 Example:
+
 ```
 matrix = [
    [ 1,  5,  9],
@@ -16,50 +17,31 @@ k = 8,
 return 13.
 ```
 
-Note: 
+Note:   
 You may assume k is always valid, 1 ≤ k ≤ n^2.
 
 ### Solutions:
 
 ```java
-public class Solution {
-    private class Entry implements Comparable<Entry> {
-        private int val;
-        private int i;
-        private int j;
-        public Entry(int val, int i, int j) {
-            this.val = val;
-            this.i = i;
-            this.j = j;
-        }
-        public int compareTo(Entry e) {
-            return this.val - e.val;
-        }
-    }
-    public int kthSmallest(int[][] matrix, int k) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
-            return 0;
-        }
-        HashSet<String> visited = new HashSet<String>();
-        int m = matrix.length, n = matrix[0].length;
-        PriorityQueue<Entry> q = new PriorityQueue<Entry>();
-        q.add(new Entry(matrix[0][0], 0, 0));
-        visited.add("0,0");
-        while (k > 1) {
-            Entry cand = q.poll();
-            if (cand.i + 1 < m && !visited.contains((cand.i + 1) + "," + cand.j)) {
-                q.add(new Entry(matrix[cand.i + 1][cand.j], cand.i + 1, cand.j));
-                visited.add((cand.i + 1) + "," + cand.j);
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<int> heap;
+        
+        for (auto const &row : matrix) {
+            for (auto val : row) {
+                if (heap.size() < k || val <= heap.top()) {
+                    heap.push(val);
+                }
+                if (heap.size() > k) {
+                    heap.pop();
+                }
             }
-            if (cand.j + 1 < n && !visited.contains(cand.i + "," + (cand.j + 1))) {
-                q.add(new Entry(matrix[cand.i][cand.j + 1], cand.i, cand.j + 1));
-                visited.add(cand.i + "," + (cand.j + 1));
-            }
-            k --;
         }
-        return q.poll().val;
+        
+        return heap.top();
     }
-}
+};
 ```
 
 ```java
@@ -77,16 +59,16 @@ public class Solution {
                 upper = mid;
             }
         }
-     
+
         return upper;
     }
-     
+
     private int count(int[][] matrix, int target){
         int n = matrix.length;
         int i = m-1;
         int j = 0;
         int count = 0;
-     
+
         while(i >= 0 && j < n){
             if(matrix[i][j] <= target){
                 count += i+1;
@@ -99,3 +81,6 @@ public class Solution {
     }
 }
 ```
+
+
+
