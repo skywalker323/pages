@@ -54,185 +54,84 @@ snake.move("U"); -> Returns -1 (Game over because snake collides with border)
 ### Solutions:
 
 ```java
-public class SnakeGame {
+/*
+TC -> move = O(1)
+SC -> O(max Snake Length)
+*/
 
-    private List<Integer> xs;
-    private List<Integer> ys;
-    private HashSet<String> snake;
-    private int foodx;
-    private int foody;
-    private int[][] food;
-    private int eaten;
-    private int m;
-    private int n;
-    /** Initialize your data structure here.
-        @param width - screen width
-        @param height - screen height 
-        @param food - A list of food positions
-        E.g food = [[1,1], [1,0]] means the first food is positioned at [1,1], the second is at [1,0]. */
-    public SnakeGame(int width, int height, int[][] food) {
-        xs = new LinkedList<Integer>();
-        ys = new LinkedList<Integer>();
-        snake = new HashSet<String>();
-        this.food = food;
-        eaten = 0;
-        m = height;
-        n = width;
-        xs.add(0, 0);
-        ys.add(0, 0);
-        snake.add(0 + "," + 0);
-        if (food != null && food.length > 0) {
-            foodx = food[0][0];
-            foody = food[0][1];
-        }
-        else {
-            foodx = -1;
-            foody = -1;
-        }
-    }
-    private boolean die(int i, int j) {
-        if (i < 0 || i >= m || j < 0 || j >= n) {
-            return true;
-        }
-        return snake.contains(i + "," + j) && !(i == xs.get(xs.size() - 1) && j == ys.get(ys.size() - 1));
+class SnakeGame {
+private:
+    int w;
+    int h;
+    int fIdx;
+    vector<vector<int>> food;
+    deque<vector<int>> posStack;
+    set<vector<int>> posSet;
+    enum Dir_t_ {
+        R = 0,
+        L,
+        U,
+        D
+    } Dir_t;
+    
+    const vector<vector<int>> dirs = { {0, 1}, {0, -1}, {-1, 0}, {1, 0} };
+    
+    vector<int> getDirCoords(string dir) {
+        if (dir == "R")
+            return dirs[R];
+        else if (dir == "L")
+            return dirs[L];
+        else if (dir == "U")
+            return dirs[U];
+        else if (dir == "D")
+            return dirs[D];
+        return {};
     }
     
-    /** Moves the snake.
-        @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down 
-        @return The game's score after the move. Return -1 if game over. 
-        Game over when snake crosses the screen boundary or bites its body. */
-    public int move(String direction) {
-        int hx = xs.get(0), hy = ys.get(0);
-        if (direction.equals("U")) {
-            hx --;
-        }
-        else if (direction.equals("L")) {
-            hy --;
-        }
-        else if (direction.equals("R")) {
-            hy ++;
-        }
-        else if (direction.equals("D")) {
-            hx ++;
-        }
-        else {
-            System.out.println("wrong move");
-        }
-        if (die(hx, hy)) {
+public:
+    SnakeGame(int width, int height, vector<vector<int>>& food) {
+        this->w = width;
+        this->h = height;
+        this->fIdx = 0;
+        this->food = food;
+        posStack.push_front({0, 0});
+        posSet.insert({0, 0});
+    }
+    
+    // TC -> O(1)
+    int move(string direction) {
+        vector<int> dir = getDirCoords(direction);
+        
+        int r = posStack.front()[0] + dir[0];
+        int c = posStack.front()[1] + dir[1];
+        
+        vector<int> headPos = {r, c};
+        
+        if (r < 0 || r >= h || c < 0 || c >= w) {
+            // Snake ran out of bounds
             return -1;
-        }
-        if (!(hx == foodx && hy == foody)) {
-            xs.add(0, hx);
-            ys.add(0, hy);
-            snake.remove(xs.get(xs.size() - 1) + "," + ys.get(ys.size() - 1));
-            snake.add(hx + "," + hy);
-            xs.remove(xs.size() - 1);
-            ys.remove(ys.size() - 1);
-            return eaten;
-        }
-        eaten ++;
-        xs.add(0, hx);
-        ys.add(0, hy);
-        snake.add(hx + "," + hy);
-        if (food != null && eaten < food.length) {
-            foodx = food[eaten][0];
-            foody = food[eaten][1];
-        }
-        else {
-            foodx = -1;
-            foody = -1;
-        }
-        return eaten;
-    }
-}
-
-/**
- * Your SnakeGame object will be instantiated and called as such:
- * SnakeGame obj = new SnakeGame(width, height, food);
- * int param_1 = obj.move(direction);
- */
-```
-
-
-```java
-public class SnakeGame {
-    int[][] food;
-    int m, n;
-    int headX, headY;
-    int eaten;
-    private HashSet<String> snake;
-    LinkedList<int[]> queue;
-    /** Initialize your data structure here.
-        @param width - screen width
-        @param height - screen height 
-        @param food - A list of food positions
-        E.g food = [[1,1], [1,0]] means the first food is positioned at [1,1], the second is at [1,0]. */
-    public SnakeGame(int width, int height, int[][] food) {
-        this.food=food;
-        snake = new HashSet<String>();
-        eaten = 0;
-        headX =0;
-        headY =0;
-        m = height;
-        n = width;
-        queue= new LinkedList<int[]>();
-        queue.offer(new int[]{0, 0});
-        snake.add("0,0");
-    }
- 
-    /** Moves the snake.
-        @param direction - 'U' = Up, 'L' = Left, 'R' = Right, 'D' = Down 
-        @return The game's score after the move. Return -1 if game over. 
-        Game over when snake crosses the screen boundary or bites its body. */
-    public int move(String direction) {
-        if (direction.equals("U")) {
-            headX --;
-        }
-        else if (direction.equals("L")) {
-            headY --;
-        }
-        else if (direction.equals("R")) {
-            headY ++;
-        }
-        else if (direction.equals("D")) {
-            headX ++;
-        }
-        else {
-            System.out.println("Wrong move");
-        }
- 
-        if(!isValid(headX,headY)){
-            return -1;
-        }
- 
-        return process(headX, headY);
-    }
- 
-    public boolean isValid(int i, int j){
-        if(i < 0 || i >= m || j < 0 || j >= n)
-            return false;
-        return true;    
-    }
- 
-    public int process(int x, int y){
-        if(eaten == food.length){
-            snake.remove(queue.peek()[0] + "," + queue.peek()[1]);
-            queue.poll();
-        }else if(food[eaten][0]==x && food[eaten][1]==y){
-            eaten ++;
-        }else{
-            snake.remove(queue.peek()[0] + "," + queue.peek()[1]);
-            queue.poll();
         }
         
-        if (snake.contains(x + "," + y)) {
+        if (fIdx < food.size() && food[fIdx][0] == r && food[fIdx][1] == c) {
+            // Found the food, increment snake length
+            fIdx++;
+        } else {
+            // We need to remove the last position from pStack as full snake would have gone through it
+            vector<int> tailPos = posStack.back();
+            posStack.pop_back();
+            posSet.erase(tailPos);
+        }
+        
+        if (posSet.find(headPos) != posSet.end()) {
+            // Snake ran over itself
             return -1;
         }
- 
-        snake.add(x + "," + y);
-        queue.offer(new int[]{x,y});
- 
-        return eaten;
+                    
+        posStack.push_front(headPos);
+        posSet.insert(headPos);
+        
+        return posStack.size() - 1;
     }
-}
+};
+
 ```
