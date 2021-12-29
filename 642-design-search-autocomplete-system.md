@@ -61,106 +61,63 @@ Please remember to RESET your class variables declared in class AutocompleteSyst
 
 ```java
 class AutocompleteSystem {
-    class TrieNode {
-        public boolean isLeaf;
-        public List<String> cands;
-        HashMap<Character, TrieNode> children;
-        public TrieNode() {
-            isLeaf = false;
-            children = new HashMap<Character, TrieNode>();
-            cands = new LinkedList<String>();
-        }
-    }
-    class Trie {
-        private TrieNode root;
-        public Trie() {
-            root = new TrieNode();
-        }
-        // Inserts a word into the trie.
-        public void insert(String word) {
-            TrieNode node = root;
-            for (int i = 0; i < word.length(); i ++) {
-                HashMap<Character, TrieNode> children = node.children;
-                char c = word.charAt(i);
-                if (!children.containsKey(c)) {
-                    children.put(c, new TrieNode());
-                }
-                children.get(c).cands.add(word);
-                if (i == word.length() - 1) {
-                    children.get(c).isLeaf = true;
-                }
-                node = node.children.get(c);
-            }
-        }
-        private TrieNode searchNode(String pre) {
-            HashMap<Character, TrieNode> children = root.children;
-            TrieNode node = root;
-            for (int i = 0; i < pre.length(); i ++) {
-                if (!children.containsKey(pre.charAt(i))) {
-                    return null;
-                }
-                node = children.get(pre.charAt(i));
-                children = node.children;
-            }
-            return node;
-        }
-    }
-    HashMap<String, Integer> count = new HashMap<String, Integer>();
-    Trie trie = new Trie();
-    String curr = "";
-    public AutocompleteSystem(String[] sentences, int[] times) {
-        for (int i = 0; i < sentences.length; i ++) {
-            count.put(sentences[i], times[i]);
-            trie.insert(sentences[i]);
-        }
+public:
+    typedef pair<int,const char*> hotstr;
+    unordered_map<string,int> hotmap;
+    vector<string>::iterator l, r;
+    vector<string> sentences;
+    string userString;
+    
+    AutocompleteSystem(vector<string>& sentences_, vector<int>& times) {
+        hotmap.clear();
+        userString = "";
+        sentences = sentences_;
+        for (int i = 0; i < sentences.size(); ++i)
+            hotmap[sentences[i]] = times[i];
+        sort(sentences.begin(), sentences.end());
     }
     
-    public List<String> input(char c) {
-        List<String> res = new LinkedList<String>();
+    vector<string> input(char c) {
         if (c == '#') {
-            if (!count.containsKey(curr)) {
-                trie.insert(curr);
-                count.put(curr, 1);
-            }
-            else {
-                count.put(curr, count.get(curr) + 1);
-            }
-            curr = "";
+            insert(userString);
+            userString = "";
+            return {};
+        } else if (userString.length() == 0) {
+            l = sentences.begin();
+            r = sentences.end();
         }
-        else {
-            curr += c;
-            res = getSuggestions();
-        }
+        userString += c;
         
-        return res;
-    }
-    private List<String> getSuggestions() {
-        List<String> res = new LinkedList<String>();
-        TrieNode node = trie.searchNode(curr);
-        if (node == null) {
-            return res;
+        // Get iterator to range start that matches userString (lower_bound)
+        // lower_bound: Iterator to the first element in the range [first,last) which does not compare less than val.
+        auto cmp = [](hotstr& a, hotstr& b) { return a.first == b.first ? strcmp(a.second,b.second) < 0 : a.first > b.first; };
+        priority_queue<hotstr,vector<hotstr>,decltype(cmp)> minheap(cmp);
+        if ((l = lower_bound(l, r, userString)) == r) return {}; // nothing found case
+        for (r = l; r != sentences.end() && !strncmp(r->c_str(), userString.c_str(), userString.length()); ++r) {
+            // Pass through a 3-size minheap, keeping hottest at bottom, popping off coldest at top
+            minheap.emplace(hotmap[*r], r->c_str());
+            if (minheap.size() > 3) minheap.pop();
         }
-        List<String> cands = node.cands;
-        Collections.sort(cands, new Comparator<String>(){
-            public int compare(String s1, String s2) {
-                if (count.get(s1) != count.get(s2)) {
-                    return count.get(s2) - count.get(s1);
-                }
-                return s1.compareTo(s2);
-            } 
-        });
-        int added = 0; 
-        for (String s:cands) {
-            res.add(s);
-            added ++;
-            if (added > 2) {
-                break;
-            }
-        }
-        return res;
-    }
 
-}
+        vector<string> results;
+        while (minheap.size())
+            results.push_back(minheap.top().second), minheap.pop();
+        std::reverse(results.begin(), results.end());
+        return results;
+    }
+    
+    void insert(string& str) {
+        auto existsIter = hotmap.find(str);
+        if (existsIter != hotmap.end()) {
+            existsIter->second++;
+        } else {
+            // upper_bound: Iterator to the first element in the range [first,last) which compares greater than val.
+            auto insertIter = upper_bound(sentences.begin(), sentences.end(), str);
+            sentences.insert(insertIter, str);
+            hotmap[str] = 1;
+        }
+    }
+};
 
 /**
  * Your AutocompleteSystem object will be instantiated and called as such:
