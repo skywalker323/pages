@@ -1,9 +1,11 @@
 # 315 Count of Smaller Numbers After Self
 
 ### Problem:
-You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts[i] is the number of smaller elements to the right of nums[i].
+
+You are given an integer array nums and you have to return a new counts array. The counts array has the property where counts\[i\] is the number of smaller elements to the right of nums\[i\].
 
 Example:
+
 ```
 Given nums = [5, 2, 6, 1]
 
@@ -13,7 +15,7 @@ To the right of 6 there is 1 smaller element (1).
 To the right of 1 there is 0 smaller element.
 ```
 
-Return the array [2, 1, 1, 0].
+Return the array \[2, 1, 1, 0\].
 
 ### Solutions:
 
@@ -42,7 +44,9 @@ public class Solution {
     }
 }
 ```
+
 Binary Search Tree
+
 ```java
 public class Solution {
     private class Node {
@@ -87,45 +91,54 @@ public class Solution {
 ```
 
 Binary Indexed tree
-```java
-public class Solution {
-    public List<Integer> countSmaller(int[] nums) {
-        int min = Integer.MAX_VALUE;
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < nums.length; i ++) {
-            if (nums[i] < min) {
-                min = nums[i];
-            }
-            if (nums[i] > max) {
-                max = nums[i];
-            }
+
+```cpp
+//In this solution uses the fenwick tree concept and we started reading from end.
+
+class Solution {
+    
+    // Fenwick  tree
+    const int N = 1e5+10;
+    vector<int> fen;
+    void update(int k, int del){
+        while(k<N){
+            fen[k]+=del;
+            k+=(k&(-k));
         }
-        int diff = 1 - min;
-        for (int i = 0; i < nums.length; i ++) {
-            nums[i] += diff;
-        }
-        max += diff;
-        List<Integer> result = new LinkedList<Integer>();
-        int[] sums = new int[max + 1];
-        for (int i = nums.length - 1; i >= 0; i --) {
-            result.add(0, getSum(sums, nums[i] - 1));
-            update(sums, nums[i]);
-        }
-        return result;
     }
-    private int getSum(int[] sums, int index) {
-        int sum = 0;
-        while (index > 0) {
-            sum += sums[index];
-            index -= index & (-index);
+    
+    int sum(int pos){
+        int ans =0;
+        while(pos>0){
+            ans+=fen[pos];
+            pos = pos - (pos&(-pos));
         }
-        return sum;
+        return ans;
     }
-    private void update(int[] sums, int val) {
-        while (val < sums.length) {
-            sums[val] += 1;
-            val += val&(-val);
-        };
+    
+    
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        int n = nums.size();
+        fen.resize(N+1,0);
+        vector<int> ans(n,0);
+        map<int, int> mp; // mapping required as we have negative input too
+        for(int i: nums){
+            mp[i] =0;
+        }
+        int tmp =1;
+        for(auto& pr : mp){
+            pr.second = tmp++;
+        }
+        for(int i = n-1; i>=0; --i){
+            int tmp = sum(mp[nums[i]]-1);
+            ans[i] = tmp;
+            update(mp[nums[i]], 1);
+        }
+        return ans;
     }
-}
+};
 ```
+
+
+
