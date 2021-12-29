@@ -40,33 +40,28 @@ Returns [4, 5, 3], [2], [1].
 ### Solutions:
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        dfs(result, root);
-        return result;
-    }
-    private int dfs(List<List<Integer>> result, TreeNode node) {
-        if (node == null) {
-            return 0;
+class Solution {
+public:
+    vector<vector<int>> findLeaves(TreeNode* root) {
+        vector<vector<int>> res;
+        vector<int> t;
+        while(root){
+            root = dfs(root, t);
+            res.push_back(t);
+            t.clear();
         }
-        int left = dfs(result, node.left);
-        int right = dfs(result, node.right);
-        int curr = Math.max(left, right) + 1;
-        if (result.size() < curr) {
-            result.add(new LinkedList());
-        }
-        result.get(curr - 1).add(node.val);
-        return curr;
+        return res;
     }
-}
+    TreeNode* dfs(TreeNode* node, vector<int> &v){
+        if(!node) return NULL;
+        if(!node->left && !node->right){
+            v.push_back(node->val);
+            node = NULL;
+            return NULL;
+        }
+        node->left = dfs(node->left, v);
+        node->right = dfs(node->right, v);
+        return node;
+    }
+};
 ```
