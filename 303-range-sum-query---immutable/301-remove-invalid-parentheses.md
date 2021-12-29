@@ -53,14 +53,14 @@ validity.
         }
         return !count;
     }
-    
 ```
 
 DFS
 
 ```java
 A naive DFS is to generate all the 2^n substr. We use hash table to remove duplicates. and then 
-return the longest ones. It is less efficient than BFS because DFS does not guarantee shortest path. So we cannot stop after the first valid strings as in BFS.
+return the longest ones. It is less efficient than BFS because DFS does not guarantee shortest path. So we cannot 
+stop after the first valid strings as in BFS.
 
 vector<string> removeInvalidParentheses(string s) 
 {
