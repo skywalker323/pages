@@ -22,79 +22,65 @@ https://en.wikipedia.org/wiki/Fenwick_tree
 ### Solutions:
 
 ```java
-public class NumArray {
-    private int[] sums;
-    private int[] nums;
-    public NumArray(int[] nums) {
-        this.nums = nums;
-        sums = new int[nums.length];
-        int sum = 0;
-        for (int i = 0; i < nums.length; i ++) {
-            sum += nums[i];
-            sums[i] = sum;
-        }
+struct SegmentTreeNode {
+    int start, end, sum;
+    SegmentTreeNode* left;
+    SegmentTreeNode* right;
+    SegmentTreeNode(int a, int b):start(a),end(b),sum(0),left(nullptr),right(nullptr){}
+};
+class NumArray {
+    SegmentTreeNode* root;
+public:
+    NumArray(vector<int> &nums) {
+        int n = nums.size();
+        root = buildTree(nums,0,n-1);
     }
-
+   
     void update(int i, int val) {
-        int diff = val - nums[i];
-        nums[i] = val;
-        for (int x = i; x < nums.length; x ++) {
-            sums[x] += diff;
+        modifyTree(i,val,root);
+    }
+
+    int sumRange(int i, int j) {
+        return queryTree(i, j, root);
+    }
+    SegmentTreeNode* buildTree(vector<int> &nums, int start, int end) {
+        if(start > end) return nullptr;
+        SegmentTreeNode* root = new SegmentTreeNode(start,end);
+        if(start == end) {
+            root->sum = nums[start];
+            return root;
         }
+        int mid = start + (end - start) / 2;
+        root->left = buildTree(nums,start,mid);
+        root->right = buildTree(nums,mid+1,end);
+        root->sum = root->left->sum + root->right->sum;
+        return root;
     }
-
-    public int sumRange(int i, int j) {
-        return sums[j] - sums[i] + nums[i];
-    }
-}
-
-
-// Your NumArray object will be instantiated and called as such:
-// NumArray numArray = new NumArray(nums);
-// numArray.sumRange(0, 1);
-// numArray.update(1, 10);
-// numArray.sumRange(1, 2);
-```
-
-```java
-public class NumArray {
-    int[] sums;
-    int[] nums;
-    public NumArray(int[] nums) {
-        sums = new int[nums.length + 1];
-        this.nums = new int[nums.length];
-        for (int i = 0; i < nums.length; i ++) {
-            update(i, nums[i]);
+    int modifyTree(int i, int val, SegmentTreeNode* root) {
+        if(root == nullptr) return 0;
+        int diff;
+        if(root->start == i && root->end == i) {
+            diff = val - root->sum;
+            root->sum = val;
+            return diff;
         }
-    }
-    
-    public void update(int i, int val) {
-        int diff = val - nums[i];
-        int j = i + 1;
-        while (j < sums.length) {
-            sums[j] += diff;
-            j = j + (j&(-j));
+        int mid = (root->start + root->end) / 2;
+        if(i > mid) {
+            diff = modifyTree(i,val,root->right);
+        } else {
+            diff = modifyTree(i,val,root->left);
         }
-        nums[i] = val;
+        root->sum = root->sum + diff;
+        return diff;
     }
-    private int getSum(int i) {
-        int sum = 0;
-        while (i > 0) {
-            sum += sums[i];
-            i = i - (i&(-i));
-        }
-        return sum;
+    int queryTree(int i, int j, SegmentTreeNode* root) {
+        if(root == nullptr) return 0;
+        if(root->start == i && root->end == j) return root->sum;
+        int mid = (root->start + root->end) / 2;
+        if(i > mid) return queryTree(i,j,root->right);
+        if(j <= mid) return queryTree(i,j,root->left);
+        return queryTree(i,mid,root->left) + queryTree(mid+1,j,root->right);
     }
-    
-    public int sumRange(int i, int j) {
-        return getSum(j + 1) - getSum(i);
-    }
-}
+};
 
-/**
- * Your NumArray object will be instantiated and called as such:
- * NumArray obj = new NumArray(nums);
- * obj.update(i,val);
- * int param_2 = obj.sumRange(i,j);
- */
 ```
