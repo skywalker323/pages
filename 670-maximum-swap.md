@@ -26,10 +26,12 @@ The given number is in the range \[0, 108\]
 ### Solutions
 
 ```java
-Actually this problem can be easily solved by only one pass from backward. During the scan, we only need to do 2 things:
+Actually this problem can be easily solved by only one pass from backward. During the scan, we only need to do 2 
+things:
 
 record the largest digit (maxdigit) and its corresponding index (maxidx);
-if the current digit is smaller than the largest digit, this digit and the largest digit are the best candidate for max swap so far. In this case, this digit pair is recorded (leftidx and rightidx).
+if the current digit is smaller than the largest digit, this digit and the largest digit are the best candidate for
+ max swap so far. In this case, this digit pair is recorded (leftidx and rightidx).
 
     int maximumSwap(int num) {
         string numstr = std::to_string(num);
