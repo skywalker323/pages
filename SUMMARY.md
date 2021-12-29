@@ -464,4 +464,6 @@
   * [735 Asteroid Collision](735-asteroid-collision.md)
 * [Data Structures](data_structures/README.md)
   * [Overview](data_structures/binary_tree.md)
+* [800-850](800-850.md)
+  * [801](800-850/801.md)
 
