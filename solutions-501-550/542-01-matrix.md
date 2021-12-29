@@ -5,7 +5,7 @@
 Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.
 
 The distance between two adjacent cells is 1.  
-Example 1:   
+Example 1:  
 Input:
 
 ```
@@ -22,7 +22,7 @@ Output:
 0 0 0
 ```
 
-Example 2:   
+Example 2:  
 Input:
 
 ```
@@ -60,16 +60,16 @@ Note:
 
 class Solution {
 public:
-    
-    
+
+
     bool isvalid(int i,int j,int m,int n)
     {
         if(i==m||j==n||j<0||i<0)
             return false;
         return true;
     }
-    
-    vector<vector<int>> dir={{1,0},{0,1},{0,-1},{-1,0}};
+
+    vector<vector<int>> dir={ {1,0}, {0,1}, {0,-1}, {-1,0} };
     vector<vector<int>> updateMatrix(vector<vector<int>>& matrix) 
     {
         queue<pair<int,int>> q;
