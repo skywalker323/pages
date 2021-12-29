@@ -2,71 +2,83 @@
 
 ### Problem:
 
-Given a list of unique words, find all pairs of distinct indices (i, j) in the given list, so that the concatenation of the two words, i.e. words[i] + words[j] is a palindrome.
+Given a list of unique words, find all pairs of distinct indices \(i, j\) in the given list, so that the concatenation of the two words, i.e. words\[i\] + words\[j\] is a palindrome.
 
-Example 1:
-Given words = ["bat", "tab", "cat"]
-Return [[0, 1], [1, 0]]
-The palindromes are ["battab", "tabbat"]
-Example 2:
-Given words = ["abcd", "dcba", "lls", "s", "sssll"]
-Return [[0, 1], [1, 0], [3, 2], [2, 4]]
-The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
+Example 1:  
+Given words = \["bat", "tab", "cat"\]  
+Return \[\[0, 1\], \[1, 0\]\]  
+The palindromes are \["battab", "tabbat"\]  
+Example 2:  
+Given words = \["abcd", "dcba", "lls", "s", "sssll"\]  
+Return \[\[0, 1\], \[1, 0\], \[3, 2\], \[2, 4\]\]  
+The palindromes are \["dcbaabcd", "abcddcba", "slls", "llssssll"\]
 
 ### Solutions:
 
 ```java
-public class Solution {
-    public List<List<Integer>> palindromePairs(String[] words) {
-        HashMap<String, Integer> index = new HashMap<String, Integer>();
-        for (int i = 0; i < words.length; i ++) {
-            index.put(words[i], i);
-        }
-        List<List<Integer>> res = new LinkedList<List<Integer>>();
-        for (int i = 0; i < words.length; i ++) {
-            String reverse = new StringBuilder(words[i]).reverse().toString();
-            int start = 0, end = reverse.length();
-            if (index.containsKey(reverse) && index.get(reverse) != i) {
-                List<Integer> tmp = new LinkedList<Integer>();
-                tmp.add(index.get(reverse));
-                tmp.add(i);
-                res.add(tmp);
-                start ++;
-                end --;
-            }
-            
-            for (int j = start; j <= end; j ++) {
-                String left = reverse.substring(0, j);
-                String right = reverse.substring(j);
-                if (index.containsKey(left) && index.get(left) != i && isPa(right)) {
-                    List<Integer> tmp = new LinkedList<Integer>();
-                    tmp.add(index.get(left));
-                    tmp.add(i);
-                    res.add(tmp);
-                }
-                if (index.containsKey(right) && index.get(right) != i && isPa(left)) {
-                    List<Integer> tmp = new LinkedList<Integer>();
-                    tmp.add(i);
-                    tmp.add(index.get(right));
-                    res.add(tmp);
-                }
-            }
-        }
-        return res;
-    }
-    private boolean isPa(String s) {
-        if (s.equals("")) {
-            return true;
-        }
-        int left = 0, right = s.length() - 1;
-        while (left < right) {
-            if (s.charAt(left) != s.charAt(right)) {
-                return false;
-            }
-            left ++;
-            right --;
+class Solution {
+public:
+    // n: words.length <= 5000, k: words[i].length <= 300, 
+    // 2 options: 
+    // 1) O(n*n*k)-> concatenate each word with all other, check if palindrome
+    
+    // 2) O(n*k*k)-> 
+    // O(n): for each word, 
+    // O(k): divide it into all possible left and right half
+    // O(k): check if right half is palindrome 
+    // and reverse of left half is present in words
+    // so that on concatenation of left|right|rev(left), a palindrome is obtained
+    // it accounts for all cases even when concatnated words are of unequal size
+    // do the same for left as right and right as left
+    
+    // since n is much higher than k, will go with 2nd option.
+
+    bool ispalin(string s) {
+        int i=0, j=s.length()-1;
+        while(i<j) {
+            if(s[i++]!=s[j--]) { return false; }
         }
         return true;
     }
-}
+    
+    vector<vector<int>> palindromePairs(vector<string>& words) {  
+        vector<vector<int>> res;
+        
+        map<string, int> m;
+        for(int i=0; i<words.size(); i++) {
+            string rev = words[i];  // reversed here so that don't have to reverse every subarray of each string later
+            reverse(rev.begin(), rev.end());
+            m[rev] = i;
+        }
+        
+        for(int j=0; j<words.size(); j++) {
+            for(int i=0; i<words[j].size(); i++) {
+                
+                string left = words[j].substr(0,i);
+                string right = words[j].substr(i,words[j].size()-i);
+                
+                if(ispalin(right) && m.find(left)!=m.end() && m[left]!=j) {
+                    res.push_back(vector<int>{j, m[left]});
+                
+                    // left=="" means right, which has entire string, is palindrome.
+                    // also left is present in map so "" string is there.
+                    // So normally only word+"" is captured but ""+word isn't captured
+                    // because right is never empty string to avoid duplicates (abcd, dcba: if left is abcd, we get abcddcba, if right is abcd, we get dcbaabcd; similaryly for string dcba as left and right we get the same 2 strings.)
+                    // so to include case ""+word below line
+                    if(left=="") { res.push_back(vector<int>{m[left], j}); }
+                }
+                
+                if(ispalin(left) && m.find(right)!=m.end() && m[right]!=j) {
+                    res.push_back(vector<int>{m[right], j});
+                    if(right=="") { res.push_back(vector<int>{m[right]}); }
+                }
+            }
+        }
+            
+        return res;
+    }
+};
 ```
+
+
+
