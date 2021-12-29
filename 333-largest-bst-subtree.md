@@ -25,50 +25,20 @@ Can you figure out ways to solve it with O(n) time complexity?
 ### Solutions:
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    private class State {
-        public boolean isBST;
-        public int min;
-        public int max;
-        public int num;
-        public State(boolean isBST, int min, int max, int num) {
-            this.isBST = isBST;
-            this.min = min;
-            this.max = max;
-            this.num = num;
-        }
+class Solution {
+public:
+    int largestBSTSubtree(TreeNode* root) {
+        return get<2>(traversal(root));
     }
-    private int max = 0;
-    public int largestBSTSubtree(TreeNode root) {
-        max = 0;
-        lbst(root);
-        return max;
+    tuple<int,int,int> traversal(TreeNode* cur) {        
+        if(!cur) return {INT_MIN, INT_MAX, 0};
+
+        auto [lmax, lmin, lval] = traversal(cur->left);
+        auto [rmax, rmin, rval] = traversal(cur->right);
+        
+        if(lmax >= cur->val || rmin <= cur->val) return {INT_MAX,INT_MIN,max(lval, rval)};
+
+        return {max(rmax, cur->val), min(lmin, cur->val), rval+lval+1};
     }
-    private State lbst(TreeNode node) {
-        State result = null;
-        if (node == null) {
-            return result;
-        }
-        State left = lbst(node.left);
-        State right = lbst(node.right);
-        if ((left == null || (left.isBST && node.val > left.max)) && (right == null || (right.isBST && node.val < right.min))) {
-            //A valid BST
-            int newMin = left == null?node.val:left.min;
-            int newMax = right == null?node.val:right.max;
-            int newNum = (left == null?0:left.num) + (right == null?0:right.num) + 1;
-            max = Math.max(max, newNum);
-            return new State(true, newMin, newMax, newNum);
-        }
-        return new State(false, 0, 0, 0);
-    }
-}
+};
 ```
