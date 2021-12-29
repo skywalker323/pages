@@ -65,7 +65,7 @@ We use a distance[][] array that keeps track of the minimum distance to reach th
 And prune any visits to that square if the distance is more than the minimum distance.*/
 
 public class Solution {
-    int[][] steps = new int[][]{{-1,0}, {1, 0}, {0, -1}, {0, 1}}; //up down left right
+    int[][] steps = new int[][]{ {-1,0}, {1, 0}, {0, -1}, {0, 1} }; //up down left right
 
 
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
