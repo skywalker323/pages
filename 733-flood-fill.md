@@ -1,15 +1,17 @@
 # 733 Flood Fill
 
 ### Problem
-An image is represented by a 2-D array of integers, each integer representing the pixel value of the image (from 0 to 65535).
 
-Given a coordinate (sr, sc) representing the starting pixel (row and column) of the flood fill, and a pixel value newColor, "flood fill" the image.
+An image is represented by a 2-D array of integers, each integer representing the pixel value of the image \(from 0 to 65535\).
 
-To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color as the starting pixel), and so on. Replace the color of all of the aforementioned pixels with the newColor.
+Given a coordinate \(sr, sc\) representing the starting pixel \(row and column\) of the flood fill, and a pixel value newColor, "flood fill" the image.
+
+To perform a "flood fill", consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels \(also with the same color as the starting pixel\), and so on. Replace the color of all of the aforementioned pixels with the newColor.
 
 At the end, return the modified image.
 
 Example 1:
+
 ```
 Input:
 image = [[1,1,1],[1,1,0],[1,0,1]]
@@ -21,34 +23,38 @@ by a path of the same color as the starting pixel are colored with the new color
 Note the bottom corner is not colored 2, because it is not 4-directionally connected
 to the starting pixel.
 ```
+
 Note:
 
-* The length of image and image[0] will be in the range [1, 50].
-* The given starting pixel will satisfy 0 <= sr < image.length and 0 <= sc < image[0].length.
-* The value of each color in image[i][j] and newColor will be an integer in [0, 65535].
+* The length of image and image\[0\] will be in the range \[1, 50\].
+* The given starting pixel will satisfy 0 &lt;= sr &lt; image.length and 0 &lt;= sc &lt; image\[0\].length.
+* The value of each color in image\[i\]\[j\] and newColor will be an integer in \[0, 65535\].
 
 ### Solutions
+
 ```java
 class Solution {
-    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        int oColor = image[sr][sc];
-        if (oColor == newColor) {
-            return image;
+ int x[4]={1,0,-1,0};
+	 int y[4]={0,1,0,-1};
+    void dfs(vector<vector<int>>& img, int sr, int sc, int nc,int oc){
+       if(sr<0 or sc<0 or sr>=img.size() or sc>=img[0].size() or 
+	   img[sr][sc]==nc or img[sr][sc]!=oc) return ;
+        img[sr][sc] = nc;
+        for(int v=0;v<4;v++){
+            int nx=sr+x[v],ncc=sc+y[v];
+            dfs(img,nx,ncc,nc,oc);
         }
-        int[][] dir = new int[][]{ {0, 1},{0, -1},{1, 0},{-1, 0}};
-        image[sr][sc] = newColor;
-        for (int i = 0; i < dir.length; i ++) {
-            int nextX = sr + dir[i][0];
-            int nextY = sc + dir[i][1];
-            if (nextX < 0 || nextX >= image.length || nextY < 0 || nextY >= image[0].length) {
-                continue;
-            }
-            if (image[nextX][nextY] != oColor) {
-                continue;
-            }
-            floodFill(image, nextX, nextY, newColor);
-        }
-        return image;
+        
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& img, int sr, int sc, int nc) {
+        int row=img.size(),col=img[0].size();
+        if(img[sr][sc]==nc) return img;
+        dfs(img,sr,sc,nc,img[sr][sc]);
+        return img;
     }
 }
 ```
+
+
+
