@@ -40,7 +40,7 @@ Have a global pointer that keeps the node that needs a new right child to insert
 ```java
 public class Solution {
      TreeNode* t;
-    
+
     void ft(TreeNode* r)
     {
        if(!r) return;          
@@ -53,12 +53,10 @@ public class Solution {
        ft(l);
        ft(rr);        
     }
-    
+
     void flatten(TreeNode* root) {
       t = new TreeNode();
-        
       ft(root);
-        
     }
 }
 ```
