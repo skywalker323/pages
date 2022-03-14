@@ -40,22 +40,23 @@ vector<TreeNode*> buildTree(int start, int end) {
     }
 
     // Iterate through all values from start to end to construct left and right subtree recursively
-	for(int i = start; i <= end; ++i) {
-		vector<TreeNode*> leftSubTree = buildTree(start, i - 1);    // Construct left subtree
-        vector<TreeNode*> rightSubTree = buildTree(i + 1, end);     // Construct right subtree
+    for(int i = start; i <= end; ++i) {
+      vector<TreeNode*> leftSubTree = buildTree(start, i - 1);    // Construct all possible left subtrees
+      vector<TreeNode*> rightSubTree = buildTree(i + 1, end);     // Construct all possible left subtrees
             
-		// loop through all left and right subtrees and connect them to ith root  
-		for(int j = 0; j < leftSubTree.size(); j++) {
-			for(int k = 0; k < rightSubTree.size(); k++) {
-				TreeNode* root = new TreeNode(i);   // Create root with value i
-				root->left = leftSubTree[j];   // Connect left subtree rooted at leftSubTree[j]
-                root->right = rightSubTree[k];   // Connect right subtree rooted at rightSubTree[k]
-				ans.push_back(root);    // Add this tree(rooted at i) to ans data-structure
-			}
-		}
-    }
+ // loop through all left and right subtrees and connect them to ith root
+ // leftSubTree.size()* rightSubTree.size() permutations
+     for(int j = 0; j < leftSubTree.size(); j++) {
+	for(int k = 0; k < rightSubTree.size(); k++) {
+	   TreeNode* root = new TreeNode(i);   // Create root with value i
+	   root->left = leftSubTree[j];   // Connect left subtree rooted at leftSubTree[j]
+           root->right = rightSubTree[k];   // Connect right subtree rooted at rightSubTree[k]
+	   ans.push_back(root);    // Add this tree(rooted at i) to ans data-structure
+	 }
+	}
+     }
         
-	return ans;
+     return ans;
 }
     
 vector<TreeNode*> generateTrees(int n) {

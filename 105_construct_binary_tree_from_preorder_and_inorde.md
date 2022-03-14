@@ -1,19 +1,13 @@
 # 105 Construct Binary Tree from Preorder and Inorder Traversal – Medium
 
-
 ### Problem:
-
-
 
 Given preorder and inorder traversal of a tree, construct the binary tree.
 
-Note:
+Note:  
 You may assume that duplicates do not exist in the tree.
 
-
 ### Thoughts:
-
-
 
 The key idea is to get the recursive partition correctly.
 
@@ -21,9 +15,11 @@ Because preorder is root, left, right. So the first element is always going to b
 
 For each step, find the root first, then partition the problem into sub problem by calculating the new range.
 
+// prel + 1, prel + 1 + leftnum - 1 =&gt;  leftnums nodes exists in left tree and they
+
+// next to prel until the next root of next right tree starts bcz it is preorder
 
 ### Solutions:
-
 
 ```java
 /**
@@ -53,11 +49,15 @@ public class Solution {
         TreeNode root = new TreeNode(pre[prel]);
         int rootIndex = inmap.get(pre[prel]);
         int leftnum = rootIndex - inl;
+
         TreeNode left = gt(pre, in, prel + 1, prel + 1 + leftnum - 1, inl, rootIndex - 1, inmap);
         TreeNode right = gt(pre, in, prel + leftnum + 1, prer, rootIndex + 1, inr, inmap);
         root.left = left;
         root.right = right;
         return root;
     }
-} 
+}
 ```
+
+
+
