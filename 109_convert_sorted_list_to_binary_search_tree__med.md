@@ -1,16 +1,10 @@
 # 109 Convert Sorted List to Binary Search Tree – Medium
 
-
 ### Problem:
-
-
 
 Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
 
-
 ### Thoughts:
-
-
 
 This is similar to the Sorted Array version of the problem.
 
@@ -20,9 +14,7 @@ But for a sorted list, we cannot visit element randomly, can only visit in order
 
 So here in order to make code clean and easy, we are pretending we could get the mid element.
 
-
 ### Solutions:
-
 
 ```java
 /**
@@ -69,3 +61,6 @@ public class Solution {
     }
 }
 ```
+
+
+
