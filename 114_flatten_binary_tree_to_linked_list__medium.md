@@ -1,76 +1,68 @@
 # 114 Flatten Binary Tree to Linked List – Medium
 
-
 ### Problem:
-
-
 
 Given a binary tree, flatten it to a linked list in-place.
 
-For example,
+For example,  
 Given
 
-         1
-        / \
-       2   5
-      / \   \
-     3   4   6
+```
+     1
+    / \
+   2   5
+  / \   \
+ 3   4   6
+```
+
 The flattened tree should look like:
 
-   1
-    \
-     2
-      \
-       3
-        \
-         4
-          \
-           5
-            \
+1  
+    \  
+     2  
+      \  
+       3  
+        \  
+         4  
+          \  
+           5  
+            \  
              6
 
 ### Thoughts:
-
-
 
 Idea is to use a modified preorder walk of the tree. Root, left, right.
 
 Have a global pointer that keeps the node that needs a new right child to insert.
 
-
 ### Solutions:
 
-
-
 ```java
-/**
-* Definition for a binary tree node.
-* public class TreeNode {
-* int val;
-* TreeNode left;
-* TreeNode right;
-* TreeNode(int x) { val = x; }
-* }
-*/
 public class Solution {
-    TreeNode pointer = new TreeNode(-1);
-    public void flatten(TreeNode root) {
-        flattenTree(root);
+     TreeNode* t;
+    
+    void ft(TreeNode* r)
+    {
+       if(!r) return;          
+       t->right =  r;
+       t = t->right;
+       auto l = r->left;
+       auto rr = r->right;
+       r->left = nullptr;
+       r->right = nullptr;
+       ft(l);
+       ft(rr);        
     }
-    private void flattenTree(TreeNode node){
-        if (node != null){
-            TreeNode left = node.left;
-            TreeNode right = node.right;
-            node.left = null;
-            node.right = null;
-            pointer.right = node;
-            pointer = node;
-            flattenTree(left);
-            flattenTree(right);
-        }
+    
+    void flatten(TreeNode* root) {
+      t = new TreeNode();
+        
+      ft(root);
+        
     }
 }
 ```
+
 Non-Recursion version:
 
 ```java
@@ -106,3 +98,6 @@ public class Solution {
     }
 }
 ```
+
+
+
