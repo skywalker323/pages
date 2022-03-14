@@ -8,9 +8,10 @@ What if the given tree could be any binary tree? Would your previous solution st
 
 Note:
 
-You may only use constant extra space.
-For example,
+You may only use constant extra space.  
+For example,  
 Given the following binary tree,
+
 ```
          1
        /  \
@@ -18,7 +19,9 @@ Given the following binary tree,
      / \    \
     4   5    7
 ```
+
 After calling your function, the tree should look like:
+
 ```
          1 -> NULL
        /  \
@@ -69,7 +72,7 @@ public class Solution {
         if (root.right != null) {
             root.right.next = next;
         }
-        
+
         connect(root.right);
         connect(root.left);
     }
@@ -108,3 +111,6 @@ public class Solution {
     }
 }
 ```
+
+
+
