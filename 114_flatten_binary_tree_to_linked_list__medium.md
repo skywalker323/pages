@@ -61,41 +61,5 @@ public class Solution {
 }
 ```
 
-Non-Recursion version:
-
-```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public void flatten(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        TreeNode p = new TreeNode(-1);
-        TreeNode node = root;
-        while (true) {
-            if (node == null) {
-                if (stack.size() == 0) {
-                    break;
-                }
-                node = stack.pop();
-            }
-            p.right = node;
-            p = node;
-            if (node.right != null) {
-                stack.push(node.right);
-            }
-            node = node.left;
-            p.left = null;
-        }
-    }
-}
-```
-
 
 
