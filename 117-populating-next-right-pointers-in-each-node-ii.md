@@ -33,83 +33,29 @@ After calling your function, the tree should look like:
 ### Solutions
 
 ```java
-/**
- * Definition for binary tree with next pointer.
- * public class TreeLinkNode {
- *     int val;
- *     TreeLinkNode left, right, next;
- *     TreeLinkNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public void connect(TreeLinkNode root) {
-        if (root == null) {
-            return;
+ Node* connect(Node* root) { 
+        if(!root) return root;
+        queue<Node*> Q;
+        Q.push(root);
+        while(!Q.empty())
+        {
+            auto sz = Q.size();
+            for(auto i=0; i < sz; i++)
+            {
+                auto r = Q.front(); Q.pop();
+                if(i == sz-1) r->next = nullptr;
+                else r->next = Q.empty()? nullptr : Q.front();
+                if(r->left)   Q.push(r->left);
+                if(r->right)   Q.push(r->right);
+            }            
         }
-        TreeLinkNode node = root.next;
-        TreeLinkNode next = null;
-        while (node != null) {
-            if (node.left != null) {
-                next = node.left;
-                break;
-            }
-            else if (node.right != null) {
-                next = node.right;
-                break;
-            }
-            else {
-                node = node.next;
-            }
-        }
-        if (root.left != null) {
-            if (root.right != null) {
-                root.left.next = root.right;
-            }
-            else {
-                root.left.next = next;
-            }
-        }
-        if (root.right != null) {
-            root.right.next = next;
-        }
-
-        connect(root.right);
-        connect(root.left);
+        return root;
+       
     }
-}
 ```
 
 ```java
-/**
- * Definition for binary tree with next pointer.
- * public class TreeLinkNode {
- *     int val;
- *     TreeLinkNode left, right, next;
- *     TreeLinkNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public void connect(TreeLinkNode root) {
-        TreeLinkNode fakeHead = new TreeLinkNode(0);
-        TreeLinkNode node = fakeHead;
-        while (root != null) {
-            if (root.left != null) {
-                node.next = root.left;
-                node = node.next;
-            }
-            if (root.right != null) {
-                node.next = root.right;
-                node = node.next;
-            }
-            root = root.next;
-            if (root == null) {
-                node = fakeHead;
-                root = fakeHead.next;
-                fakeHead.next = null;
-            }
-        }
-    }
-}
+
 ```
 
 
