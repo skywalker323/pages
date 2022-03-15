@@ -1,27 +1,22 @@
 # 131 Palindrome Partitioning – Medium
 
-
 ### Problem:
-
-
 
 Given a string s, partition s such that every substring of the partition is a palindrome.
 
 Return all possible palindrome partitioning of s.
 
-For example, given s = "aab",
+For example, given s = "aab",  
 Return
 
-[
+\[
 
-[“aa”,”b”],
+\[“aa”,”b”\],
 
-["a","a","b"]
-]
+\["a","a","b"\]  
+\]
 
 ### Thoughts:
-
-
 
 What is a Palindrome? A palindrome is like a string “aba” where it’s the same no matter if you read from left to right or right to left.
 
@@ -35,44 +30,39 @@ The idea is like the Rod Cut Problem in book . Suppose string s has length n. We
 
 One more thing is that we need to quickly check if a certain substring in string s is a palindrome. In order to do so, we build a auxiliary array isPa to keep in mind if that certain substring is palindrome. To calculate this array, we do another dynamic programming.
 
-
 ### Solutions:
 
-
-```java
-public class Solution {
-    public List<List<String>> partition(String s) {
-        boolean[][] isP = new boolean[s.length()][s.length()];
-        List<List<String>> result = new LinkedList<List<String>>();
-        List<String> curr = new LinkedList<String>();
-        calIsP(isP, s);
-        process(result, isP, s, curr, 0);
+```cpp
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>> result;
+        vector<string> currentList;
+        dfs(result, s, 0, currentList);
         return result;
     }
-    private void process(List<List<String>> result, boolean[][] isP, String s, List<String> curr, int start) {
-        if (start == s.length()) {
-            result.add(new LinkedList<String>(curr));
-        }
-        for (int i = start; i < s.length(); i ++) {
-            if (isP[start][i] == true) {
-                curr.add(s.substring(start, i + 1));
-                process(result, isP, s, curr, i + 1);
-                curr.remove(curr.size() - 1);
+
+    void dfs(vector<vector<string>> &result, string &s, int start, vector<string> &currentList) {
+        if (start >= s.length()) result.push_back(currentList);
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                // add current substring in the currentList
+                currentList.push_back(s.substr(start, end - start + 1));
+                dfs(result, s, end + 1, currentList);
+                // backtrack and remove the current substring from currentList
+                currentList.pop_back();
             }
         }
     }
-    private void calIsP(boolean[][] isP, String s) {
-        for (int i = 0; i < s.length(); i ++) {
-            isP[i][i] = true;
+
+    bool isPalindrome(string &s, int low, int high) {
+        while (low < high) {
+            if (s[low++] != s[high--]) return false;
         }
-        for (int i = 0; i < s.length() - 1; i ++) {
-            isP[i][i + 1] = s.charAt(i) == s.charAt(i + 1);
-        }
-        for (int k = 2; k < s.length(); k ++) {
-            for (int i = 0; i + k < s.length(); i ++) {
-                isP[i][i + k] = s.charAt(i) == s.charAt(i + k) && isP[i + 1][i + k - 1] == true;
-            }
-        }
+        return true;
     }
-}
+};
 ```
+
+
+
