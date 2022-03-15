@@ -1,10 +1,12 @@
 # 156 Binary Tree Upside Down – Medium
 
 ### Problem:
-Given a binary tree where all the right nodes are either leaf nodes with a sibling (a left node that shares the same parent node) or empty, flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
 
-For example:
+Given a binary tree where all the right nodes are either leaf nodes with a sibling \(a left node that shares the same parent node\) or empty, flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
+
+For example:  
 Given a binary tree {1,2,3,4,5},
+
 ```
     1
    / \
@@ -12,73 +14,78 @@ Given a binary tree {1,2,3,4,5},
  / \
 4   5
 ```
-return the root of the binary tree [4,5,2,#,#,3,1].
-```
 
+return the root of the binary tree \[4,5,2,\#,\#,3,1\].
+
+```
    4
   / \
  5   2
     / \
    3   1
 ```
-confused what “{1,#,2,3}” means? > read more on how binary tree is serialized on OJ.
+
+confused what “{1,\#,2,3}” means? &gt; read more on how binary tree is serialized on OJ.
 
 ### Thoughts
 
-The key point here is that the tree is given by strict condition.
-all the right nodes are either leaf nodes with a sibling (a left node that shares the same parent node) or empty
+The key point here is that the tree is given by strict condition.  
+all the right nodes are either leaf nodes with a sibling \(a left node that shares the same parent node\) or empty
 
 This means if a node has a right child, the right child will never has a subtree, or in another word, the right child will not have any children.
 
-So the basic step we will need is to reorganize the pointer between a node, its left child (if there is) and the right child (if there is). If left child is not empty, we go down to recursively solve the problem.
+So the basic step we will need is to reorganize the pointer between a node, its left child \(if there is\) and the right child \(if there is\). If left child is not empty, we go down to recursively solve the problem.  
 Using this method, we need to make sure to clean the left and right pointer of current node, otherwise, the original root will keep having old values in its left and right pointer.
 
-Also, there could be an iterative solution which will avoid to use stack when calling function recursively.
-The key idea for this method is to always solve (assign the correct value for left and right pointer of) current node.
-Say for the example above,
-Step 1, assign correct left and right for 1, which is null for both.
-Step 2, assign correct left and right for 2, which is 3 and 1.
-Step 3, assign correct left and right for 4, which is 5 and 2,
-etc.
+Also, there could be an iterative solution which will avoid to use stack when calling function recursively.  
+The key idea for this method is to always solve \(assign the correct value for left and right pointer of\) current node.  
+Say for the example above,  
+Step 1, assign correct left and right for 1, which is null for both.  
+Step 2, assign correct left and right for 2, which is 3 and 1.  
+Step 3, assign correct left and right for 4, which is 5 and 2,  
+etc.  
 And need to have two pointer to keep the value of above level.
 
-There could also be a version to use a modified post order solution.
+There could also be a version to use a modified post order solution.  
 This is similar to the first solution – recursion. The difference is that if we want to re-assign pointer from top to down OR from bottom to up?
 
 ### Solutions:
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+dfs with left child.
+
+Just follow instructions. rotate from bottom up, i.e. post order fasion.
+
 class Solution {
-    public TreeNode upsideDownBinaryTree(TreeNode root) {
-        return process(root);
+public:
+    TreeNode* upsideDownBinaryTree(TreeNode* root) {
+        TreeNode* head = nullptr;
+        dfs(root, head);
+        return head;
     }
-    private TreeNode process(TreeNode node) {
-        if (node == null) {
-            return null;
+
+private:
+    void dfs(TreeNode* root, TreeNode* &head) {
+        if (!root) return;
+		
+		//update head of upside down tree
+        if (!root->left && !root->right) {
+            head = root;
+            return;
         }
-        if (node.left == null && node.right == null) {
-            return node;
-        }
-        TreeNode left = node.left;
-        TreeNode right = node.right;
-        TreeNode root = process(node.left);
-        node.left = null;
-        node.right = null;
-        left.left = right;
-        left.right = node;
-        return root;
+        
+        dfs(root->left, head);
+        
+        //post-order
+        root->left->left = root->right;
+        root->left->right = root;
+        root->right = nullptr;
+        root->left = nullptr;
     }
-}
+    
+};
 ```
+
 Iterative solutions:
 
 ```java
@@ -106,3 +113,6 @@ public class Solution {
     }
 }
 ```
+
+
+
