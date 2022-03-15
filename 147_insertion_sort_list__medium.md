@@ -1,16 +1,10 @@
 # 147 Insertion Sort List – Medium
 
-
 ### Problem:
-
-
 
 Sort a linked list using insertion sort.
 
-
 ### Thoughts:
-
-
 
 This is a very basic sorting problem.
 
@@ -18,11 +12,9 @@ If you have learnt algorithms, this could be the very first algorithm you learnt
 
 Only difference is instead of an array, it is using a Single Linked List which complicates the problem a little bit. Because swapping two elements in a LinkedList is not that easy as in array.
 
-The solution below is still in O(n^2) which is the standard insertion sort running time.
-
+The solution below is still in O\(n^2\) which is the standard insertion sort running time.
 
 ### Solutions:
-
 
 ```java
 /**
@@ -53,3 +45,6 @@ public class Solution {
     }
 }
 ```
+
+
+
