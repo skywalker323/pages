@@ -28,16 +28,17 @@ This is a very basic recursion problem. Binary Tree iteration.
 ### Solutions:
 
 ```java
+ int ans = 0;
  void helper(TreeNode* root,int val){
-        
+
         if(root == nullptr) return;
-        
+
         //if it is a leaf node then add value till leaf to the answer::
         if(root->left == nullptr && root->right == nullptr){
             ans += (val*10 + root->val);
             return;
         }
-        
+
         //If not leaf then recursively call for the left and right child
         if(root->left) helper(root->left,val*10 + root->val);
         if(root->right) helper(root->right,val*10 + root->val);
