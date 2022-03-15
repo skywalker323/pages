@@ -16,16 +16,16 @@ The solution below is still in O\(n^2\) which is the standard insertion sort run
 
 ### Solutions:
 
-```java
+```cpp
 class Solution {
 public:
     ListNode* insertionSortList(ListNode* head) {
         if(!head||!head->next) return head;
-        
+
         ListNode* temp = head;
         ListNode* next = NULL;
         ListNode* sorted = NULL;
-        
+
         while(temp!=NULL){
             next = temp->next;
             // apply insrtion sort logic
