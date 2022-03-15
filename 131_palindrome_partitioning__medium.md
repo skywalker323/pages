@@ -38,7 +38,6 @@ public:
     vector<vector<string>> result;
     vector<string> currentList;
     vector<vector<string>> partition(string s) {
-       
         dfs(result, s, 0, currentList);
         return result;
     }
