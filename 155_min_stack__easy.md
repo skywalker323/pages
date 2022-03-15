@@ -1,107 +1,50 @@
 # 155  Min Stack – Easy
 
-
 ### Problem:
-
-
 
 Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
-push(x) — Push element x onto stack.
-pop() — Removes the element on top of the stack.
-top() — Get the top element.
-getMin() — Retrieve the minimum element in the stack.
+push\(x\) — Push element x onto stack.  
+pop\(\) — Removes the element on top of the stack.  
+top\(\) — Get the top element.  
+getMin\(\) — Retrieve the minimum element in the stack.
 
 ### Thoughts:
 
-
-
 The trick is to use an extra stack to keep the current min value.
 
-
 ### Solutions:
-```java
-public class MinStack {
-    private Stack<Integer> data;
-    private Stack<Integer> mins;
-    /** initialize your data structure here. */
-    public MinStack() {
-        data = new Stack<Integer>();
-        mins = new Stack<Integer>();
-    }
-    public void push(int x) {
-        data.push(x);
-        if (mins.isEmpty()) {
-            mins.push(x);
-        }
-        else {
-            mins.push(Math.min(x, mins.peek()));
-        }
-    }
-    public void pop() {
-        data.pop();
-        mins.pop();
-    
-    }
-    
-    public int top() {
-        return data.peek();
-    }
-    
-    public int getMin() {
-        return mins.peek();
-    }
-}
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
- ```
-
-
 
 ```java
-public class MinStack {
-    private Stack<Integer> data;
-    private Stack<Integer> mins;
-    /** initialize your data structure here. */
-    public MinStack() {
-        data = new Stack<Integer>();
-        mins = new Stack<Integer>();
-        data.push(-1);
-        mins.push(Integer.MAX_VALUE);
+
+class MinStack {
+public:
+    //maintaining pair {value,minimum_value}
+    stack<pair<int, int>>s;
+    MinStack() {}
+
+    void push(int val) {
+        if (!s.empty())
+            //decide the minimum and then push the pair
+            s.push({ val, min(val, s.top().second) });
+        else
+            //if stack is empty then of course that value itself will be the minimum
+            s.push({ val, val });
     }
-    public void push(int x) {
-        data.push(x);
-        mins.push(Math.min(x, mins.peek()));
+
+    void pop() {
+        s.pop();
     }
-    public void pop() {
-        if (data.size() > 1) {
-            data.pop();
-            mins.pop();
-        }   
+
+    int top() {
+        return s.top().first;
     }
-     
-    public int top() {
-        return data.peek();
+
+    int getMin() {
+        return s.top().second;
     }
-     
-    public int getMin() {
-        return mins.peek();
-    }
-}
- 
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack obj = new MinStack();
- * obj.push(x);
- * obj.pop();
- * int param_3 = obj.top();
- * int param_4 = obj.getMin();
- */
- ```
+};
+```
+
+
+
