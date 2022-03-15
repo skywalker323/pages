@@ -1,30 +1,22 @@
 # 119 Pascal’s Triangle II – Medium
 
-
 ### Problem:
-
-
 
 Given an index k, return the kth row of the Pascal’s triangle.
 
-For example, given k = 3,
-Return [1,3,3,1].
+For example, given k = 3,  
+Return \[1,3,3,1\].
 
-Note:
-Could you optimize your algorithm to use only O(k) extra space?
-
+Note:  
+Could you optimize your algorithm to use only O\(k\) extra space?
 
 ### Thoughts:
 
-
-
 Similar to the Version I. Actually, this problem could be solved using the Version I solution, instead of returning the whole triangle, return the kth row.
 
-But it could be optimized  to use only O(k) space. Only use on array then all calculations will be using this single array. Each time when calculating element in a new row, calculate from the right to left so that we don’t overwrite any existing elements in the array.
-
+But it could be optimized  to use only O\(k\) space. Only use on array then all calculations will be using this single array. Each time when calculating element in a new row, calculate from the right to left so that we don’t overwrite any existing elements in the array.
 
 ### Solutions:
-
 
 ```java
 public class Solution {
@@ -42,3 +34,6 @@ public class Solution {
     }
 }
 ```
+
+
+
