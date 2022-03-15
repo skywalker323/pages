@@ -17,8 +17,8 @@ After running your function, the board should be:
 X X X X  
 X X X X  
 X X X X  
-X O X X  
-  
+X O X X
+
 Explanation: Surrounded regions should not be on the border, which means that any 'O' on the border of the board are not flipped to 'X'. Any 'O' that is not on the border and it is not connected to an 'O' on the border will be flipped to 'X'. Two cells are connected if they are adjacent cells connected horizontally or vertically.
 
 ### Thoughts:
@@ -39,62 +39,43 @@ So the whole ideal is to like a DFS, go deeper as possible. But not like a norma
 
 Alternative solution:
 
-```java
-public class Solution {
-    public void solve(char[][] board) {
-        for (int i = 0; i < board.length; i ++) {
-            mark(board, i, 0);
-            mark(board, i, board[i].length - 1);
-        }
-        for (int j = 0; j < board[0].length; j ++) {
-            mark(board, 0, j);
-            mark(board, board.length - 1, j);
-        }
-        for (int i = 0; i < board.length; i ++) {
-            for (int j = 0; j < board[0].length; j ++) {
-                if (board[i][j] == 'O') {
-                    board[i][j] = 'X';
-                    continue;
-                }
-                if (board[i][j] == 'Y') {
-                    board[i][j] = 'O';
-                    continue;
-                }
+```cpp
+class Solution {
+public:
+    vector<int>dx{-1,1,0,0};
+    vector<int>dy{0,0,1,-1};
+    void dfs(int row, int col, vector<vector<char>>& board){
+        board[row][col] = 'N';
+        
+        for(int i=0;i<4;i++){
+            int ni = row + dx[i];
+            int nj = col + dy[i];
+            
+            if(ni >= 0 and ni < board.size() and nj >= 0 and nj < board[0].size() and board[ni][nj] == 'O'){
+                dfs(ni, nj, board);
             }
         }
     }
-    private void mark(char[][] board, int i, int j) {
-        Queue<Integer> xs = new LinkedList<Integer>();
-        Queue<Integer> ys = new LinkedList<Integer>();
-        xs.add(i);
-        ys.add(j);
-        if (board[i][j] != 'O') {
-            return;
+    
+    void solve(vector<vector<char>>& board) {
+        int n = board.size();
+        for(int i=0;i<board[0].size();i++){
+            if(board[0][i] == 'O') dfs(0, i, board);
+            if(board[board.size() - 1][i] == 'O')dfs(board.size() - 1, i, board);
         }
-        while(xs.size() > 0) {
-            int x = xs.poll();
-            int y = ys.poll();
-            board[x][y] = 'Y';
-            if (x - 1 >= 0 && board[x-1][y] == 'O') {
-                xs.add(x - 1);
-                ys.add(y);
-            }
-            if (x + 1 < board.length && board[x+1][y] == 'O') {
-                xs.add(x + 1);
-                ys.add(y);
-            }
-            if (y - 1 >= 0 && board[x][y-1] == 'O') {
-                xs.add(x);
-                ys.add(y - 1);
-            }
-            if (y + 1 < board[0].length && board[x][y+1] == 'O') {
-                xs.add(x);
-                ys.add(y + 1);
-            }
+        for(int i=0;i<board.size();i++){
+            if(board[i][0] == 'O') dfs(i, 0, board);
+            if(board[i][board[0].size() - 1] == 'O')dfs(i, board[0].size() - 1, board);
         }
-
+        
+        for(int i=0;i<board.size();i++){
+            for(int j=0;j<board[0].size();j++){
+                if(board[i][j] == 'N') board[i][j] = 'O';
+                else if(board[i][j] == 'O') board[i][j] = 'X';
+            }
+        }        
     }
-}
+};
 ```
 
 
