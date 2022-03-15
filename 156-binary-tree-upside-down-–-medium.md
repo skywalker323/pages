@@ -51,7 +51,7 @@ This is similar to the first solution – recursion. The difference is that if w
 
 ### Solutions:
 
-```java
+```cpp
 dfs with left child.
 
 Just follow instructions. rotate from bottom up, i.e. post order fasion.
@@ -67,22 +67,22 @@ public:
 private:
     void dfs(TreeNode* root, TreeNode* &head) {
         if (!root) return;
-		
-		//update head of upside down tree
+
+        //update head of upside down tree
         if (!root->left && !root->right) {
             head = root;
             return;
         }
-        
+
         dfs(root->left, head);
-        
+
         //post-order
         root->left->left = root->right;
         root->left->right = root;
         root->right = nullptr;
         root->left = nullptr;
     }
-    
+
 };
 ```
 
