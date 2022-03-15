@@ -28,7 +28,7 @@ public:
         return a/b;
     }
      bool isop(string it){
-     return( it =="+" or it =="-" or it =="*" or it=="/") ;
+             return( it =="+" or it =="-" or it =="*" or it=="/") ;
      }
     int evalRPN(vector<string>& toks) {
         stack<int> s ;
