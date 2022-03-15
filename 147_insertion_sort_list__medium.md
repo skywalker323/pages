@@ -17,33 +17,36 @@ The solution below is still in O\(n^2\) which is the standard insertion sort run
 ### Solutions:
 
 ```java
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public ListNode insertionSortList(ListNode head) {
-        ListNode fakeHead = new ListNode(Integer.MIN_VALUE);
-        while (head != null){
-            ListNode p = fakeHead;
-            while (p != null) {
-                if ( head.val >= p.val && (p.next == null || head.val <= p.next.val)) {
-                    ListNode next = head.next;
-                    head.next = p.next;
-                    p.next = head;
-                    head = next;
-                    break;
-                }
-                p = p.next;
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        if(!head||!head->next) return head;
+        
+        ListNode* temp = head;
+        ListNode* next = NULL;
+        ListNode* sorted = NULL;
+        
+        while(temp!=NULL){
+            next = temp->next;
+            // apply insrtion sort logic
+            if(sorted == nullptr|| sorted->val > temp->val){
+                temp->next = sorted;
+                sorted = temp;
             }
+            else{
+                ListNode* curr = sorted;
+                while(curr->next!= nullptr && curr->next->val<temp->val){
+                    curr = curr->next;
+                }
+                temp->next = curr->next;
+                curr->next = temp;
+            }
+            temp = next;
         }
-        return fakeHead.next;
+        head = sorted;
+        return head;
     }
-}
+};
 ```
 
 
