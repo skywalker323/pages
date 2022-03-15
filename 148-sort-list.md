@@ -7,47 +7,48 @@ Sort a linked list in O\(n log n\) time using constant space complexity.
 ### Solutions:
 
 ```cpp
-class Solution {
-public:
-    ListNode* sortList(ListNode* head) {
-        if (!head || !head->next)
-            return head;
-        ListNode* mid = getMid(head);
-        ListNode* left = sortList(head);
-        ListNode* right = sortList(mid);
-        return merge(left, right);
-    }
 
-    ListNode* merge(ListNode* list1, ListNode* list2) {
-        ListNode dummyHead(0);
-        ListNode* ptr = &dummyHead;
-        while (list1 && list2) {
-            if (list1->val < list2->val) {
-                ptr->next = list1;
-                list1 = list1->next;
-            } else {
-                ptr->next = list2;
-                list2 = list2->next;
-            }
-            ptr = ptr->next;
-        }
-        if(list1) ptr->next = list1;
-        else ptr->next = list2;
-
-        return dummyHead.next;
+ListNode *Merge(ListNode *n1,ListNode *n2)
+{
+    ListNode *curr=new ListNode (0);
+    if(!n1) return n2;
+    if(!n2) return n1;
+    
+    if(n1->val<=n2->val)
+    {
+        curr->val=n1->val;
+        curr->next=Merge(n1->next,n2);
+        
+    }else
+    {
+        curr->val=n2->val;
+        curr->next=Merge(n1,n2->next);
     }
+    
+    return curr;
+}
 
-    ListNode* getMid(ListNode* head) {
-        ListNode* midPrev = nullptr;
-        while (head && head->next) {
-            midPrev = (midPrev == nullptr) ? head : midPrev->next;
-            head = head->next->next;
-        }
-        ListNode* mid = midPrev->next;
-        midPrev->next = nullptr;
-        return mid;
-    }
-};
+ListNode* sortList(ListNode* head) {
+    ListNode *curr=head;
+    if(!curr  or !curr->next) return curr;
+    
+    ListNode *temp = NULL;
+    ListNode *mid = head;
+    ListNode *end = head;
+    
+    while(end !=  NULL && end -> next != NULL)
+    {
+        temp = mid;
+        mid = mid->next;          
+        end = end ->next ->next;  
+        
+    }   
+    temp -> next = NULL; 
+    ListNode *n1=sortList(head);
+    ListNode *n2=sortList(mid);
+
+    return Merge(n1, n2); 
+}
 ```
 
 
