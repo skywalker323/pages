@@ -56,34 +56,27 @@ dfs with left child.
 
 Just follow instructions. rotate from bottom up, i.e. post order fasion.
 
-class Solution {
-public:
-    TreeNode* upsideDownBinaryTree(TreeNode* root) {
-        TreeNode* head = nullptr;
-        dfs(root, head);
-        return head;
-    }
-
-private:
-    void dfs(TreeNode* root, TreeNode* &head) {
-        if (!root) return;
-
-        //update head of upside down tree
-        if (!root->left && !root->right) {
-            head = root;
-            return;
+    TreeNode* traverse(TreeNode* node, TreeNode* parent)
+    {
+        if (!node) return parent;
+        TreeNode* res = traverse(node->left, node);
+        if (parent)
+        {
+            node->right = parent;
+            node->left = parent->right;
         }
-
-        dfs(root->left, head);
-
-        //post-order
-        root->left->left = root->right;
-        root->left->right = root;
-        root->right = nullptr;
-        root->left = nullptr;
+        else
+        {
+            node->left = nullptr;
+            node->right = nullptr;
+        }
+        return res;
     }
-
-};
+    
+    TreeNode* upsideDownBinaryTree(TreeNode* root) {
+        return traverse(root, nullptr);
+    }
+    
 ```
 
 Iterative solutions:
