@@ -23,19 +23,19 @@ public:
         if(!head||!head->next) return head;
 
         ListNode* temp = head;
-        ListNode* next = NULL;
-        ListNode* sorted = NULL;
+        ListNode* next = nullptr;
+        ListNode* sorted = nullptr;
 
-        while(temp!=NULL){
+        while(!temp){
             next = temp->next;
             // apply insrtion sort logic
-            if(sorted == nullptr|| sorted->val > temp->val){
+            if(!sorted || sorted->val > temp->val){
                 temp->next = sorted;
                 sorted = temp;
             }
             else{
                 ListNode* curr = sorted;
-                while(curr->next!= nullptr && curr->next->val<temp->val){
+                while(curr->next  && curr->next->val<temp->val){
                     curr = curr->next;
                 }
                 temp->next = curr->next;
