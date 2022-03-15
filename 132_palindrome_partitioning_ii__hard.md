@@ -28,7 +28,7 @@ class Solution {
 public:
     vector<int> cutsDp;
     vector<vector<bool>> palindromeDp;
-    
+
     int minCut(string s) {
         cutsDp.resize(s.length());
         palindromeDp.resize(s.length(), vector<bool>(s.length(), false));
