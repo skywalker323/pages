@@ -33,7 +33,7 @@ The solution below relies on each node has a unique value because it uses label 
 
 ### Solutions:
 
-```java
+```cpp
 class SolutionNode {
 public:
     Node* cloneGraph(Node* node) {
@@ -51,8 +51,8 @@ public:
                 for(auto val : old_node->neighbors){
                     if (!visited[val->val]){
                         auto adj_node = new Node(val->val);
-                        visited[adj_node->val] = adj_node;
-                        visited[old_node->val]->neighbors.push_back(adj_node);
+                        visited[adj_node->val] = adj_node; // add to the map
+                        visited[old_node->val]->neighbors.push_back(adj_node); // add to the parent map list
                         q.push(val);
                     } else {
                         visited[old_node->val]->neighbors.push_back(visited[val->val]);
