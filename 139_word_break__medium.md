@@ -22,30 +22,31 @@ A\[i\] = A\[j\] && dict.contains\(substring\(j+1, i\)\)
 
 ```cpp
 bool wordBreak(string s, vector<string>& wordDict) {
-        int len = s.length();
-        // use a set to store words to avoid redundant words
-		unordered_set<string> words(wordDict.begin(), wordDict.end());
-		// dp[i] represents whether a substring starting at index i can be broken down using dict words
-        vector<bool> dp(len+1, false);
-        dp[len] = true;
-		
-		// outer for loop (loop over entire string from end to beginning)
-        for (int i = len-1; i >= 0; --i)
-		{
-		    // inner for loop (loop over all possible substrings starting at index i
-            for (int j = len-1; j >= i; --j)
-			{
-				// if the current substring matches any word and the remaining substring is valid
-				// note that since we're going from end to beginning, the validity of remaining substring
-				// will always already have been determined
-                if (words.find(s.substr(i, j-i+1)) != words.end() && dp[j+1])
-				{
-                    dp[i] = true;
-                    break;
+        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
+        vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
+        
+        for (int i = 0; i < s.size(); i++){
+            for (int j = i; j < s.size(); j++){
+                if (wordSet.count(s.substr(i, j+1-i)) > 0){
+                    if (i == 0){
+                        dp[i][j] = true;
+                        if (j == s.size()-1){
+                            return true;
+                        }
+                    }
+                    for (int col = 0; col < i; col++){
+                        if (dp[col][i-1]){
+                            dp[i][j] = true;
+                            if (j == s.size()-1){
+                                return true;
+                            }
+                            break;
+                        }
+                    }
                 }
             }
         }
-        return dp[0];
+        return false;
     }
 ```
 
