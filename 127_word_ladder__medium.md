@@ -1,33 +1,28 @@
 # 127 Word Ladder – Medium
 
-
 ### Problem:
 
+Given two words \(beginWord and endWord\), and a dictionary’s word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
 
-
-Given two words (beginWord and endWord), and a dictionary’s word list, find the length of shortest transformation sequence from beginWord to endWord, such that:
-
-Only one letter can be changed at a time
-Each intermediate word must exist in the word list
+Only one letter can be changed at a time  
+Each intermediate word must exist in the word list  
 For example,
 
-Given:
-beginWord = "hit"
-endWord = "cog"
-wordList = ["hot","dot","dog","lot","log"]
+Given:  
+beginWord = "hit"  
+endWord = "cog"  
+wordList = \["hot","dot","dog","lot","log"\]
 
-As one shortest transformation is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+As one shortest transformation is "hit" -&gt; "hot" -&gt; "dot" -&gt; "dog" -&gt; "cog",  
 return its length 5.
 
 Note:
 
-Return 0 if there is no such transformation sequence.
-All words have the same length.
+Return 0 if there is no such transformation sequence.  
+All words have the same length.  
 All words contain only lowercase alphabetic characters.
 
 ### Thoughts:
-
-
 
 This is a little complicated problem. Solution may vary based on different requirements.
 
@@ -35,46 +30,52 @@ Solution below is using a modified BFS version. It is also modifying the wordDic
 
 If constraint has cannot modify wordDic, this approach might not work sell. But could use an extra hashSet to achieve the same goal.
 
-
 ### Solutions:
 
 ```java
-public class Solution {
-    public int ladderLength(String beginWord, String endWord, Set<String> wordDict) {
-        if (beginWord == null || endWord == null || beginWord.length() != endWord.length()) {
-            return 0;
-        }
-        HashSet<String> visited = new HashSet<String>();
-        Queue<String> q = new LinkedList<String>();
-        q.add(beginWord);
-        visited.add(beginWord);
-        int count = 0;
-        while (q.size() > 0) {
-            int n = q.size();
-            count ++;
-            for (int i = 0; i < n; i ++) {
-                String word = q.remove();
-                if (word.equals(endWord)) {
-                    return count;
+ bool onediff(string &s1, string &s2)
+    {
+       if(s1.length()!=s2.length()) return false;
+       int numdiff=0;
+       for(int i=0;i<s1.length();i++)
+       {
+           if(s1[i]!=s2[i])
+           {
+               numdiff++;
+               if(numdiff>1) return false;
+           }
+       }
+       return  numdiff==1;
+    }
+    
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> words(wordList.begin(),wordList.end());
+        if(words.find(endWord)==words.end()) return 0;
+        deque<string> store;
+        store.push_back(beginWord);
+        int steps=1;
+        while(store.size()>0)
+        {
+            int n=store.size();
+            steps++;
+            while(n--)
+            {
+                string cur=store.front();store.pop_front();
+                vector<string> visited;
+                for(auto it=words.begin();it!=words.end();it++)
+                {
+                   string s=(*it);
+                   if(!onediff(s,cur)) continue; 
+                   if(s==endWord) return steps;
+                   store.push_back(s);
+                   visited.push_back(s); 
                 }
-                StringBuilder nwsb = new StringBuilder(word);
-                for (int j = 0; j < word.length(); j ++) {
-                    char origin = word.charAt(j);
-                    for (int m = 0; m < 26; m ++) {
-                        if ('a' + m == origin) {
-                            continue;
-                        }
-                        nwsb.setCharAt(j, (char)('a' + m));
-                        if (wordDict.contains(nwsb.toString()) && !visited.contains(nwsb.toString())){
-                            visited.add(nwsb.toString());
-                            q.add(nwsb.toString());
-                        }
-                    }
-                    nwsb.setCharAt(j, origin);
-                }
+                for(string s:visited) words.erase(s);
             }
         }
-        return 0;
+        return 0;             
     }
-}
 ```
+
+
+
