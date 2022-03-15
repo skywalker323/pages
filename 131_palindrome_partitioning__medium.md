@@ -35,14 +35,15 @@ One more thing is that we need to quickly check if a certain substring in string
 ```cpp
 class Solution {
 public:
+    vector<vector<string>> result;
+    vector<string> currentList;
     vector<vector<string>> partition(string s) {
-        vector<vector<string>> result;
-        vector<string> currentList;
+       
         dfs(result, s, 0, currentList);
         return result;
     }
 
-    void dfs(vector<vector<string>> &result, string &s, int start, vector<string> &currentList) {
+    void dfs(string &s, int start) {
         if (start >= s.length()) result.push_back(currentList);
         for (int end = start; end < s.length(); end++) {
             if (isPalindrome(s, start, end)) {
