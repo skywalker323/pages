@@ -1,61 +1,58 @@
 # 3 LeetCode Java: Longest Substring Without Repeating Characters
 
-
 ### Problem:
-
 
 Given a string, find the length of the longest substring without repeating characters. For example, the longest substring without repeating letters for “abcabcbb” is “abc”, which the length is 3. For “bbbbb” the longest substring is “b”, with the length of 1.
 
-
 ### Thoughts:
 
-
-Keep a set of flags to indicate what character has appeared.
+Keep a set of flags to indicate what character has appeared.  
 We could use a HashSet
 
-There could be a optimization about the HashSet. Instead to use a set of character, use a boolean array of 256 elements saves more space when n becomes larger (n is the number of elements in the given array). Because a Character takes 16-bit and a boolean only takes 1 bit. So no matter what n is, using boolean array only takes 256 bit at most.
-
+There could be a optimization about the HashSet. Instead to use a set of character, use a boolean array of 256 elements saves more space when n becomes larger \(n is the number of elements in the given array\). Because a Character takes 16-bit and a boolean only takes 1 bit. So no matter what n is, using boolean array only takes 256 bit at most.
 
 ### Solutions:
-
 
 This is the optimized version using boolean array.
 
 ```java
-public class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        boolean[] flag = new boolean[256];
- 
-        int result = 0;
-        int start = 0;
-        char[] arr = s.toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            char current = arr[i];
-            if (flag[current]) {
-                result = Math.max(result, i - start);
-                for (int k = start; k < i; k++) {
-                    if (arr[k] == current) {
-                        start = k + 1;
-                        break;
-                    }
-                    flag[arr[k]] = false;
+int lengthOfLongestSubstring(string s) {
+        
+        if(s.empty()) return 0;
+        unordered_map<char, int> um;
+        int cur = 0;
+        int mx = 1;
+        for(int i =0; i < s.size(); i++)
+        {
+            if( um.count(s[i]))
+            {
+                int j = cur;
+                while ( j < i and s[i] != s[j])
+                {
+                    um.erase(s[j]);
+                    j++;
                 }
-            } else {
-                flag[current] = true;
+                cur = j+1;
+                um[s[i]] = i;             
             }
+            else
+            {
+                um.insert({s[i], i});    
+            }
+            mx = max(mx, i-cur+1);        
         }
-        result = Math.max(arr.length - start, result);
- 
-        return result;
+        
+        return mx;
     }
-}
 ```
+
 Updated: 10/13/2016
 
 The code above, because of cleaning the flags by
 
-`for (int k = start; k < i; k++) {`
-The solution will have two pass of the array, which is 2n operations. The new solution below will only have one pass of the array which is more efficient in running time. But from algorithm analysis point, they are both O(n). Also note the solution below requires to use HashMap instead of HashSet in the above.
+`for (int k = start; k < i; k++) {`  
+The solution will have two pass of the array, which is 2n operations. The new solution below will only have one pass of the array which is more efficient in running time. But from algorithm analysis point, they are both O\(n\). Also note the solution below requires to use HashMap instead of HashSet in the above.
+
 ```java
 public class Solution {
   public int lengthOfLongestSubstring(String s) {
@@ -77,7 +74,9 @@ public class Solution {
   }
 }
 ```
+
 Another version of the solution is inspired by the official article of leetcode
+
 ```java
 public class Solution {
   public int lengthOfLongestSubstring(String s) {
@@ -96,3 +95,6 @@ public class Solution {
   }
 }
 ```
+
+
+
