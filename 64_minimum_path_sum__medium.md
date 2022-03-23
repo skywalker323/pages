@@ -2,31 +2,23 @@
 
 ### Problem:
 
-
-
 Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
 
 Note: You can only move either down or right at any point in time.
 
-
 ### Thoughts:
-
-
 
 This is another modified version of the problem Unique Paths.
 
 Instead of
 
-d[i][j] = d[i-1][j] +d[i][j-1]
+d\[i\]\[j\] = d\[i-1\]\[j\] +d\[i\]\[j-1\]
 
 Use
 
-d[i][j] = Math.min(d[i-1][j], d[i][j-1]) + nums[i][j]
-
+d\[i\]\[j\] = Math.min\(d\[i-1\]\[j\], d\[i\]\[j-1\]\) + nums\[i\]\[j\]
 
 ### Solutions:
-
-
 
 ```java
 public class Solution {
@@ -50,3 +42,6 @@ public class Solution {
     }
 }
 ```
+
+
+
