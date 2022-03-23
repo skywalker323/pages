@@ -1,25 +1,23 @@
-# 28 Implement strStr() – Easy
-
+# 28 Implement strStr\(\) – Easy
 
 ### Problem:
 
-
-
-Implement strStr().
+Implement strStr\(\).
 
 Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
-
 ### Thoughts:
 
-
-
-Very straightforward. String manipulation.
+Very straightforward. String manipulation.  
 
 
 ### Solutions:
 
 ```java
+
+size_t found=haystack.find(needle);   
+return found!=string::npos ? found :-1 ;
+
 public class Solution {
     public int strStr(String haystack, String needle) {
         if (needle.equals("")) {
@@ -39,8 +37,9 @@ public class Solution {
     }
 }
 ```
-KMP algorithm.
-https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm
+
+KMP algorithm.  
+[https://en.wikipedia.org/wiki/Knuth–Morris–Pratt\_algorithm](https://en.wikipedia.org/wiki/Knuth–Morris–Pratt_algorithm)
 
 ```java
 public class Solution {
@@ -88,3 +87,6 @@ public class Solution {
     }
 }
 ```
+
+
+
