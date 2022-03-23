@@ -1,62 +1,46 @@
 # 5 Longest Palindromic Substring
 
-
 ### Problem:
-
 
 Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
 
-
 ### Thoughts:
 
-
-Trivial way is to calculate each substring is palindrome, using O(n^2) time and space.
-Could be optimized using only O(1) space.
-Idea is to return the longest palindromic substring that is center by (i,i) or (i, i + 1).
-
+Trivial way is to calculate each substring is palindrome, using O\(n^2\) time and space.  
+Could be optimized using only O\(1\) space.  
+Idea is to return the longest palindromic substring that is center by \(i,i\) or \(i, i + 1\).
 
 ### Solution:
-
 
 Trivial way:
 
 ```java
-public class Solution {
-    public String longestPalindrome(String s) {
-        boolean[][] isPa = new boolean[s.length()][s.length()];
-        calIsPa(isPa, s);
-        String longest = "";
-        int max = 0;
-        for (int i = 0; i < s.length(); i ++){
-            for (int j = i; j < s.length(); j ++){
-                if (isPa[i][j] == true && (j - i + 1) > max){
-                    max = j - i + 1;
-                    longest = s.substring(i, j + 1);
-                }
+string longestPalindrome(string s) {
+        vector<vector<bool>> dp(s.size(), vector<bool>(s.size(), false));
+        
+        for(int i =1; i < s.size(); i++)
+            dp[i][i]=1;
+        
+        int start = 0;
+        int end = 0;
+        for(int len = 2; len <= s.size(); len++) // abcdef
+        {
+            for(int i =0; i < s.size()-len+1; i++) // len 5 (0-4)=> 0, 1 , 2 , 3 
+            {
+                int j = i+len-1; // end of substr
+                if(s[i] == s[i+len-1]) // when len =2 (0, 1) => dp[1][0] which is false so handl seperate
+                    dp[i][j] = len == 2 ? true : dp[i+1][j-1]; 
+                  
+                if( dp[i][j]) { start = i; end = j;}                                
             }
         }
-        return longest;
+        
+        return s.substr(start, end-start+1);
+        
     }
-    private void calIsPa(boolean[][] isPa, String s){
-        for (int i = 0; i < s.length(); i ++){
-            isPa[i][i] = true;
-        }
-        for (int i = 0; i < s.length() - 1; i ++){
-            if (s.charAt(i) == s.charAt(i+1)){
-                isPa[i][i+1] = true;
-            }
-        }
-        for (int l = 3; l <= s.length(); l ++ ){
-            for (int i = 0; i < s.length() - l + 1; i ++){
-                if (s.charAt(i) == s.charAt(i + l - 1) && isPa[i+1][i + l -2]){
-                    isPa[i][i+ l - 1] = true;
-                }
-            }
-        }
-    }
-     
-}
+
 ```
+
 The better way:
 
 ```java
@@ -86,3 +70,6 @@ public class Solution {
     }
 }
 ```
+
+
+
