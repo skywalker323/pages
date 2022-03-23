@@ -19,30 +19,19 @@ The key takeaway here is that if a problem is very annoying and has many special
 ### Solutions:
 
 ```java
-string intToRoman(int num) {
-        vector<string> rms{"M", "CM", "D", "CD", "C", "XC", "L", "XL","X", "IX", "V", "IV", "I"};
-        vector<int>  nms {1000, 900, 500,   400, 100, 90,  50,   40, 10,   9,    5,   4, 1};
-        string res;
-        // 58 = 50 + 8 => 50 + 5 +3
-        // 48 => 
-        for(int i =0; i < nms.size(); i++)
+ int romanToInt(string s) 
+    {
+       unordered_map<char, int> um{{'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C' , 100}, {'D', 500}, {'M', 1000}};
+    
+        int no =0;
+        for(int i =0; i < s.size(); i++)
         {
-            if( num >= nms[i])
-            {
-                auto temp = num;
-                int count = num/nms[i];
-                for(int ii =0; ii < count; ii++)
-                {
-                    res += rms[i];
-                    temp -= nms[i];
-                }
-                
-                num  = temp;
-            }
+            if( i > 0 and um[s[i-1]] < um[s[i]] )
+                no -= (2*um[s[i-1]]);
+            no += um[s[i]];
         }
-        
-        return res;
-        
+
+        return no;
     }
 ```
 
