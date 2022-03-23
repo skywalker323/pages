@@ -12,8 +12,6 @@ The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 
 ### Thoughts:
 
-
-
 This is almost the same problem with 3Sum. The only difference is the checking condition. Instead of a + b + c = 0, check if \(a + b + c – target\) is min.
 
 ### Solutions:
@@ -24,6 +22,7 @@ public class Solution {
         if (nums.length == 0){
             return 0;
         }
+        
         Arrays.sort(nums);
         int min = Integer.MAX_VALUE;
         int closed = 0;
