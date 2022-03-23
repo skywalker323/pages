@@ -1,73 +1,46 @@
-# 8 String to Integer (atoi) – Easy
-
+# 8 String to Integer \(atoi\) – Easy
 
 ### Problem:
 
-
 Implement atoi to convert a string to an integer.
 
-Notes: It is intended for this problem to be specified vaguely (ie, no given input specs). You are responsible to gather all the input requirements up front.
+Notes: It is intended for this problem to be specified vaguely \(ie, no given input specs\). You are responsible to gather all the input requirements up front.
 
 ### Thoughts:
 
-
-The tricky part for this problem is how to handle overflow.
-The annoying thing here is the special cases. “010” -> 10 “+-2″ -> 0 ” 010″ -> 10 “-012ab1234” -> -12 “2147483648” -> “2147483647” “-2147483648” -> – 2147483648 Although I would think for some of these special cases we should throw Exceptions instead of returning things.
+The tricky part for this problem is how to handle overflow.  
+The annoying thing here is the special cases. “010” -&gt; 10 “+-2″ -&gt; 0 ” 010″ -&gt; 10 “-012ab1234” -&gt; -12 “2147483648” -&gt; “2147483647” “-2147483648” -&gt; – 2147483648 Although I would think for some of these special cases we should throw Exceptions instead of returning things.
 
 ### Solutions:
 
-
-
 ```java
-public class Solution {
-    public int myAtoi(String str) {
-        str = str.trim();
-        int result = 0;
-        int flag = 1;
-        int start = 0;
-        if (str == null || str.length() == 0){
-            return 0;
+int myAtoi(string s) {
+        
+        if(s.empty()) return 0;
+        int idx = 0;
+        int n = s.size();
+        while(s[idx] == ' ') idx++;
+        bool sn = s[idx] == '-' ?  true: false;
+        if( sn or s[idx] == '+') idx++;
+        
+        while(idx < n and  s[idx] == '0') idx++;
+        
+        long long no =0;
+        while(idx < n and isdigit(s[idx]))     
+        {
+            // check overflow 
+            no = no*10+s[idx]-'0';
+            if( no >  INT_MAX)   return sn  ?  INT_MIN : INT_MAX;
+            idx++;
         }
-        if (str.charAt(0) == '-'){
-            flag = -1;
-            start = 1;
-        }
-        else if (str.charAt(0) == '+'){
-            start = 1;
-        }
-        for (int i = start; i < str.length(); i ++){
-            if (str.charAt(i) != '0'){
-                start = i;
-                break;
-            }
-        }
-        for (int i = start; i < str.length(); i ++){
-            char c = str.charAt(i);
-            if (c < 48 || c > 57){
-                break;
-            }
-            int digit = c - 48;
-            int tmp = result * 10 + digit;
-            if (tmp == Integer.MIN_VALUE && i == (str.length() -1) && str.charAt(0) == '-'){
-                return Integer.MIN_VALUE;
-            }
-            else if ((tmp - digit) / 10 != result || (result > 0 && tmp < 0)){
-                //overflow
-                if (str.charAt(0) == '-'){
-                    return Integer.MIN_VALUE;
-                }
-                else{
-                    return Integer.MAX_VALUE;
-                }
-            }
-            else{
-                result = tmp;
-            }
-        }
-        return result * flag;
+        
+        if( no >  INT_MAX) 
+            return sn  ?   INT_MIN : INT_MAX;
+        
+        return  sn ? -no : no;
     }
-}
 ```
+
 Updated: 10/17/2016
 
 ```java
@@ -109,3 +82,6 @@ public class Solution {
     }
 }
 ```
+
+
+
