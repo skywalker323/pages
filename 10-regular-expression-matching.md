@@ -1,7 +1,9 @@
 # 10 Regular Expression Matching
 
 ### Problem:
-Implement regular expression matching with support for '.' and '*'.
+
+Implement regular expression matching with support for '.' and '\*'.
+
 ```
 '.' Matches any single character.
 '*' Matches zero or more of the preceding element.
@@ -22,40 +24,43 @@ isMatch("aab", "c*a*b") → true
 ```
 
 ### Solutions:
+
 ```java
-public class Solution {
-    public boolean isMatch(String s, String p) {
-        return match(s, p, 0, 0);   
+map<pair<int, int>, bool> um;
+    bool match (string s, string p, int s1, int p1)
+    {
+        if( s1 == s.size() and p1 == p.size() ) return true;
+        if( p1 == p.size() ) return false;
+        
+        //  "ab", p = ".*"
+        // if *  normal compare
+        if( um.count({s1, p1})) return um[{s1, p1}];
+        if( p1 != p.size()-1 and p[p1+1] == '*') 
+        {
+                //.* or C* 
+                if(match(s, p, s1, p1+2)) return true;
+                // zero or more
+                if(s1 < s.size() and (s[s1] == p[p1] || p[p1] == '.') )
+                    return um[{s1, p1}] = match(s, p, s1+1, p1);
+                else
+                    return um[{s1, p1}] =false;
+            
+        }
+        else
+        {
+             // normal case
+            if(s1 < s.size() and (p[p1] == '.' || s[s1] == p[p1] ) )
+                 return um[{s1, p1}] = match(s, p, s1+1, p1+1);
+            else
+                return um[{s1, p1}] =false;
+        }
+        if( s1 == s.size() and p1 == p.size()) return true;
+        return um[{s1, p1}] = false;
     }
-    private boolean match(String s, String p, int s1, int s2) {
-        if (s1 == s.length() && s2 == p.length()) {
-            return true;
-        }
-        if (s2 == p.length()) {
-            return false;
-        }
-        if (s2 == p.length() - 1 || p.charAt(s2 + 1) != '*') {
-            //normal check
-            if (s1 < s.length() && (p.charAt(s2) == '.' || s.charAt(s1) == p.charAt(s2))) {
-                return match(s, p, s1 + 1, s2 + 1);
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            // * as zero
-            if (match(s, p, s1, s2 + 2)) {
-                return true;
-            }
-            // * as not zero
-            if (s1 < s.length() && ((p.charAt(s2) == '.' ||s.charAt(s1) == p.charAt(s2)) && match(s, p, s1 + 1, s2))) {
-                return true;
-            }
-        }
-        return false;
+    
+    bool isMatch(string s, string p) {
+        return match(s, p, 0, 0);
     }
-}
 ```
 
 ```java
@@ -77,7 +82,7 @@ class Solution {
                     if (p.charAt(j - 2) == '.' || p.charAt(j - 2) == s.charAt(i - 1)) {
                         dp[i][j] = dp[i][j] || dp[i - 1][j];
                     }
-                    
+
                 }
                 else {
                     if (p.charAt(j- 1) == '.' || p.charAt(j - 1) == s.charAt(i - 1)) {
@@ -90,3 +95,6 @@ class Solution {
     }
 }
 ```
+
+
+
