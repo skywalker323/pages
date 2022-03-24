@@ -30,7 +30,6 @@ then use 2 as root, then becomes subproblem\(1,1\) \* subproblem\(3,n\)  S\[1\] 
 ![](/assets/import.png)
 
 ```java
-
 vector<TreeNode*> buildTree(int start, int end) {
     vector<TreeNode*> ans;
 
@@ -65,6 +64,10 @@ vector<TreeNode*> buildTree(int start, int end) {
     }
 
     return ans;
+}
+
+vector<TreeNode*> generateTrees(int n) {
+    return buildTree(1, n);
 }
 ```
 
