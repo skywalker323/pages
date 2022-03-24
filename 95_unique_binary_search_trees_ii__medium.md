@@ -30,37 +30,41 @@ then use 2 as root, then becomes subproblem\(1,1\) \* subproblem\(3,n\)  S\[1\] 
 ![](/assets/import.png)
 
 ```java
+
 vector<TreeNode*> buildTree(int start, int end) {
-	vector<TreeNode*> ans;
-        
-    // If start > end, then subtree will be empty so add NULL in the ans and return it.
-    if(start > end) {
-		ans.push_back(NULL);
+    vector<TreeNode*> ans;
+
+    // If start > end, then subtree will be empty so
+    /// add NULL in the ans and return it.
+    if (start > end) {
+        ans.push_back(nullptr);
         return ans;
     }
 
-    // Iterate through all values from start to end to construct left and right subtree recursively
-    for(int i = start; i <= end; ++i) {
-      vector<TreeNode*> leftSubTree = buildTree(start, i - 1);    // Construct all possible left subtrees
-      vector<TreeNode*> rightSubTree = buildTree(i + 1, end);     // Construct all possible left subtrees
-            
- // loop through all left and right subtrees and connect them to ith root
- // leftSubTree.size()* rightSubTree.size() permutations
-     for(int j = 0; j < leftSubTree.size(); j++) {
-	for(int k = 0; k < rightSubTree.size(); k++) {
-	   TreeNode* root = new TreeNode(i);   // Create root with value i
-	   root->left = leftSubTree[j];   // Connect left subtree rooted at leftSubTree[j]
-           root->right = rightSubTree[k];   // Connect right subtree rooted at rightSubTree[k]
-	   ans.push_back(root);    // Add this tree(rooted at i) to ans data-structure
-	 }
-	}
-     }
-        
-     return ans;
-}
-    
-vector<TreeNode*> generateTrees(int n) {
-	return buildTree(1, n);
+    // Iterate through all values from start to end to construct
+    // left and right subtree recursively
+    for (int i = start; i <= end; ++i) {
+        // Construct all possible left subtrees
+        vector<TreeNode*> leftSubTree = buildTree(start, i - 1);
+        // Construct all possible left subtrees
+        vector<TreeNode*> rightSubTree = buildTree(i + 1, end); 
+
+        // loop through all left and right subtrees and connect them to ith root
+        // leftSubTree.size()* rightSubTree.size() permutations
+        for (int j = 0; j < leftSubTree.size(); j++) {
+            for (int k = 0; k < rightSubTree.size(); k++) {
+                // Create root with value i
+                TreeNode* root = new TreeNode(i);
+                // Connect left subtree rooted at leftSubTree[j]
+                root->left = leftSubTree[j];
+                // Connect right subtree rooted at rightSubTree[k]
+                root->right = rightSubTree[k]; 
+                ans.push_back(root); 
+            }
+        }
+    }
+
+    return ans;
 }
 ```
 
