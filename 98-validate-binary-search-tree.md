@@ -52,7 +52,8 @@ public class Solution {
             return false;
         }
         // left subtree must be < root.val && right subtree must be > root.val
-        return validate(root.left, min, (long)root.val - 1) && validate(root.right, (long)root.val + 1, max);
+        return validate(root.left, min, (long)root.val - 1) && 
+               validate(root.right, (long)root.val + 1, max);
     }
 }
 ```
