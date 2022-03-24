@@ -31,15 +31,6 @@ Binary tree \[1,2,3\], return false.
 ### Solutions
 
 ```cpp
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
         return validate(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
