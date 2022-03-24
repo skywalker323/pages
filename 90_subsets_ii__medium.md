@@ -1,36 +1,30 @@
 # 90 Subsets II – Medium
 
-
 ### Problem:
-
-
 
 Given a collection of integers that might contain duplicates, nums, return all possible subsets.
 
 Note:
 
-Elements in a subset must be in non-descending order.
-The solution set must not contain duplicate subsets.
-For example,
-If nums = [1,2,2], a solution is:
+Elements in a subset must be in non-descending order.  
+The solution set must not contain duplicate subsets.  
+For example,  
+If nums = \[1,2,2\], a solution is:
 
-[
-  [2],
-  [1],
-  [1,2,2],
-  [2,2],
-  [1,2],
-  []
-]
+\[  
+  \[2\],  
+  \[1\],  
+  \[1,2,2\],  
+  \[2,2\],  
+  \[1,2\],  
+  \[\]  
+\]
 
 ### Thoughts:
-
-
 
 To meet requirement non-descending order, we have to sort the array first.
 
 The difference compared to the version I is that now we have duplicates. So that one more condition is needed to avoid duplicates.
-
 
 ### Solutions:
 
@@ -73,30 +67,25 @@ public class Solution {
     }
 }
 ```
-Updated: 11/10/2016 
-Improved logic.
+
+Updated: 11/10/2016   
+Improved logic.  
 Recursion version:
 
 ```java
-public class Solution {
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
-        List<List<Integer>> result = new LinkedList<List<Integer>>();
-        if (nums == null || nums.length == 0) {
-            return result;
-        }
-        Arrays.sort(nums);
-        process(result, new LinkedList<Integer>(), 0, nums);
-        return result;
-    }
-    private void process(List<List<Integer>> result, List<Integer> curr, int start, int[] nums) {
-        result.add(new LinkedList<Integer>(curr));
-        for (int i = start; i < nums.length; i ++) {
-            if (i == start || nums[i] != nums[i-1]){
-                curr.add(nums[i]);
-                process(result, curr, i + 1, nums);
-                curr.remove(curr.size() - 1);
+ void backtrack(vector<vector<int>> &ans,vector<int> nums,vector<int> temp,int start){
+        ans.push_back(temp);
+        for(int i=start;i<nums.size();i++){
+            if(i>start && nums[i]==nums[i-1]){
+                continue;
             }
+            temp.push_back(nums[i]);
+            backtrack(ans,nums,temp,i+1);
+            temp.pop_back();
         }
     }
-}
+
 ```
+
+
+
